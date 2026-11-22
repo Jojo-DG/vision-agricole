@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Construction de l'exécutable
+build/
+dist/
+*.spec
+
+# Résultats et données de test (volumineux, ne pas publier)
+rapports_drone/
+*.tif
+*.tiff
+*.jpg
+*.JPG
+*.las
+*.laz
+*.log
+
+# Système / éditeur
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

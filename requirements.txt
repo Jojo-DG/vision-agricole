@@ -1,0 +1,12 @@
+pyodm>=1.5.13
+rasterio>=1.5.1
+numpy>=1.26
+scikit-learn>=1.4
+matplotlib>=3.8
+reportlab>=4.2
+pypdf>=5.0
+Pillow>=10.0
+customtkinter>=5.2
+pyshp>=2.3
+ezdxf>=1.1
+contourpy>=1.0
