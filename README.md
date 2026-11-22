@@ -9,6 +9,11 @@ Elle correspond à l'**Option B (pipeline automatisé)** du dossier technique :
 photos → moteur de traitement photogrammétrique (API) → analyse Python
 (rasterio/numpy/scikit-learn, sans QGIS) → exports QGIS + rapport PDF.
 
+> **À savoir avant de commencer :** l'application ne traite pas les photos
+> elle-même. Elle les envoie à un moteur de photogrammétrie (NodeODM) qui
+> tourne dans **Docker**. Installez et démarrez Docker Desktop, puis créez le
+> conteneur NodeODM (voir la section 2) avant de lancer l'application.
+
 ---
 
 ## 1. Architecture
@@ -285,3 +290,28 @@ Catégorisé > valeur `ZONE`.
   génère une fausse orthomosaïque et un faux MNT pour vérifier que les
   modules d'analyse et le PDF fonctionnent avant même d'avoir des vraies
   données de vol.
+
+---
+
+## 8. Équipe
+
+Projet réalisé par le **Groupe 2 – Impact Connexion**, catégorie Orange,
+dans le cadre de l'**ÉlectroChallenge 2026** (Bénin). Le projet est la
+propriété du groupe, qui en est l'auteur.
+
+---
+
+## 9. Licence et crédits
+
+- Le code de ce dépôt est publié sous **licence MIT** (voir le fichier
+  `LICENSE`). Copyright © 2026 Groupe 2 – Impact Connexion.
+- Le moteur de traitement **NodeODM** (projet OpenDroneMap) est un logiciel
+  indépendant, sous licence **AGPL-3.0**. Il n'est pas inclus dans ce dépôt :
+  il fonctionne séparément dans Docker, et l'application le contacte par le
+  réseau.
+- L'application s'appuie sur des bibliothèques libres (PyODM, rasterio, NumPy,
+  scikit-learn, Matplotlib, ReportLab, pypdf, Pillow, CustomTkinter, pyshp,
+  ezdxf, contourpy), chacune sous sa propre licence. Merci à leurs auteurs.
+- Les suggestions de cultures et les interprétations du rapport sont des
+  aides à la décision : elles ne remplacent pas l'avis d'un agronome ni une
+  analyse de sol.
