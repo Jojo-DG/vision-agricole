@@ -88,7 +88,7 @@ export const team = [
   { photo: media('equipe/degue-jaime-jordi.jpg'), w: 487, h: 680, name: 'Jaime Jordi DEGUE', role: 'Chef d’équipe', detail: 'Meilleur participant de l’ÉlectroChallenge 2026.' },
   { photo: media('equipe/gbaguidi-constantino.jpg'), w: 512, h: 680, name: 'Constantino GBAGUIDI', role: 'Adjoint au chef d’équipe', detail: 'Auteur de la version 0.0.0.' },
   { photo: media('equipe/adigbli-serge-olivier.jpg'), w: 499, h: 680, name: 'Serge-Olivier ADIGBLI', role: 'Technique', detail: 'Gestion des dépendances.' },
-  { photo: media('equipe/oyeniran-aweni.jpg'), w: 509, h: 680, name: 'Awèni OYENIRAN', role: 'Valorisation', detail: 'Marketing.' },
+  { photo: media('equipe/oyeniran-aweni.jpg'), w: 509, h: 680, name: 'Awèni OYENIRAN', role: 'Valorisation', detail: 'Marketing et communication.' },
 ] as const
 
 export const faqs = [
