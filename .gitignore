@@ -24,3 +24,6 @@ rapports_drone/
 Thumbs.db
 .vscode/
 .idea/
+
+# Installateur
+dist_installateur/

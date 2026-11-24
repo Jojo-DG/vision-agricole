@@ -27,7 +27,7 @@ if ! command -v python3 >/dev/null 2>&1; then
     exit 1
 fi
 
-echo "Vérification de Tkinter (interface graphique)..."
+echo "Vérification de Tkinter (interface de secours)..."
 if ! python3 -c "import tkinter" 2>/dev/null; then
     echo "ERREUR : Tkinter est absent de ce Python."
     echo "Installez Python depuis https://www.python.org/downloads/macos/"
@@ -43,12 +43,13 @@ python3 -m venv .venv_build
 # shellcheck disable=SC1091
 source .venv_build/bin/activate
 
-echo "Installation des dépendances (une seule commande)..."
+echo "Installation des dépendances : les téléchargements s'affichent en temps réel"
+echo "(paquet, taille, progression, débit, temps restant)..."
 python -m pip install --quiet --upgrade pip
-python -m pip install --quiet -r requirements.txt pyinstaller
+python -m pip install --progress-bar on --disable-pip-version-check -r requirements.txt pyinstaller
 
 echo "Vérification des imports..."
-python -c "import pyodm, rasterio, numpy, sklearn, matplotlib, reportlab, pypdf, PIL, tkinter, customtkinter, shapefile, ezdxf, contourpy" || {
+python -c "import pyodm, rasterio, numpy, sklearn, matplotlib, reportlab, pypdf, PIL, tkinter, customtkinter, shapefile, ezdxf, contourpy, webview" || {
     echo "ERREUR : une dépendance s'installe mais ne s'importe pas."
     exit 1
 }
@@ -57,6 +58,8 @@ echo
 echo "Construction de l'application (plusieurs minutes)..."
 python -m PyInstaller --noconfirm --windowed --onedir \
     --name "Vision Agricole" \
+    --icon "assets/vision_agricole.png" \
+    --osx-bundle-identifier "bj.impactconnexion.visionagricole" \
     --collect-all rasterio \
     --collect-all matplotlib \
     --collect-all sklearn \
@@ -66,6 +69,8 @@ python -m PyInstaller --noconfirm --windowed --onedir \
     --collect-all customtkinter \
     --collect-all ezdxf \
     --collect-all contourpy \
+    --collect-all webview \
+    --add-data "app/web_ui:app/web_ui" \
     main.py
 
 if [ ! -d "dist/Vision Agricole.app" ]; then

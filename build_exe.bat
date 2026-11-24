@@ -1,4 +1,12 @@
 @echo off
+REM Garde la fenetre ouverte quoi qu'il arrive (meme en cas d'erreur
+REM inattendue), pour pouvoir lire les messages.
+if /i not "%~1"=="--dans-console" (
+    cmd /k ""%~f0" --dans-console"
+    exit /b
+)
+cd /d "%~dp0"
+
 REM ============================================================
 REM  Construit un executable Windows autonome (.exe) de
 REM  l'application, a lancer UNE SEULE FOIS sur un PC qui a
@@ -38,11 +46,14 @@ if exist "build" rmdir /s /q "build"
 
 echo.
 echo Installation des dependances (une seule commande, plus rapide)...
-python -m pip install --quiet -r requirements.txt
+echo Les telechargements s'affichent ci-dessous en temps reel : nom du paquet,
+echo taille, barre de progression, debit et temps restant. Un paquet deja
+echo installe apparait comme "Requirement already satisfied".
+python -m pip install --progress-bar on --disable-pip-version-check -r requirements.txt
 if errorlevel 1 goto :install_par_module
 
 echo Verification de l'ensemble des dependances...
-python -c "import pyodm, rasterio, numpy, sklearn, matplotlib, reportlab, pypdf, PIL, customtkinter, shapefile, ezdxf, contourpy" 2>nul
+python -c "import pyodm, rasterio, numpy, sklearn, matplotlib, reportlab, pypdf, PIL, customtkinter, shapefile, ezdxf, contourpy, webview" 2>nul
 if errorlevel 1 goto :install_par_module
 
 echo     OK - toutes les dependances sont installees et verifiees.
@@ -57,7 +68,7 @@ echo ============================================================
 echo.
 
 echo   - pyodm ...
-python -m pip install --quiet pyodm
+python -m pip install --progress-bar on --disable-pip-version-check pyodm
 if errorlevel 1 (
     echo ERREUR : installation de pyodm echouee.
     pause
@@ -72,7 +83,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - rasterio ...
-python -m pip install --quiet rasterio
+python -m pip install --progress-bar on --disable-pip-version-check rasterio
 if errorlevel 1 (
     echo ERREUR : installation de rasterio echouee.
     pause
@@ -87,7 +98,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - scikit-learn ...
-python -m pip install --quiet scikit-learn
+python -m pip install --progress-bar on --disable-pip-version-check scikit-learn
 if errorlevel 1 (
     echo ERREUR : installation de scikit-learn echouee.
     pause
@@ -102,7 +113,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - reportlab ...
-python -m pip install --quiet reportlab
+python -m pip install --progress-bar on --disable-pip-version-check reportlab
 if errorlevel 1 (
     echo ERREUR : installation de reportlab echouee.
     pause
@@ -117,7 +128,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - pypdf ...
-python -m pip install --quiet pypdf
+python -m pip install --progress-bar on --disable-pip-version-check pypdf
 if errorlevel 1 (
     echo ERREUR : installation de pypdf echouee.
     pause
@@ -132,7 +143,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - matplotlib ...
-python -m pip install --quiet matplotlib
+python -m pip install --progress-bar on --disable-pip-version-check matplotlib
 if errorlevel 1 (
     echo ERREUR : installation de matplotlib echouee.
     pause
@@ -147,7 +158,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - Pillow ...
-python -m pip install --quiet Pillow
+python -m pip install --progress-bar on --disable-pip-version-check Pillow
 if errorlevel 1 (
     echo ERREUR : installation de Pillow echouee.
     pause
@@ -162,7 +173,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - numpy ...
-python -m pip install --quiet numpy
+python -m pip install --progress-bar on --disable-pip-version-check numpy
 if errorlevel 1 (
     echo ERREUR : installation de numpy echouee.
     pause
@@ -177,7 +188,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - customtkinter ...
-python -m pip install --quiet customtkinter
+python -m pip install --progress-bar on --disable-pip-version-check customtkinter
 if errorlevel 1 (
     echo ERREUR : installation de customtkinter echouee.
     pause
@@ -192,7 +203,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - pyshp ...
-python -m pip install --quiet pyshp
+python -m pip install --progress-bar on --disable-pip-version-check pyshp
 if errorlevel 1 (
     echo ERREUR : installation de pyshp echouee.
     pause
@@ -207,7 +218,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - ezdxf ...
-python -m pip install --quiet ezdxf
+python -m pip install --progress-bar on --disable-pip-version-check ezdxf
 if errorlevel 1 (
     echo ERREUR : installation de ezdxf echouee.
     pause
@@ -222,7 +233,7 @@ if errorlevel 1 (
 echo     OK
 
 echo   - contourpy ...
-python -m pip install --quiet contourpy
+python -m pip install --progress-bar on --disable-pip-version-check contourpy
 if errorlevel 1 (
     echo ERREUR : installation de contourpy echouee.
     pause
@@ -236,13 +247,28 @@ if errorlevel 1 (
 )
 echo     OK
 
+echo   - pywebview (nouvelle interface) ...
+python -m pip install --progress-bar on --disable-pip-version-check pywebview
+if errorlevel 1 (
+    echo ERREUR : installation de pywebview echouee.
+    pause
+    exit /b 1
+)
+python -c "import webview" 2>nul
+if errorlevel 1 (
+    echo ERREUR : pywebview installe mais introuvable a l'import ^(module webview^).
+    pause
+    exit /b 1
+)
+echo     OK
+
 echo.
 echo Toutes les dependances sont installees et verifiees.
 
 :install_pyinstaller
 
 echo Installation de PyInstaller...
-python -m pip install --quiet pyinstaller
+python -m pip install --progress-bar on --disable-pip-version-check pyinstaller
 if errorlevel 1 (
     echo.
     echo ============================================================
@@ -258,6 +284,7 @@ echo.
 echo Construction de l'executable (peut prendre plusieurs minutes)...
 python -m PyInstaller --noconfirm --windowed --onefile --noupx ^
     --name "Vision Agricole" ^
+    --icon "assets\vision_agricole.ico" ^
     --hidden-import tkinter ^
     --hidden-import tkinter.ttk ^
     --hidden-import tkinter.filedialog ^
@@ -272,6 +299,11 @@ python -m PyInstaller --noconfirm --windowed --onefile --noupx ^
     --collect-all customtkinter ^
     --collect-all ezdxf ^
     --collect-all contourpy ^
+    --collect-all webview ^
+    --hidden-import clr ^
+    --collect-all pythonnet ^
+    --collect-all clr_loader ^
+    --add-data "app\web_ui;app\web_ui" ^
     main.py
 if errorlevel 1 (
     echo.

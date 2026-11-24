@@ -10,3 +10,4 @@ customtkinter>=5.2
 pyshp>=2.3
 ezdxf>=1.1
 contourpy>=1.0
+pywebview>=5.0

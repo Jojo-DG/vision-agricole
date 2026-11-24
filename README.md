@@ -101,27 +101,38 @@ python3 main.py
 
 ## 3. Utilisation
 
-1. **Onglet "1. Mission et images"**
-   - Choisir le dossier contenant toutes les photos JPEG du vol.
-   - Choisir le dossier où seront enregistrés le rapport et les fichiers
-     intermédiaires.
-   - Renseigner les métadonnées de mission (parcelle, exploitant, date,
-     altitude, pilote...).
-   - Choisir le nombre de zones de gestion souhaité pour le zonage (4 par
-     défaut).
+Depuis la version 1.1, l'application s'ouvre sur une interface guidée
+(page web affichée dans une fenêtre de bureau, via PyWebView) :
 
-2. **Onglet "2. Moteur de traitement"**
-   - Par défaut, l'application se connecte à `localhost:3000` (le conteneur
-     Docker lancé à l'étape 2.3).
-   - Cliquer sur "Tester la connexion" pour vérifier.
+1. **Accueil** : cliquer sur **« Démarrer une mission »**. L'indicateur en
+   haut à droite montre si le moteur de traitement est prêt ; s'il ne l'est
+   pas, un clic dessus affiche les trois étapes pour le démarrer.
+2. **Étape 1 – Vos photos** : choisir le dossier du vol ; l'application
+   compte les photos et en montre un aperçu.
+3. **Étape 2 – Votre parcelle** : nom de la parcelle, exploitant et date
+   (obligatoires), altitude, pilote, équipe, nombre de zones (2 à 6), et
+   facultativement les informations de sol (pH, texture, observation, ou
+   estimation en ligne SoilGrids).
+4. **Étape 3 – Vérification** : récapitulatif et choix de la qualité
+   (**Rapide** recommandé sur un PC de 8 Go ; Équilibré et Précis
+   demandent plus de mémoire), puis **« Lancer le traitement »**.
+5. **Progression** : cinq étapes en langage simple, pourcentage et temps
+   écoulé. Ne pas fermer l'application ni mettre le PC en veille.
+6. **Résultats** : phrase de synthèse, quatre indicateurs, les sept cartes
+   avec leur légende, et les boutons pour ouvrir le PDF, le dossier des
+   résultats et les fichiers QGIS. « Ouvrir une mission précédente », sur
+   l'accueil, permet de revoir une mission sans relancer le calcul.
 
-3. Cliquer sur **"Lancer le traitement"**.
-   - La barre de progression affiche les étapes : envoi des photos,
-     traitement photogrammétrique (le plus long — de quelques minutes à
-     plusieurs heures selon le nombre de photos), calcul des indices
-     agricoles, génération du PDF.
-   - Le rapport `rapport_mission_drone.pdf` s'ouvre automatiquement à la fin
-     dans le dossier de sortie choisi.
+Les **réglages avancés** (adresse et port du moteur, dossier de sortie,
+qualité par défaut) sont dans le menu ⚙ en haut à droite. Ils sont
+enregistrés dans `%USERPROFILE%\.vision_agricole\reglages.json`.
+
+**Interface classique** : `python main.py --classique` ouvre l'ancienne
+interface CustomTkinter. L'application y bascule aussi d'elle-même si la
+nouvelle interface ne peut pas s'ouvrir (le moteur d'affichage WebView2,
+présent par défaut sur Windows 11 et sur la plupart des Windows 10 à jour,
+est nécessaire). Le calcul est le même dans les deux cas
+(`app/pipeline.py`).
 
 ---
 
@@ -130,7 +141,7 @@ python3 main.py
 Si l'équipe a déjà une instance WebODM installée (via `docker-compose` du
 projet officiel WebODM), le nœud NodeODM interne est généralement exposé sur
 le port **3001** de la machine hôte. Il suffit alors de renseigner, dans
-l'onglet "2. Moteur de traitement" :
+les réglages avancés (menu ⚙) :
 - Adresse : `localhost`
 - Port : `3001`
 
@@ -151,7 +162,10 @@ drone_report_app/
 │   ├── gis_export.py            # exports QGIS : zonage (GeoTIFF/SHP), courbes de niveau (SHP/DXF)
 │   ├── soil_data.py             # sol (saisie manuelle ou repli SoilGrids) + suggestion de cultures
 │   ├── report_generator.py      # assemblage du PDF (reportlab)
-│   └── gui.py                   # interface graphique (CustomTkinter)
+│   ├── pipeline.py              # déroulé d'une mission, indépendant de l'interface
+│   ├── webview_app.py           # nouvelle interface : fenêtre PyWebView + pont Python/JavaScript
+│   ├── web_ui/index.html        # écrans de la nouvelle interface (HTML/CSS/JS)
+│   └── gui.py                   # interface classique (CustomTkinter), solution de repli
 └── tests/
     └── make_synthetic_data.py   # génère de fausses données pour tester
                                   # le pipeline sans vraies photos drone
@@ -312,6 +326,8 @@ propriété du groupe, qui en est l'auteur.
 - L'application s'appuie sur des bibliothèques libres (PyODM, rasterio, NumPy,
   scikit-learn, Matplotlib, ReportLab, pypdf, Pillow, CustomTkinter, pyshp,
   ezdxf, contourpy), chacune sous sa propre licence. Merci à leurs auteurs.
+- Les icônes de l'interface sont dessinées d'après le jeu Feather Icons
+  (licence MIT). Le logo (`assets/`) appartient au Groupe 2.
 - Les suggestions de cultures et les interprétations du rapport sont des
   aides à la décision : elles ne remplacent pas l'avis d'un agronome ni une
   analyse de sol.
