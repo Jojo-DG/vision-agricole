@@ -22,7 +22,7 @@ Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
 ## Histoire (texte pour la page « Notre histoire » – à relire par l'équipe)
 
 ### Le concours
-L'ÉlectroChallenge a été lancé à l'initiative de Monsieur Goldfrid OBELAKOU (orthographe du prénom à confirmer). Il comptait trois catégories, selon l'âge des participants :
+Monsieur Goldfrid OBELAKOU est le promoteur principal de l'ÉlectroChallenge. Il comptait trois catégories, selon l'âge des participants :
 - Catégorie Bleue (12 à 15 ans) : un four solaire (à confirmer).
 - Catégorie Verte (15 à 18 ans) : un système d'arrosage / d'irrigation (à confirmer).
 - Catégorie Orange (18 à 30 ans) : la nôtre, avec la cartographie agricole par drone. Cinq équipes s'y affrontaient.
@@ -50,4 +50,4 @@ Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'applica
 - Depuis : v1.1.0 de Vision Agricole, projets en cours avec l'application.
 
 ### À COMPLÉTER
-Dates exactes (ouverture, 13 août, pitch), orthographe du prénom de M. OBELAKOU, projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
+Dates exactes (ouverture, 13 août, pitch), projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
