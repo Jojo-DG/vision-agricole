@@ -52,4 +52,4 @@ Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'applica
 - Depuis : v1.1.0 de Vision Agricole, projets en cours avec l'application.
 
 ### À COMPLÉTER
-autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
+Autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
