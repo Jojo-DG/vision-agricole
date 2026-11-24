@@ -12,7 +12,7 @@ Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
 | DEGUE Jaime Jordi | degue-jaime-jordi.jpg | Chef d'équipe ; titre de « Meilleur participant » de l'ÉlectroChallenge 2026 |
 | GBAGUIDI Constantino | gbaguidi-constantino.jpg | Adjoint au chef d'équipe ; auteur de la version 0.0.0 |
 | ADIGBLI Serge-Olivier | adigbli-serge-olivier.jpg | Côté technique, gestion des dépendances |
-| OYENIRAN Awèni | oyeniran-aweni.jpg | Valorisation et marketing |
+| OYENIRAN Awèni | oyeniran-aweni.jpg | Valorisation, marketing et communication |
 
 
 ## Captures (`medias/captures/`)
