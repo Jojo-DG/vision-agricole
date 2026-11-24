@@ -1,7 +1,9 @@
 # Contenu du site vitrine – Vision Agricole
 
+
 ## Équipe (Groupe 2 – Impact Connexion, Catégorie Orange, ÉlectroChallenge 2026)
 Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
+
 
 | Nom | Photo | Rôle |
 |---|---|---|
@@ -10,11 +12,36 @@ Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
 | ADIGBLI Serge-Olivier | adigbli-serge-olivier.jpg | Côté technique, gestion des dépendances |
 | OYENIRAN Awèni | oyeniran-aweni.jpg | Valorisation et marketing |
 
+
 ## Captures (`medias/captures/`)
 - 00-version-0.0.0-streamlit.jpg : première version (« AgriDrone Analytics », Streamlit + WebODM, par Constantino) → à utiliser pour l'histoire « d'où on vient ».
 - 01-accueil, 02-choix-photos, 05-moteur-a-demarrer, 03/04-reglages, 06-a-propos : vraie application Vision Agricole 1.1.0.
 - 07-apercu-resultats-donnees-test.png : aperçu des résultats sur données de TEST (parcelle fictive) → à remplacer par une vraie capture de mission.
 
-## Histoire (brouillon à relire et compléter par l'équipe)
-Le projet est né pour l'ÉlectroChallenge 2026 : aider les agriculteurs béninois à lire l'état de leurs parcelles à partir de simples photos de drone (DJI Mavic 3 Enterprise). Le premier prototype, « AgriDrone Analytics » (version 0.0.0), était une page web Streamlit connectée à WebODM. Sous la conduite de Jaime et avec l'accompagnement du mentor Renaud DANVI, l'équipe l'a transformé en application Windows guidée, Vision Agricole, qui produit un rapport PDF en français (mosaïque, vigueur de la végétation, zonage, pentes et zones basses) et des exports pour QGIS. Le Groupe 2 – Impact Connexion a remporté l'ÉlectroChallenge 2026 en Catégorie Orange ; l'équipe travaille maintenant à faire connaître et à diffuser l'application.
-À COMPLÉTER : dates, anecdotes, remerciements, résultats précis du concours.
+
+## Histoire (texte pour la page « Notre histoire » – à relire par l'équipe)
+
+### Le récit
+L'ÉlectroChallenge 2026 a commencé à la mi-juillet. Nous avions tous postulé individuellement, puis passé un test sélectif, à la hauteur du défi. Les candidats retenus ont ensuite été répartis en équipes. Le Groupe 2 – Impact Connexion, Catégorie Orange, s'est formé autour de notre mentor, Renaud DANVI, avec qui nous avons commencé à discuter du projet.
+
+Le vrai travail a démarré le 13 août (date à confirmer) par une séance de cartographie réalisée sur un vrai terrain. Nous avons décidé de développer l'application en parallèle. Ce jour-là, nous avons travaillé jusqu'à 22 h, et la fatigue était réelle. Trouver ensuite un ordinateur assez puissant pour le traitement photogrammétrique n'a pas été simple : pendant le reste de la semaine, nous rentrions très tard.
+
+Le samedi, nous avons fait les derniers réglages de l'application et lancé la présentation PowerPoint, qui a donné lieu à de vrais débats dans l'équipe. Le lundi soir, nous étions enfin à l'aise avec le diaporama. Le mardi, nous l'avons terminé et nous avons commencé à répéter. Ce moment a été précieux : nous avons vu les points faibles de chacun et travaillé dessus. Grâce au matériel de répétition mis à notre disposition par les encadrants, nous avons progressé.
+
+Le mercredi, nous avons pitché, et nous avons remporté le défi. Nous n'y croyions pas vraiment : certaines propositions des autres équipes nous avaient impressionnés. Mais nous avions choisi d'être très réalistes et de croire à notre projet, et nous nous sommes donnés à fond. Jaime a en plus reçu le titre de meilleur participant de la catégorie.
+
+### Et maintenant
+Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'application évolue, et nous participons déjà à des projets avec elle. Ce site a été créé pour la faire connaître et la mettre à la disposition de ceux qui en ont besoin.
+
+### Frise chronologique (pour la page)
+- Mi-juillet : candidatures individuelles, puis test de sélection ; constitution des équipes ; premiers échanges avec le mentor.
+- 13 août (à confirmer) : première cartographie sur un terrain ; début du développement de l'application, séance jusqu'à 22 h.
+- Même semaine : recherche d'un ordinateur adapté au traitement photogrammétrique.
+- Samedi : derniers réglages de l'application ; début du PowerPoint.
+- Lundi soir : le diaporama prend forme.
+- Mardi : fin du PowerPoint ; premières répétitions.
+- Mercredi : pitch devant le jury, victoire en Catégorie Orange ; Jaime, meilleur participant de la catégorie.
+- Depuis : v1.1.0 de Vision Agricole, projets en cours avec l'application.
+
+### À COMPLÉTER
+Dates exactes (ouverture, 13 août, pitch), nom des organisateurs et des encadrants à remercier, nombre d'équipes en compétition, anecdotes, projets actuels que l'on peut citer publiquement.
