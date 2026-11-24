@@ -20,6 +20,9 @@ rapports_drone/
 *.laz
 *.log
 
+# Site (Vite)
+node_modules/
+
 # Système / éditeur
 .DS_Store
 Thumbs.db

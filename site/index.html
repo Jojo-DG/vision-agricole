@@ -1,292 +1,35 @@
 <!doctype html>
 <html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vision Agricole – De vos photos de drone à un rapport clair pour votre parcelle</title>
-<meta name="description" content="Vision Agricole transforme les photos de votre drone en carte de santé des cultures, zonage et rapport PDF en français. Gratuit, pour Windows. Vos photos restent sur votre ordinateur.">
-<meta name="theme-color" content="#0B4F5C">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:site_name" content="Vision Agricole">
-<meta property="og:title" content="Vision Agricole – De vos photos de drone à un rapport clair pour votre parcelle">
-<meta property="og:description" content="Vision Agricole transforme les photos de votre drone en carte de santé des cultures, zonage et rapport PDF en français. Gratuit, pour Windows. Vos photos restent sur votre ordinateur.">
-<meta property="og:url" content="https://jojo-dg.github.io/vision-agricole/">
-<meta property="og:image" content="https://jojo-dg.github.io/vision-agricole/assets/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Vision Agricole : de vos photos de drone à un rapport clair pour votre parcelle">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css">
-<script>document.documentElement.classList.add("js");</script>
-</head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol><symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol><symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol><symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol><symbol id="i-edit-3" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol><symbol id="i-external-link" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol><symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-maximize-2" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol></defs></svg>
-<a class="lien-evitement" href="#contenu">Aller au contenu</a>
-<header class="entete">
-  <div class="conteneur">
-    <a class="logo" href="index.html" aria-label="Vision Agricole, retour à l'accueil"><img src="assets/logo.svg" width="106" height="44" alt="Vision Agricole"></a>
-    <a class="bouton bouton-principal bouton-petit" href="#telecharger"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Télécharger</a>
-    <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Ouvrir le menu"><svg class="icone icone-ouvrir" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><svg class="icone icone-fermer" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button>
-    <nav class="menu" id="menu-principal" aria-label="Menu principal"><ul>
-      <li><a href="#fonctionnement">Fonctionnement</a></li><li><a href="#resultats">Résultats</a></li><li><a href="#telecharger">Télécharger</a></li><li><a href="histoire.html">Notre histoire</a></li><li><a href="#equipe">Équipe</a></li>
-    </ul></nav>
-  </div>
-</header>
-<main id="contenu">
-
-<section class="accroche" aria-labelledby="titre-accroche">
-  <div class="conteneur">
-    <div class="accroche-texte">
-      <h1 id="titre-accroche">De vos photos de drone à un rapport clair pour votre parcelle</h1>
-      <p class="sous-titre">Transformer les images du ciel en décisions simples pour le terrain.</p>
-      <div class="boutons">
-        <a class="bouton bouton-principal bouton-grand" href="#telecharger"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Télécharger pour Windows</a>
-        <a class="bouton bouton-secondaire bouton-grand" href="#fonctionnement">Voir comment ça marche</a>
-      </div>
-    </div>
-    <figure class="capture-vedette">
-      <img src="medias/captures/01-accueil.jpg" width="1400" height="762" alt="Écran d'accueil de Vision Agricole : le titre « De vos photos de drone à un rapport clair pour votre parcelle », le bouton « Démarrer une mission » et les trois étapes du parcours.">
-    </figure>
-  </div>
-</section>
-
-<div class="preuve">
-  <div class="conteneur">
-    <p><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-award"/></svg><span>Lauréat de l'ÉlectroChallenge 2026 – Catégorie Orange</span></p>
-  </div>
-</div>
-
-<section class="section section-blanche probleme" aria-labelledby="titre-probleme">
-  <div class="conteneur etroit">
-    <h2 class="sr" id="titre-probleme">Le problème</h2>
-    <p>Une parcelle vue du sol cache l'essentiel : où les plantes souffrent, où l'eau stagne, où intervenir en premier.</p>
-    <p>Un drone voit tout, mais ses photos brutes ne disent rien à un agriculteur.</p>
-  </div>
-</section>
-
-<section class="section" id="fonctionnement" aria-labelledby="titre-fonctionnement">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">Fonctionnement</span>
-      <h2 id="titre-fonctionnement">Comment ça marche</h2>
-      <p>Trois étapes, du vol de votre drone jusqu'au rapport.</p>
-    </div>
-    <ol class="etapes">
-      <li class="etape"><span class="numero" aria-hidden="true">1</span><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span>
-        <h3>Choisissez vos photos</h3><p>Indiquez le dossier du vol de votre drone.</p></li>
-      <li class="etape"><span class="numero" aria-hidden="true">2</span><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-edit-3"/></svg></span>
-        <h3>Décrivez votre parcelle</h3><p>Quelques informations utiles : parcelle, exploitant, date.</p></li>
-      <li class="etape"><span class="numero" aria-hidden="true">3</span><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span>
-        <h3>Recevez votre rapport</h3><p>Consultez et partagez le PDF.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section class="section section-alt" id="resultats" aria-labelledby="titre-resultats">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">Résultats</span>
-      <h2 id="titre-resultats">Ce que vous obtenez</h2>
-      <p>Des réponses claires pour votre parcelle, pas des données brutes.</p>
-    </div>
-    <ul class="cartes cartes-3" style="list-style:none;margin:0;padding:0">
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-activity"/></svg></span><h3>Une carte de santé de vos cultures</h3><p>Les zones vigoureuses et les zones faibles, d'un coup d'œil.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg></span><h3>Un zonage de la parcelle</h3><p>Où agir en priorité, où tout va bien.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-droplet"/></svg></span><h3>Pentes et zones basses</h3><p>Repérez l'eau qui stagne ou qui ruisselle.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-check-circle"/></svg></span><h3>Un verdict en mots simples</h3><p>La santé globale de la parcelle, expliquée sans jargon.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-printer"/></svg></span><h3>Un rapport PDF en français</h3><p>Prêt à imprimer ou à partager.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg></span><h3>Des fichiers pour les techniciens</h3><p>Zonage et courbes de niveau pour QGIS et la DAO, ajoutés automatiquement.</p></li>
-    </ul>
-    <p class="note">Le rapport est une aide à la décision. Il ne remplace ni l'avis d'un agronome, ni une analyse de sol.</p>
-  </div>
-</section>
-
-<section class="section section-blanche" id="captures" aria-labelledby="titre-captures">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">L'application</span>
-      <h2 id="titre-captures">Voyez-la en action</h2>
-      <p>Des captures de la vraie application, version 1.1.0.</p>
-    </div>
-    <ul class="galerie" role="region" aria-label="Captures de l'application (faire défiler horizontalement)" tabindex="0">
-      <li><figure class="vignette">
-          <a href="medias/captures/02-choix-photos.jpg" data-visionneuse data-legende="Étape 1 : choisissez le dossier des photos de votre drone."><img src="medias/captures/02-choix-photos.jpg" width="1400" height="762" loading="lazy" alt="Étape 1 de l'application : choisir le dossier des photos du drone, avec les formats acceptés JPG et PNG."><span class="agrandir" aria-hidden="true"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-maximize-2"/></svg></span></a>
-          <figcaption><strong>Étape 1.</strong> Choisissez le dossier des photos de votre drone.</figcaption>
-        </figure></li>
-      <li><figure class="vignette">
-          <a href="medias/captures/05-moteur-a-demarrer.jpg" data-visionneuse data-legende="Moteur pas encore démarré : l'application vous guide en trois étapes."><img src="medias/captures/05-moteur-a-demarrer.jpg" width="1400" height="762" loading="lazy" alt="Écran d'aide qui explique, en trois étapes, comment démarrer le moteur de traitement dans Docker Desktop."><span class="agrandir" aria-hidden="true"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-maximize-2"/></svg></span></a>
-          <figcaption><strong>Un guide pas à pas</strong> si le moteur de traitement n'est pas encore démarré.</figcaption>
-        </figure></li>
-      <li><figure class="vignette">
-          <a href="medias/captures/04-reglages-exports.jpg" data-visionneuse data-legende="Les fichiers pour QGIS et la DAO sont créés automatiquement, sans réglage."><img src="medias/captures/04-reglages-exports.jpg" width="1400" height="762" loading="lazy" alt="Réglages avancés : la section Exports SIG explique que le zonage et les courbes de niveau sont produits automatiquement, prêts pour QGIS ou la DAO."><span class="agrandir" aria-hidden="true"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-maximize-2"/></svg></span></a>
-          <figcaption><strong>Fichiers pour QGIS et la DAO</strong> créés automatiquement, sans réglage.</figcaption>
-        </figure></li>
-      <li><figure class="vignette">
-          <a href="medias/captures/03-reglages.jpg" data-visionneuse data-legende="Réglages pour le technicien. La qualité « Rapide » est recommandée sur 8 Go."><img src="medias/captures/03-reglages.jpg" width="1400" height="762" loading="lazy" alt="Réglages avancés pour le technicien : moteur de traitement, dossier de sortie du rapport et qualité par défaut, « Rapide (recommandé sur 8 Go) »."><span class="agrandir" aria-hidden="true"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-maximize-2"/></svg></span></a>
-          <figcaption><strong>Réglages pour le technicien.</strong> La qualité « Rapide » est recommandée sur 8 Go.</figcaption>
-        </figure></li>
-      <li><figure class="vignette">
-          <a href="medias/captures/06-a-propos.jpg" data-visionneuse data-legende="À propos : version 1.1.0, licence MIT."><img src="medias/captures/06-a-propos.jpg" width="1400" height="762" loading="lazy" alt="Écran À propos : logo de Vision Agricole, version 1.1.0, licence MIT et technologies utilisées."><span class="agrandir" aria-hidden="true"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-maximize-2"/></svg></span></a>
-          <figcaption><strong>À propos.</strong> Version 1.1.0, licence MIT.</figcaption>
-        </figure></li>
-    </ul>
-    <p class="astuce-galerie">Faites glisser pour voir les autres captures. Touchez une image pour l'agrandir.</p>
-  </div>
-</section>
-
-<section class="section section-sombre" id="pourquoi" aria-labelledby="titre-pourquoi">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">Pourquoi Vision Agricole</span>
-      <h2 id="titre-pourquoi">Un outil fait pour le terrain</h2>
-    </div>
-    <ul class="cartes cartes-3" style="list-style:none;margin:0;padding:0">
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-compass"/></svg></span><h3>Simple et guidé</h3><p>Un parcours en 3 étapes, pensé pour l'agriculteur et son technicien.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg></span><h3>100 % en français</h3><p>Les écrans, les explications et le rapport PDF.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg></span><h3>Vos photos restent chez vous</h3><p>Le traitement se fait sur votre ordinateur. Vos photos ne sont pas envoyées sur Internet.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-code"/></svg></span><h3>Gratuit et libre</h3><p>Licence MIT. Le code est public sur <a href="https://github.com/Jojo-DG/vision-agricole">GitHub</a>.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg></span><h3>Conçu au Bénin</h3><p>Lauréat de l'ÉlectroChallenge 2026, Catégorie Orange.</p></li>
-      <li class="carte"><span class="pastille"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg></span><h3>Pour les drones courants</h3><p>Pensé pour les photos de drones courants. Testé avec un DJI Mavic 3 Enterprise (photos RGB).</p></li>
-    </ul>
-  </div>
-</section>
-
-<section class="section" id="histoire" aria-labelledby="titre-histoire">
-  <div class="conteneur">
-    <div class="histoire-bref">
-      <div>
-        <span class="surtitre">Notre histoire</span>
-        <h2 class="sr" id="titre-histoire">Notre histoire en bref</h2>
-        <blockquote>Né en quelques jours, validé devant un jury.</blockquote>
-      </div>
-      <div>
-        <p>Tout commence à la mi-juillet 2026, avec l'ÉlectroChallenge. Nous postulons chacun de notre côté, passons un test de sélection, puis nous nous retrouvons en équipe autour de notre mentor, Renaud DANVI.</p>
-        <p>Notre catégorie, la Catégorie Orange, porte sur la cartographie agricole par drone. Le vrai travail démarre le 13 août, sur un vrai terrain.</p>
-        <p>Le 19 août, nous présentons Vision Agricole devant le jury. Nous remportons la catégorie, et Jaime reçoit le titre de meilleur participant.</p>
-        <p>Depuis, l'application continue d'évoluer et nous l'utilisons déjà dans des projets.</p>
-        <p><a class="lien-fleche" href="histoire.html">Lire toute l'histoire <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-blanche" id="equipe" aria-labelledby="titre-equipe">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">L'équipe</span>
-      <h2 id="titre-equipe">Les personnes derrière l'application</h2>
-    </div>
-    <ul class="equipe">
-      <li class="membre"><img src="medias/equipe/degue-jaime-jordi.jpg" width="487" height="680" loading="lazy" alt="Portrait de Jaime Jordi DEGUE"><div><h3>Jaime Jordi DEGUE</h3><p>Chef d'équipe. Meilleur participant de l'ÉlectroChallenge 2026.</p></div></li>
-      <li class="membre"><img src="medias/equipe/gbaguidi-constantino.jpg" width="512" height="680" loading="lazy" alt="Portrait de Constantino GBAGUIDI"><div><h3>Constantino GBAGUIDI</h3><p>Adjoint au chef d'équipe. Auteur de la version 0.0.0.</p></div></li>
-      <li class="membre"><img src="medias/equipe/adigbli-serge-olivier.jpg" width="499" height="680" loading="lazy" alt="Portrait de Serge-Olivier ADIGBLI"><div><h3>Serge-Olivier ADIGBLI</h3><p>Côté technique, gestion des dépendances.</p></div></li>
-      <li class="membre"><img src="medias/equipe/oyeniran-aweni.jpg" width="509" height="680" loading="lazy" alt="Portrait de Awèni OYENIRAN"><div><h3>Awèni OYENIRAN</h3><p>Valorisation et marketing.</p></div></li>
-    </ul>
-    <p class="mentor">Mentor : Renaud DANVI.</p>
-  </div>
-</section>
-
-<section class="section section-alt" id="telecharger" aria-labelledby="titre-telecharger">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">Télécharger</span>
-      <h2 id="titre-telecharger">Essayez Vision Agricole sur votre PC</h2>
-      <p>Gratuit, pour Windows.</p>
-    </div>
-    <div class="telecharger">
-      <div class="dl-carte">
-        <h3>Vision Agricole 1.1.0 pour Windows</h3>
-        <p style="margin:0 0 18px;color:var(--discret)">Un seul fichier à lancer : pas besoin d'installer Python.</p>
-        <a class="bouton bouton-principal bouton-grand" href="https://github.com/Jojo-DG/vision-agricole/releases/download/v1.1.0/Vision.Agricole.exe"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Télécharger pour Windows</a>
-        <ul class="prerequis" aria-label="Avant de commencer">
-          <li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg><span>Un ordinateur sous <strong>Windows</strong>.</span></li>
-          <li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-package"/></svg><span><strong>Docker Desktop</strong> et le moteur de traitement (NodeODM), expliqués pas à pas dans le <a href="https://github.com/Jojo-DG/vision-agricole#readme">README</a>.</span></li>
-          <li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-cpu"/></svg><span>Sur un PC de <strong>8 Go</strong> : choisissez la qualité « Rapide ».</span></li>
-        </ul>
-        <p class="petit">Mac : une version peut être construite depuis le code source (non testé). Pour les techniciens : voir la <a href="technique.html">page technique</a>.</p>
-      </div>
-      <div class="alerte" role="note">
-        <h3><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>Windows affiche un avertissement ?</h3>
-        <p>C'est normal pour un nouveau logiciel qui n'est pas encore signé. Pour le lancer :</p>
-        <ol>
-          <li>Cliquez sur « Informations complémentaires ».</li>
-          <li>Puis sur « Exécuter quand même ».</li>
-        </ol>
-        <p>Vous préférez vérifier d'abord ? Utilisez l'empreinte et l'analyse ci-dessous.</p>
-      </div>
-      <div class="verif">
-        <h3><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>Vérifier le fichier</h3>
-        <p style="margin:0">Empreinte SHA-256 de <span class="mono">Vision.Agricole.exe</span> :</p>
-        <code class="sha" id="sha256">ecf9f03b36ac40f7828d46675f0bd0000a16663846c9f8efcf3a6da1eadc9c0e</code>
-        <div class="verif-actions">
-          <button class="bouton bouton-secondaire bouton-petit" type="button" data-copier="sha256" hidden><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg>Copier l'empreinte</button>
-          <a class="bouton bouton-secondaire bouton-petit" href="https://www.virustotal.com/gui/file/ecf9f03b36ac40f7828d46675f0bd0000a16663846c9f8efcf3a6da1eadc9c0e" rel="noopener">Analyse VirusTotal <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></a>
-          <span class="etat-copie" id="etat-copie" role="status"></span>
-        </div>
-        <p style="margin:14px 0 0;font-size:.95rem;color:var(--discret)">Sous Windows, dans l'Invite de commandes : <span class="mono">certutil -hashfile Vision.Agricole.exe SHA256</span> (avec le nom du fichier téléchargé). Le résultat doit être identique.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="faq" aria-labelledby="titre-faq">
-  <div class="conteneur">
-    <div class="section-titre">
-      <span class="surtitre">FAQ</span>
-      <h2 id="titre-faq">Vos questions</h2>
-    </div>
-    <div class="faq">
-      <details><summary>Quel drone faut-il ?<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-        <div class="reponse"><p>Des photos aériennes JPG ou PNG de bonne qualité, avec un recouvrement entre les images. L'application a été testée avec un DJI Mavic 3 Enterprise (photos RGB).</p></div></details>
-      <details><summary>Faut-il Internet ?<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-        <div class="reponse"><p>Pas pour le traitement. Il faut Internet la première fois, pour télécharger Docker et le moteur de traitement.</p>
-        <p>L'estimation du sol en ligne (SoilGrids), qui est facultative, utilise aussi Internet.</p></div></details>
-      <details><summary>Mes photos sont-elles envoyées quelque part ?<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-        <div class="reponse"><p>Non. Tout reste sur votre ordinateur.</p></div></details>
-      <details><summary>Combien de temps dure un traitement ?<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-        <div class="reponse"><p>Cela dépend du nombre de photos et de la puissance de votre PC. L'application affiche la progression et le temps écoulé. Ne la fermez pas et ne mettez pas le PC en veille pendant le traitement.</p></div></details>
-      <details><summary>C'est payant ?<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-        <div class="reponse"><p>Non. Vision Agricole est gratuit et libre, sous licence MIT.</p></div></details>
-      <details><summary>Où trouver de l'aide ?<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-        <div class="reponse"><p>Le <a href="https://github.com/Jojo-DG/vision-agricole#readme">README</a> explique l'installation pas à pas. Pour poser une question, ouvrez une demande dans les <a href="https://github.com/Jojo-DG/vision-agricole/issues">Issues du dépôt GitHub</a>.</p></div></details>
-    </div>
-  </div>
-</section>
-</main>
-<footer class="pied">
-  <div class="conteneur">
-    <div class="pied-grille">
-      <div>
-        <a class="logo" href="index.html" aria-label="Vision Agricole, retour à l'accueil"><img src="assets/logo.svg" width="96" height="40" alt="Vision Agricole" loading="lazy"></a>
-        <p style="margin-top:12px">Transformer les images du ciel en décisions simples pour le terrain.</p>
-      </div>
-      <div>
-        <h2>Le site</h2>
-        <ul>
-          <li><a href="index.html#fonctionnement">Comment ça marche</a></li>
-          <li><a href="index.html#telecharger">Télécharger</a></li>
-          <li><a href="histoire.html">Notre histoire</a></li>
-          <li><a href="technique.html">Pour les techniciens</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Libre et ouvert</h2>
-        <ul>
-          <li><a href="https://github.com/Jojo-DG/vision-agricole"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-github"/></svg> Code source sur GitHub</a></li>
-          <li><a href="https://github.com/Jojo-DG/vision-agricole#readme">Le README (installation pas à pas)</a></li>
-          <li><a href="https://github.com/Jojo-DG/vision-agricole/issues">Poser une question (Issues)</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="pied-bas">
-      <p>Application sous licence MIT. Moteur de traitement NodeODM / OpenDroneMap : licence AGPL-3.0. Icônes : Feather Icons, licence MIT.</p>
-      <p>Groupe 2 – Impact Connexion · ÉlectroChallenge 2026</p>
-    </div>
-  </div>
-</footer>
-<script src="js/main.js" defer></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vision Agricole – De vos photos de drone à un rapport clair pour votre parcelle</title>
+    <meta name="description" content="Vision Agricole transforme les photos de votre drone en carte de santé des cultures, zonage et rapport PDF en français. Gratuit, pour Windows. Vos photos restent sur votre ordinateur." />
+    <meta name="theme-color" content="#072f37" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Vision Agricole" />
+    <meta property="og:title" content="Vision Agricole – De vos photos de drone à un rapport clair pour votre parcelle" />
+    <meta property="og:description" content="Vision Agricole transforme les photos de votre drone en carte de santé des cultures, zonage et rapport PDF en français. Gratuit, pour Windows." />
+    <meta property="og:url" content="https://jojo-dg.github.io/vision-agricole/" />
+    <meta property="og:image" content="https://jojo-dg.github.io/vision-agricole/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vision Agricole : de vos photos de drone à un rapport clair pour votre parcelle" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="font-family:system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1rem;line-height:1.6">
+        <strong>Vision Agricole</strong> – De vos photos de drone à un rapport clair pour votre parcelle.<br />
+        Ce site a besoin de JavaScript pour s'afficher. Vous pouvez tout de même
+        <a href="https://github.com/Jojo-DG/vision-agricole/releases/download/v1.1.0/Vision.Agricole.exe">télécharger l'application pour Windows</a>
+        ou consulter <a href="https://github.com/Jojo-DG/vision-agricole#readme">le README</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
