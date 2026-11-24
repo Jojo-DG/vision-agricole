@@ -1,7 +1,7 @@
 # Site vitrine : développement
 
 Site en **React + TypeScript + Vite + Tailwind CSS**, dans ce dossier (`site/`).
-Il est compilé puis publié sur GitHub Pages par `.github/workflows/pages.yml`.
+Il est compilé puis publié par Vercel, à partir du dossier `site/` du dépôt (voir « Publication » plus bas).
 
 ## Lancer le site en local
 
@@ -33,3 +33,19 @@ Node 22 ou plus récent est recommandé.
 - **Aucune ressource externe** : les polices (Fraunces, Plus Jakarta Sans, DM Mono) sont dans `src/fonts/`, sans Google Fonts, sans suivi.
 - **Animations** : `Reveal` (apparition au défilement) et `Counter` (chiffres qui défilent) dans `src/components/ui.tsx`, en CSS et `IntersectionObserver`, sans bibliothèque. Elles sont coupées si le visiteur a demandé « réduire les animations » (`prefers-reduced-motion`).
 - **Images du comparateur** : `public/medias/resultats/comparaison-*.webp` sont deux vues du même vol test, découpées sur la même emprise.
+
+## Publication (Vercel)
+
+Le projet Vercel est relié au dépôt GitHub avec ces réglages :
+
+| Réglage | Valeur |
+|---|---|
+| Root Directory | `site` |
+| Framework Preset | Vite |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+
+Chaque envoi sur `main` met le site en ligne. Chaque branche ou pull request reçoit une adresse d'aperçu.
+Les en-têtes de cache sont dans `vercel.json`.
+
+Après un changement d'adresse (domaine Vercel ou personnalisé), mettre à jour les balises `og:url` et `og:image` dans `index.html` : les aperçus de partage exigent une adresse complète.
