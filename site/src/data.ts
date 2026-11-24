@@ -19,8 +19,6 @@ export const MAC = {
   sha256: 'e39900ff9012dd5bdb353c52f157efd1abbc9b35f6c6ebfbfe2426926f8beba4',
   verifyCmd: 'shasum -a 256 "Vision-Agricole-1.1.0-Mac.zip"',
   virustotal: 'https://www.virustotal.com/gui/file/e39900ff9012dd5bdb353c52f157efd1abbc9b35f6c6ebfbfe2426926f8beba4',
-  /** Date à laquelle l'analyse VirusTotal a été relue : aucune détection. */
-  virustotalChecked: '24 novembre 2026',
   quarantineCmd: 'xattr -dr com.apple.quarantine "/Applications/Vision Agricole.app"',
   engineCmd: 'docker run -d -p 3000:3000 --platform linux/amd64 --name nodeodm opendronemap/nodeodm',
   buildCmd: 'chmod +x build_mac.sh\n./build_mac.sh',

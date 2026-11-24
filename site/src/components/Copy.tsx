@@ -43,13 +43,12 @@ export function Checksum({ platform = 'windows' }: { platform?: Platform }) {
       {mac ? (
         <>
           <p className="verify-tip">Pour vérifier le fichier, dans le Terminal : <code>{MAC.verifyCmd}</code>. Le résultat doit être identique.</p>
-          <p className="verify-ok"><Icon name="check" size={16} /><span>VirusTotal : <b>aucun éditeur de sécurité n’a signalé ce fichier comme malveillant</b> (au {MAC.virustotalChecked}).</span></p>
-          <a className="virus-link" href={MAC.virustotal} rel="noopener">Voir l’analyse antivirus (VirusTotal) <Icon name="arrow" /></a>
+          <a className="virus-link" href={MAC.virustotal} rel="noopener">Voir l’analyse VirusTotal <Icon name="arrow" /></a>
         </>
       ) : (
         <>
           <p className="verify-tip">Sous Windows, dans l’Invite de commandes : <code>certutil -hashfile Vision.Agricole.exe SHA256</code> (avec le nom du fichier téléchargé). Le résultat doit être identique.</p>
-          <a className="virus-link" href={LINKS.virustotal} rel="noopener">Voir l’analyse antivirus (VirusTotal) <Icon name="arrow" /></a>
+          <a className="virus-link" href={LINKS.virustotal} rel="noopener">Voir l’analyse VirusTotal <Icon name="arrow" /></a>
         </>
       )}
     </>

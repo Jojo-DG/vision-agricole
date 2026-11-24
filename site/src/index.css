@@ -655,6 +655,3 @@ dialog.lightbox .close { position: absolute; right: 0; top: -54px; width: 46px; 
 @media (max-width: 720px) { .download-tabs { padding: 26px 25px 0; } .platform-tabs button { min-width: 96px; padding: 0 16px; } .hero-mac { text-align: center; } }
 
 .install-intro .platform-tabs { margin-bottom: 26px; }
-
-.verify-ok { display: flex; gap: 8px; align-items: flex-start; margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: #e3f1ec; color: var(--night); font-size: 14px; line-height: 1.5; }
-.verify-ok .icon { margin-top: 3px; color: var(--green); }
