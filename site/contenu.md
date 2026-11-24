@@ -32,7 +32,7 @@ Les phases préparatoires ont commencé le 2 août ; la finale a débuté le 17 
 ### Le récit
 L'ÉlectroChallenge 2026 a commencé à la mi-juillet. Nous avions tous postulé individuellement, puis passé un test sélectif, à la hauteur du défi. Les candidats retenus ont ensuite été répartis en équipes. Le Groupe 2 – Impact Connexion, Catégorie Orange, s'est formé autour de notre mentor, Monsieur Renaud DANVI, avec qui nous avons commencé à discuter du projet.
 
-Le vrai travail a démarré le 13 août (date à confirmer) par une séance de cartographie réalisée sur un vrai terrain. Nous avons décidé de développer l'application en parallèle. Ce jour-là, nous avons travaillé jusqu'à 22 h, et la fatigue était réelle. Trouver ensuite un ordinateur assez puissant pour le traitement photogrammétrique n'a pas été simple : pendant le reste de la semaine, nous rentrions très tard.
+Le vrai travail a démarré le 13 août par une séance de cartographie réalisée sur un vrai terrain. Nous avons décidé de développer l'application en parallèle. Ce jour-là, nous avons travaillé jusqu'à 22 h, et la fatigue était réelle. Trouver ensuite un ordinateur assez puissant pour le traitement photogrammétrique n'a pas été simple : pendant le reste de la semaine, nous rentrions très tard.
 
 Le samedi, nous avons fait les derniers réglages de l'application et lancé la présentation PowerPoint, qui a donné lieu à de vrais débats dans l'équipe. Le lundi soir, nous étions enfin à l'aise avec le diaporama. Le mardi, nous l'avons terminé et nous avons commencé à répéter. Ce moment a été précieux : nous avons vu les points faibles de chacun et travaillé dessus. Grâce au matériel de répétition mis à notre disposition par les encadrants, nous avons progressé.
 
@@ -44,7 +44,7 @@ Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'applica
 ### Frise chronologique (pour la page)
 - Mi-juillet : candidatures individuelles, puis test de sélection ; constitution des équipes ; premiers échanges avec le mentor.
 - 2 août : début des phases préparatoires.
-- 13 août (à confirmer) : première cartographie sur un terrain ; début du développement de l'application, séance jusqu'à 22 h.
+- 13 août : première cartographie sur un terrain ; début du développement de l'application, séance jusqu'à 22 h.
 - Même semaine : recherche d'un ordinateur adapté au traitement photogrammétrique.
 - Samedi : derniers réglages de l'application ; début du PowerPoint.
 - Lundi 17 août : début de la finale ; le soir, le diaporama prend forme.
@@ -53,4 +53,4 @@ Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'applica
 - Depuis : v1.1.0 de Vision Agricole, projets en cours avec l'application.
 
 ### À COMPLÉTER
-Date exacte du pitch (sans doute le mercredi 19 août) et confirmation du 13 août, projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
+Date exacte du pitch (sans doute le mercredi 19 août), projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
