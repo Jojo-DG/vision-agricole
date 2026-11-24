@@ -228,10 +228,43 @@ reconstruire. Tout correctif, même mineur, demande de relancer
 
 ---
 
-## 6 bis. Version Mac (non testée sur Mac réel)
+## 6 bis. Version Mac
 
-Le code est le même sur Windows et sur Mac (Python, CustomTkinter). Seule la
-construction diffère, et **elle doit se faire sur un Mac** :
+Une version Mac est publiée dans la Release v1.1.0 :
+`Vision-Agricole-1.1.0-Mac.zip`. Elle est faite pour les **Mac à puce Apple
+Silicon** (M1, M2, M3...) ; il n'y a pas de version Intel pour l'instant.
+
+SHA-256 : `e39900ff9012dd5bdb353c52f157efd1abbc9b35f6c6ebfbfe2426926f8beba4`
+(vérification : `shasum -a 256 "Vision-Agricole-1.1.0-Mac.zip"`).
+
+### Installer et lancer
+
+1. Décompressez le fichier, puis glissez **Vision Agricole** dans le dossier
+   **Applications**.
+2. Premier lancement : clic droit sur l'application > **Ouvrir** > **Ouvrir**
+   (l'application n'est pas signée par Apple).
+3. Si macOS bloque l'ouverture :
+   ```bash
+   xattr -dr com.apple.quarantine "/Applications/Vision Agricole.app"
+   ```
+
+### Moteur de traitement
+
+**Docker Desktop pour Mac** et le moteur NodeODM restent nécessaires, comme
+sous Windows. Réglez la mémoire de Docker dans Réglages > Resources (4 à 5 Go
+sur un Mac de 8 Go), puis créez le moteur :
+
+```bash
+docker run -d -p 3000:3000 --platform linux/amd64 --name nodeodm opendronemap/nodeodm
+```
+
+Sur Apple Silicon, le moteur tourne en émulation (`--platform linux/amd64`) :
+le traitement est donc nettement plus lent.
+
+### Construire soi-même (solution de repli)
+
+Le code est le même sur Windows et sur Mac (Python, CustomTkinter). La
+construction doit se faire sur un Mac :
 
 1. Installez Python 3 depuis python.org (il inclut un Tkinter récent).
 2. Dans le Terminal, dans le dossier du projet :
@@ -245,15 +278,6 @@ construction diffère, et **elle doit se faire sur un Mac** :
 4. Premier lancement : clic droit > Ouvrir (app non signée). Pour une copie
    reçue par e-mail ou téléchargée : `xattr -dr com.apple.quarantine
    "Vision Agricole.app"`.
-
-Points d'attention :
-- **Docker Desktop pour Mac** est nécessaire, comme sous Windows. Réglez sa
-  mémoire dans Réglages > Resources (4 à 5 Go sur un Mac de 8 Go).
-- **Mac Apple Silicon (M1, M2, M3...)** : l'image NodeODM peut tourner en
-  émulation (`--platform linux/amd64`), donc nettement plus lentement. À
-  tester avant de compter dessus.
-- Cette version Mac n'a été vérifiée qu'en lecture du code : aucun test sur
-  un vrai Mac n'a eu lieu.
 
 ---
 

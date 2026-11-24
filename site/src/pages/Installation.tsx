@@ -2,14 +2,15 @@ import type { ReactNode } from 'react'
 import { Accordion, Button, Icon, Reveal, Topography } from '../components/ui'
 import { Checksum, CodeBlock } from '../components/Copy'
 import { Contact } from '../components/Contact'
-import { LINKS, shots } from '../data'
+import { MacBuildFromSource, MacFirstLaunch } from '../components/MacContent'
+import { PlatformPanel, PlatformTabs, usePlatform } from '../components/platform'
+import { ENGINE_CMD_WINDOWS, LINKS, MAC, shots } from '../data'
 
 const DOCKER = 'https://www.docker.com/products/docker-desktop/'
-const NODEODM_CMD = 'docker run -d -p 3000:3000 --name nodeodm opendronemap/nodeodm'
 
-function Step({ n, title, children }: { n: string; title: string; children: ReactNode }) {
+function Step({ n, title, last = false, children }: { n: string; title: string; last?: boolean; children: ReactNode }) {
   return (
-    <Reveal as="section" className="install-step" aria-labelledby={`etape-${n}`}>
+    <Reveal as="section" className={`install-step ${last ? 'is-last' : ''}`} aria-labelledby={`etape-${n}`}>
       <div className="install-num" aria-hidden="true">{n}</div>
       <div className="install-body">
         <h2 id={`etape-${n}`}>{title}</h2>
@@ -33,6 +34,7 @@ const Check = ({ children }: { children: ReactNode }) => (
 )
 
 export default function Installation() {
+  const mac = usePlatform() === 'mac'
   return (
     <main className="inner-page" id="contenu">
       <section className="inner-hero">
@@ -41,7 +43,7 @@ export default function Installation() {
           <a href="#/" className="back-link"><Icon name="arrow" size={16} /> Retour à l’accueil</a>
           <span className="section-kicker light"><i />Installation</span>
           <h1>Installer Vision Agricole, <em>pas à pas.</em></h1>
-          <p>De Windows jusqu’à votre premier rapport, en trois étapes : l’application, le moteur de traitement, puis votre première mission.</p>
+          <p>De votre ordinateur (Windows ou Mac) jusqu’à votre premier rapport, en trois étapes : l’application, le moteur de traitement, puis votre première mission.</p>
         </div>
       </section>
 
@@ -50,12 +52,25 @@ export default function Installation() {
           <Reveal className="prose">
             <span className="section-kicker"><i />Avant de commencer</span>
             <h2 id="avant">Ce qu’il vous faut.</h2>
-            <ul className="checklist">
-              <Check>Un ordinateur sous <b>Windows</b>.</Check>
-              <Check>Environ <b>8 Go de mémoire</b> disponibles pour Docker. Sur un PC de 8 Go, vous choisirez la qualité « Rapide ».</Check>
-              <Check>Les photos de votre drone (JPG ou PNG), réunies dans un dossier.</Check>
-              <Check>Une connexion Internet <b>la première fois</b>, pour télécharger Docker et le moteur de traitement. Ensuite, le traitement de vos photos n’en a plus besoin.</Check>
-            </ul>
+            <p className="choose-os">Choisissez votre ordinateur :</p>
+            <PlatformTabs idBase="inst" />
+            <PlatformPanel idBase="inst">
+              <ul className="checklist">
+                {mac ? (
+                  <>
+                    <Check>Un <b>Mac à puce Apple Silicon</b> (M1, M2, M3…). Il n’y a pas de version Intel pour l’instant. Pour connaître votre puce : menu Pomme, puis « À propos de ce Mac ».</Check>
+                    <Check>Environ <b>8 Go de mémoire</b> au total. Dans Docker Desktop, réglez la mémoire dans Réglages &gt; Resources : 4 à 5 Go sur un Mac de 8 Go.</Check>
+                  </>
+                ) : (
+                  <>
+                    <Check>Un ordinateur sous <b>Windows</b>.</Check>
+                    <Check>Environ <b>8 Go de mémoire</b> disponibles pour Docker. Sur un PC de 8 Go, vous choisirez la qualité « Rapide ».</Check>
+                  </>
+                )}
+                <Check>Les photos de votre drone (JPG ou PNG), réunies dans un dossier.</Check>
+                <Check>Une connexion Internet <b>la première fois</b>, pour télécharger Docker et le moteur de traitement. Ensuite, le traitement de vos photos n’en a plus besoin.</Check>
+              </ul>
+            </PlatformPanel>
           </Reveal>
         </div>
       </section>
@@ -63,34 +78,63 @@ export default function Installation() {
       <section className="section install-steps" style={{ background: '#fff' }}>
         <div className="container">
           <Step n="01" title="Téléchargez l’application">
-            <p>Vision Agricole tient dans <b>un seul fichier</b> : pas besoin d’installer Python. Double-cliquez dessus pour la lancer. Le premier lancement est un peu plus lent que les suivants.</p>
-            <div className="install-actions">
-              <Button href={LINKS.download}>Télécharger pour Windows</Button>
-              <span className="install-note">Version 1.1.0 · gratuit · <a href="#/licence">licence MIT</a></span>
-            </div>
-            <div className="callout callout-warn" role="note">
-              <h3><Icon name="alert" size={18} /> Windows affiche un avertissement ?</h3>
-              <p>C’est normal : le logiciel est nouveau et n’est pas encore signé. Pour le lancer :</p>
-              <ol>
-                <li>Cliquez sur <b>Informations complémentaires</b>.</li>
-                <li>Puis sur <b>Exécuter quand même</b>.</li>
-              </ol>
-            </div>
-            <Accordion title="Vérifier le fichier avant de le lancer">
-              <Checksum />
-            </Accordion>
-            <p className="install-aside">Un Mac ? Une version peut être construite depuis le code source, mais elle n’a pas été testée.</p>
+            {mac ? (
+              <>
+                <p>Vision Agricole pour Mac est une application à glisser dans <b>Applications</b>. Elle est faite pour les Mac à puce <b>Apple Silicon</b> (M1, M2, M3…) ; il n’y a pas de version Intel pour l’instant.</p>
+                <div className="install-actions">
+                  <Button href={MAC.download}>Télécharger pour Mac</Button>
+                  <span className="install-note">Version 1.1.0 · gratuit · <a href="#/licence">licence MIT</a></span>
+                </div>
+                <h3>Premier lancement</h3>
+                <MacFirstLaunch />
+                <Accordion title="Vérifier le fichier avant de l’ouvrir">
+                  <Checksum platform="mac" />
+                </Accordion>
+                <Accordion title="Je préfère construire moi-même">
+                  <MacBuildFromSource />
+                </Accordion>
+              </>
+            ) : (
+              <>
+                <p>Vision Agricole tient dans <b>un seul fichier</b> : pas besoin d’installer Python. Double-cliquez dessus pour la lancer. Le premier lancement est un peu plus lent que les suivants.</p>
+                <div className="install-actions">
+                  <Button href={LINKS.download}>Télécharger pour Windows</Button>
+                  <span className="install-note">Version 1.1.0 · gratuit · <a href="#/licence">licence MIT</a></span>
+                </div>
+                <div className="callout callout-warn" role="note">
+                  <h3><Icon name="alert" size={18} /> Windows affiche un avertissement ?</h3>
+                  <p>C’est normal : le logiciel est nouveau et n’est pas encore signé. Pour le lancer :</p>
+                  <ol>
+                    <li>Cliquez sur <b>Informations complémentaires</b>.</li>
+                    <li>Puis sur <b>Exécuter quand même</b>.</li>
+                  </ol>
+                </div>
+                <Accordion title="Vérifier le fichier avant de le lancer">
+                  <Checksum />
+                </Accordion>
+              </>
+            )}
           </Step>
 
           <Step n="02" title="Installez le moteur de traitement">
             <p>L’application ne traite pas les photos elle-même : elle les confie à un moteur, <b>NodeODM</b>, qui tourne sur votre ordinateur grâce à <b>Docker</b>. Cette étape se fait <b>une seule fois</b>.</p>
 
             <h3>A. Installez Docker Desktop</h3>
-            <p>Téléchargez-le depuis le <a href={DOCKER} rel="noopener">site officiel de Docker</a>, installez-le puis démarrez-le. Attendez que l’indication en bas à gauche affiche <b>« Engine running »</b>.</p>
+            <p>Téléchargez-le {mac ? <>(version pour Mac) </> : null}depuis le <a href={DOCKER} rel="noopener">site officiel de Docker</a>, installez-le puis démarrez-le. Attendez que l’indication en bas à gauche affiche <b>« Engine running »</b>.</p>
 
             <h3>B. Créez le moteur</h3>
-            <p>Ouvrez l’<b>Invite de commandes</b> (ou PowerShell), collez cette commande, puis validez. Elle crée le moteur et le démarre en arrière-plan.</p>
-            <CodeBlock code={NODEODM_CMD} label="créer le moteur de traitement NodeODM" />
+            {mac ? (
+              <>
+                <p>Ouvrez le <b>Terminal</b>, collez cette commande, puis validez. Elle crée le moteur et le démarre en arrière-plan.</p>
+                <CodeBlock code={MAC.engineCmd} label="créer le moteur de traitement NodeODM sur Mac" />
+                <p className="install-aside">Sur Apple Silicon, l’option <span className="mono">--platform linux/amd64</span> fait tourner le moteur en émulation : le traitement est donc plus lent.</p>
+              </>
+            ) : (
+              <>
+                <p>Ouvrez l’<b>Invite de commandes</b> (ou PowerShell), collez cette commande, puis validez. Elle crée le moteur et le démarre en arrière-plan.</p>
+                <CodeBlock code={ENGINE_CMD_WINDOWS} label="créer le moteur de traitement NodeODM" />
+              </>
+            )}
 
             <h3>C. Vérifiez qu’il répond</h3>
             <p>Ouvrez <span className="mono">http://localhost:3000</span> dans votre navigateur. Une page d’information (du texte JSON) doit s’afficher : le moteur est prêt.</p>
@@ -101,7 +145,8 @@ export default function Installation() {
               caption="Si le moteur n’est pas démarré, l’application vous l’explique et vous guide en trois étapes." />
           </Step>
 
-          <Step n="03" title="Lancez votre première mission">
+          <Step n="03" title="Lancez votre première mission" last>
+            {mac && <p className="install-aside">Les captures de cette étape viennent de la version Windows de l’application.</p>}
             <ol className="mission-steps">
               <li>
                 <h3>L’accueil</h3>
@@ -153,10 +198,13 @@ export default function Installation() {
               </ol>
               <p>Le moteur n’a jamais été créé ? Reprenez l’étape 02 (B).</p>
             </Accordion>
-            <Accordion title="Mon PC est lent ou manque de mémoire">
-              <p>Le traitement des photos est gourmand en mémoire : Docker a besoin d’environ 8 Go disponibles. Choisissez la qualité <b>« Rapide »</b>, recommandée sur un PC de 8 Go.</p>
+            <Accordion title="Mon ordinateur est lent ou manque de mémoire">
+              <p>Le traitement des photos est gourmand en mémoire : Docker a besoin d’environ 8 Go disponibles. Choisissez la qualité <b>« Rapide »</b>, recommandée sur un PC de 8 Go. Sur un Mac Apple Silicon, le moteur tourne en émulation : il est plus lent.</p>
             </Accordion>
-            <Accordion title="L’application ne s’ouvre pas comme prévu">
+            <Accordion title="Sur Mac, macOS bloque l’ouverture de l’application">
+              <MacFirstLaunch />
+            </Accordion>
+            <Accordion title="Sous Windows, l’application ne s’ouvre pas comme prévu">
               <p>La nouvelle interface a besoin de WebView2, déjà présent sur Windows 11 et sur la plupart des Windows 10 à jour. Si elle ne peut pas s’ouvrir, l’application bascule d’elle-même sur l’interface classique : le calcul est le même.</p>
             </Accordion>
             <Accordion title="Où sont mes résultats ?">

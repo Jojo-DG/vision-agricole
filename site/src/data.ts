@@ -12,6 +12,21 @@ export const LINKS = {
   readme: `${GITHUB}#readme`,
 } as const
 
+/** Version Mac (Release v1.1.0) : Apple Silicon uniquement, pas de version Intel pour l'instant. */
+export const MAC = {
+  download: `${GITHUB}/releases/download/v1.1.0/Vision-Agricole-1.1.0-Mac.zip`,
+  file: 'Vision-Agricole-1.1.0-Mac.zip',
+  sha256: 'e39900ff9012dd5bdb353c52f157efd1abbc9b35f6c6ebfbfe2426926f8beba4',
+  verifyCmd: 'shasum -a 256 "Vision-Agricole-1.1.0-Mac.zip"',
+  virustotal: 'https://www.virustotal.com/gui/file/e39900ff9012dd5bdb353c52f157efd1abbc9b35f6c6ebfbfe2426926f8beba4',
+  quarantineCmd: 'xattr -dr com.apple.quarantine "/Applications/Vision Agricole.app"',
+  engineCmd: 'docker run -d -p 3000:3000 --platform linux/amd64 --name nodeodm opendronemap/nodeodm',
+  buildCmd: 'chmod +x build_mac.sh\n./build_mac.sh',
+} as const
+
+/** Commande de création du moteur de traitement sous Windows. */
+export const ENGINE_CMD_WINDOWS = 'docker run -d -p 3000:3000 --name nodeodm opendronemap/nodeodm'
+
 /** Coordonnées publiques pour poser une question. */
 export const CONTACT = {
   email: 'jaimedeg001@gmail.com',
@@ -92,6 +107,7 @@ export const team = [
 ] as const
 
 export const faqs = [
+  { q: 'Existe-t-il une version Mac ?', a: ['Oui, pour les Mac à puce Apple Silicon (M1, M2, M3…). Il n’y a pas de version Intel pour l’instant. Docker Desktop et le moteur de traitement restent nécessaires ; sur Apple Silicon, le moteur tourne en émulation, donc plus lentement.'], link: { label: 'Voir le guide d’installation', href: '#/installation' } },
   { q: 'Quel drone faut-il ?', a: ['Des photos aériennes JPG ou PNG de bonne qualité, avec un recouvrement entre les images. L’application a été testée avec un DJI Mavic 3 Enterprise (photos RGB).'] },
   { q: 'Faut-il Internet ?', a: ['Pas pour le traitement. Il faut Internet la première fois, pour télécharger Docker et le moteur de traitement.', 'L’estimation du sol en ligne (SoilGrids), qui est facultative, utilise aussi Internet.'] },
   { q: 'Mes photos sont-elles envoyées quelque part ?', a: ['Non. Tout reste sur votre ordinateur.'] },
@@ -127,6 +143,6 @@ export const limits = [
   'Le zonage exporté est lissé : il est plus net que l’image du rapport. Le champ PCT_BRUT donne la part de chaque zone avant lissage.',
   'Les exports ont été vérifiés par relecture avec GDAL, le moteur de lecture de QGIS. Ils n’ont pas encore été ouverts dans QGIS lui-même.',
   'L’altitude de vol n’est pas bloquée par l’application : elle est simplement reportée dans le PDF.',
-  'La version Mac n’a pas été testée sur un vrai Mac.',
+  'La version Mac est faite pour les Mac à puce Apple Silicon (M1, M2, M3…) : il n’y a pas de version Intel pour l’instant. Sur Apple Silicon, le moteur de traitement tourne en émulation : il est plus lent.',
   'Les suggestions de cultures et les interprétations du rapport sont des aides à la décision. Elles ne remplacent pas l’avis d’un agronome ni une analyse de sol.',
 ] as const

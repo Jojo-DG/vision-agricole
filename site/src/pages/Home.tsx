@@ -1,9 +1,11 @@
 import { Accordion, Button, Counter, Icon, Reveal, Topography } from '../components/ui'
 import type { IconName } from '../components/ui'
 import { BeforeAfter, Gallery } from '../components/Interactive'
-import { Checksum } from '../components/Copy'
+import { Checksum, CodeBlock } from '../components/Copy'
+import { MacBuildFromSource, MacFirstLaunch } from '../components/MacContent'
+import { PlatformPanel, PlatformTabs, setPlatform, usePlatform } from '../components/platform'
 import { Contact } from '../components/Contact'
-import { benefits, faqs, LINKS, maps, shots, steps, team, testFlight, why } from '../data'
+import { benefits, faqs, LINKS, MAC, maps, shots, steps, team, testFlight, why } from '../data'
 
 function Kicker({ children, light = false }: { children: string; light?: boolean }) {
   return <Reveal as="span" className={`section-kicker ${light ? 'light' : ''}`}><i />{children}</Reveal>
@@ -23,6 +25,7 @@ function Hero() {
             <Button href="#telecharger">Télécharger pour Windows</Button>
             <Button href="#fonctionnement" variant="secondary">Voir comment ça marche</Button>
           </div>
+          <p className="hero-mac">Aussi pour Mac (Apple Silicon) : <a href="#telecharger" onClick={() => setPlatform('mac')}>voir le téléchargement</a>.</p>
           <div className="proof-pill">
             <span className="award-mark"><Icon name="award" size={20} /></span>
             <span><b>Lauréat de l’ÉlectroChallenge 2026</b><small>Catégorie Orange</small></span>
@@ -240,37 +243,71 @@ function Team() {
 }
 
 function Download() {
+  const platform = usePlatform()
+  const mac = platform === 'mac'
   return (
     <section className="section download-section" id="telecharger" aria-labelledby="titre-telecharger">
       <div className="container">
         <Reveal variant="scale" className="download-card">
           <Topography />
-          <div className="download-main">
-            <span className="section-kicker light"><i />Version 1.1.0</span>
-            <h2 id="titre-telecharger">Prêt à voir votre parcelle <em>autrement&nbsp;?</em></h2>
-            <p>Téléchargez Vision Agricole et transformez votre prochain vol en décisions claires.</p>
-            <a href={LINKS.download} className="button button-light"><Icon name="download" />Télécharger Vision Agricole 1.1.0 pour Windows</a>
-            <div className="requirements">
-              <span><Icon name="check" size={16} />Windows</span>
-              <span><Icon name="check" size={16} />Un seul fichier, sans installer Python</span>
-              <span><Icon name="check" size={16} />Gratuit</span>
+          <div className="download-tabs"><PlatformTabs idBase="dl" light /></div>
+          <PlatformPanel idBase="dl" className="download-panel">
+            <div className="download-main">
+              <span className="section-kicker light"><i />Version 1.1.0</span>
+              <h2 id="titre-telecharger">Prêt à voir votre parcelle <em>autrement&nbsp;?</em></h2>
+              <p>Téléchargez Vision Agricole et transformez votre prochain vol en décisions claires.</p>
+              {mac ? (
+                <>
+                  <a href={MAC.download} className="button button-light"><Icon name="download" />Télécharger pour Mac</a>
+                  <div className="requirements">
+                    <span><Icon name="check" size={16} />Mac Apple Silicon (M1, M2, M3…)</span>
+                    <span><Icon name="check" size={16} />Pas de version Intel pour l’instant</span>
+                    <span><Icon name="check" size={16} />Gratuit</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <a href={LINKS.download} className="button button-light"><Icon name="download" />Télécharger Vision Agricole 1.1.0 pour Windows</a>
+                  <div className="requirements">
+                    <span><Icon name="check" size={16} />Windows</span>
+                    <span><Icon name="check" size={16} />Un seul fichier, sans installer Python</span>
+                    <span><Icon name="check" size={16} />Gratuit</span>
+                  </div>
+                </>
+              )}
+              <a className="text-link" href="#/installation">Guide d’installation pas à pas <Icon name="arrow" /></a>
             </div>
-            <a className="text-link" href="#/installation">Guide d’installation pas à pas <Icon name="arrow" /></a>
-            <p className="mac-note">Mac : une version peut être construite depuis le code source (non testé).</p>
-          </div>
-          <div className="download-details">
-            <h3>Avant de commencer</h3>
-            <ul>
-              <li>Un ordinateur Windows.</li>
-              <li>Docker Desktop et le moteur de traitement (NodeODM), expliqués pas à pas dans le <a href="#/installation">guide d’installation</a>.</li>
-              <li>Sur un PC de 8 Go, choisissez la qualité « Rapide ».</li>
-            </ul>
-            <Accordion title="Windows affiche un avertissement ?">
-              <p>C’est normal pour un nouveau logiciel qui n’est pas encore signé. Cliquez sur <b>Informations complémentaires</b>, puis sur <b>Exécuter quand même</b>.</p>
-              <p>Vous préférez vérifier d’abord ? Utilisez l’empreinte et l’analyse ci-dessous.</p>
-            </Accordion>
-            <Checksum />
-          </div>
+            <div className="download-details">
+              <h3>Avant de commencer</h3>
+              {mac ? (
+                <>
+                  <ul>
+                    <li>Un Mac à puce <b>Apple Silicon</b> (M1, M2, M3…). Il n’y a pas de version Intel pour l’instant.</li>
+                    <li><b>Docker Desktop</b> et le moteur de traitement (NodeODM) restent nécessaires, expliqués dans le <a href="#/installation">guide d’installation</a>.</li>
+                  </ul>
+                  <p className="engine-label">Créez le moteur une seule fois, dans le Terminal :</p>
+                  <CodeBlock code={MAC.engineCmd} label="créer le moteur de traitement NodeODM sur Mac" />
+                  <p className="verify-tip">Sur Apple Silicon, le moteur tourne en émulation : le traitement est plus lent.</p>
+                  <Accordion title="Premier lancement sur Mac"><MacFirstLaunch /></Accordion>
+                  <Accordion title="Je préfère construire moi-même"><MacBuildFromSource /></Accordion>
+                  <Checksum platform="mac" />
+                </>
+              ) : (
+                <>
+                  <ul>
+                    <li>Un ordinateur Windows.</li>
+                    <li>Docker Desktop et le moteur de traitement (NodeODM), expliqués pas à pas dans le <a href="#/installation">guide d’installation</a>.</li>
+                    <li>Sur un PC de 8 Go, choisissez la qualité « Rapide ».</li>
+                  </ul>
+                  <Accordion title="Windows affiche un avertissement ?">
+                    <p>C’est normal pour un nouveau logiciel qui n’est pas encore signé. Cliquez sur <b>Informations complémentaires</b>, puis sur <b>Exécuter quand même</b>.</p>
+                    <p>Vous préférez vérifier d’abord ? Utilisez l’empreinte et l’analyse ci-dessous.</p>
+                  </Accordion>
+                  <Checksum />
+                </>
+              )}
+            </div>
+          </PlatformPanel>
         </Reveal>
       </div>
     </section>

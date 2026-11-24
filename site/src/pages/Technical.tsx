@@ -59,6 +59,7 @@ export default function Technical() {
             <h2>Prérequis</h2>
             <ul className="tech-list">
               <li>Windows. L’interface utilise WebView2, présent par défaut sur Windows 11 et sur la plupart des Windows 10 à jour. Sinon, l’application bascule seule sur l’interface classique.</li>
+              <li>Mac : puce Apple Silicon (M1, M2, M3…) ; pas de version Intel pour l’instant. Le moteur NodeODM y tourne en émulation (<span className="tech-code">--platform linux/amd64</span>), donc plus lentement.</li>
               <li>Docker Desktop, pour le moteur de traitement.</li>
               <li>Environ 8 Go de mémoire disponibles pour Docker. Sur un PC de 8 Go, choisissez la qualité « Rapide ».</li>
             </ul>
