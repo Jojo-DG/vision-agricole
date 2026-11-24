@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import type { MouseEvent, ReactNode } from 'react'
-import { LINKS } from '../data'
+import { CONTACT, LINKS } from '../data'
 import { Icon, Topography } from './ui'
 
 /* ---------- Navigation : pages par hash (#/histoire), sections par ancre (#resultats) ---------- */
 
-export type Page = 'home' | 'histoire' | 'techniciens'
+export type Page = 'home' | 'histoire' | 'techniciens' | 'installation' | 'licence'
 
 export function pageFromHash(hash: string): Page {
   if (hash === '#/histoire') return 'histoire'
   if (hash === '#/techniciens') return 'techniciens'
+  if (hash === '#/installation') return 'installation'
+  if (hash === '#/licence') return 'licence'
   return 'home'
 }
 
@@ -100,17 +102,21 @@ export function Footer({ page }: { page: Page }) {
             <span>En savoir plus</span>
             <a href="#/histoire">Notre histoire</a>
             <a href="#/techniciens">Pour les techniciens</a>
-            <a href={LINKS.readme}>Installation (README)</a>
+            <a href="#/installation">Guide d’installation</a>
           </div>
           <div>
             <span>Projet libre</span>
             <a href={LINKS.github}><Icon name="github" size={16} /> Code sur GitHub</a>
-            <a href={LINKS.license}>Licence MIT</a>
-            <a href={LINKS.issues}>Poser une question</a>
+            <a href="#/licence">Licence MIT</a>
+          </div>
+          <div>
+            <span>Une question ?</span>
+            <a href={`mailto:${CONTACT.email}`}><Icon name="mail" size={16} /> {CONTACT.email}</a>
+            <a href={`tel:${CONTACT.tel}`}><Icon name="phone" size={16} /> {CONTACT.phone}</a>
           </div>
         </div>
         <p className="footer-credits">
-          Application sous licence MIT. Moteur de traitement : NodeODM / OpenDroneMap, licence AGPL-3.0, qui fonctionne séparément dans Docker.
+          Application sous <a href="#/licence">licence MIT</a>. Moteur de traitement : NodeODM / OpenDroneMap, licence AGPL-3.0, qui fonctionne séparément dans Docker.
           Icônes d’après Feather Icons (licence MIT). Polices : Fraunces, Plus Jakarta Sans et DM Mono (licence SIL OFL).
         </p>
         <div className="footer-bottom">

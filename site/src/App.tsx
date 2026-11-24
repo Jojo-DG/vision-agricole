@@ -5,11 +5,15 @@ import type { Page } from './components/Chrome'
 import Home from './pages/Home'
 import History from './pages/History'
 import Technical from './pages/Technical'
+import Installation from './pages/Installation'
+import License from './pages/License'
 
 const titles: Record<Page, string> = {
   home: 'Vision Agricole – De vos photos de drone à un rapport clair pour votre parcelle',
   histoire: 'Notre histoire – Vision Agricole',
   techniciens: 'Pour les techniciens – Vision Agricole',
+  installation: 'Guide d’installation – Vision Agricole',
+  licence: 'Licence MIT – Vision Agricole',
 }
 
 function scrollToSection(id: string) {
@@ -44,7 +48,7 @@ export default function App() {
     <>
       <a className="skip-link" href={page === 'home' ? '#probleme' : '#contenu'}>Aller au contenu</a>
       <Header page={page} />
-      {page === 'home' ? <main id="contenu-accueil"><Home /></main> : page === 'histoire' ? <History /> : <Technical />}
+      {page === 'home' ? <main id="contenu-accueil"><Home /></main> : page === 'histoire' ? <History /> : page === 'installation' ? <Installation /> : page === 'licence' ? <License /> : <Technical />}
       <Footer page={page} />
       <Analytics />
     </>

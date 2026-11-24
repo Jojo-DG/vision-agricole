@@ -12,7 +12,7 @@ export default function Technical() {
           <a href="#/" className="back-link"><Icon name="arrow" size={16} /> Retour à l’accueil</a>
           <span className="section-kicker light"><i />Pour les techniciens</span>
           <h1>Du traitement brut <br />aux <em>exports métiers.</em></h1>
-          <p>Le fonctionnement de Vision Agricole, des photos du drone jusqu’aux livrables. Le détail complet est dans le README du dépôt.</p>
+          <p>Le fonctionnement de Vision Agricole, des photos du drone jusqu’aux livrables. Pour installer l’application pas à pas, voir le guide d’installation.</p>
         </div>
       </section>
 
@@ -76,7 +76,8 @@ export default function Technical() {
 
           <Reveal className="tech-block" as="div">
             <div className="tech-links">
-              <Button href={LINKS.readme} icon="arrow" external>Lire le README</Button>
+              <Button href="#/installation" icon="arrow">Guide d’installation</Button>
+              <Button href={LINKS.readme} variant="secondary" icon="arrow" external>Documentation technique (README)</Button>
               <Button href={LINKS.github} variant="secondary" icon="github" external>Code source sur GitHub</Button>
             </div>
           </Reveal>
