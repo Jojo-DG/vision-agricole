@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision Agricole</title>
+<style>
+:root{
+  --bg:#F6F4EF; --card:#FFFFFF; --subtle:#EFECE4; --line:#DFD9CE; --field:#C7BFB0;
+  --petrol:#0B4F5C; --petrol-2:#0E5E6D;
+  --green:#0B7D5C; --green-hover:#096A4E; --green-soft:#E5F5EF; --green-ink:#0A6B4F;
+  --blue:#1E6FD9; --blue-soft:#E8F1FC; --blue-ink:#1659B3;
+  --orange:#DF7E26; --orange-soft:#FDF1E6; --orange-ink:#A85512;
+  --ink:#1E292B; --muted:#55605E; --danger:#C23B3B; --danger-soft:#FCEAEA;
+  --radius:14px; --shadow:0 1px 2px rgba(30,41,43,.05),0 6px 20px rgba(30,41,43,.06);
+  --font:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-display:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em;flex:0 0 auto}
+.ic .i,.feature-icon .i{width:22px;height:22px}
+.feature-icon .i{width:30px;height:30px}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+.app{display:flex;flex-direction:column;height:100vh}
+
+/* ---------- En-tête ---------- */
+header{background:var(--petrol);color:#fff;display:flex;align-items:center;gap:16px;padding:14px 32px;flex:0 0 auto}
+.brand{display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;cursor:pointer;color:#fff}
+.logo{width:44px;height:44px;border-radius:50%;background:#D4E4E5;display:grid;place-items:center;flex:0 0 auto}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.badge-orange{background:var(--orange);color:#fff;font-weight:700;font-size:12px;letter-spacing:.06em;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.spacer{flex:1}
+.engine-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14px;cursor:pointer}
+.engine-pill .dot{width:9px;height:9px;border-radius:50%;background:#9AA5A3}
+.engine-pill.ok .dot{background:#4ADE9B}
+.engine-pill.down .dot{background:#F2A35E}
+.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);display:grid;place-items:center;cursor:pointer;color:#fff}
+.menu-wrap{position:relative}
+.menu{position:absolute;right:0;top:52px;background:#fff;color:var(--ink);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.16);padding:8px;min-width:280px;z-index:20;display:none}
+.menu.open{display:block}
+.menu button{display:flex;gap:12px;align-items:center;width:100%;border:0;background:none;padding:11px 12px;border-radius:8px;text-align:left;cursor:pointer;font-size:16px}
+.menu button:hover{background:var(--subtle)}
+
+/* ---------- Contenu ---------- */
+main{flex:1;overflow:auto}
+.screen{display:none;max-width:1120px;margin:0 auto;padding:32px 32px 48px;animation:fade .25s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.eyebrow{color:var(--green-ink);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px}
+h1,h2,h3{font-family:var(--font-display);color:var(--petrol);margin:0}
+h1{font-size:34px;line-height:1.15;letter-spacing:-.02em;font-weight:700}
+h2{font-size:22px;font-weight:650}
+h3{font-size:18px;font-weight:650}
+.lead{color:var(--muted);font-size:17px;margin:8px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:12px;border:1px solid transparent;font-weight:650;font-size:16px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .05s;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--green);color:#fff;box-shadow:0 4px 14px rgba(11,125,92,.25)}
+.btn-primary:hover{background:var(--green-hover)}
+.btn-primary:disabled{background:#A9C9BD;box-shadow:none;cursor:not-allowed}
+.btn-secondary{background:#fff;color:var(--petrol);border-color:var(--field)}
+.btn-secondary:hover{background:#F2F6F4}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:#185DBA}
+.btn-lg{min-height:58px;font-size:18px;padding:0 34px;border-radius:14px}
+.link{background:none;border:0;color:var(--petrol);font-weight:650;cursor:pointer;padding:6px 0;display:inline-flex;gap:8px;align-items:center;text-decoration:underline;text-underline-offset:3px}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px}
+
+/* ---------- Accueil ---------- */
+.hero{text-align:center;padding:40px 0 8px}
+.hero h1{font-size:52px;max-width:880px;margin:0 auto;letter-spacing:-.03em;font-weight:800}
+.hero .lead{font-size:19px;margin-top:16px}
+.hero-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:32px}
+.steps-strip{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:16px;padding:24px 32px;margin:48px auto 0;max-width:1000px}
+.strip-item{display:flex;gap:14px;align-items:flex-start}
+.num{min-width:40px;height:40px;border-radius:10px;background:var(--green-soft);color:var(--green-ink);display:grid;place-items:center;font-weight:700}
+.strip-item b{display:block;color:var(--petrol)}
+.strip-item span{color:var(--muted);font-size:15px}
+.arrow{color:#A59E90}
+.privacy{text-align:center;color:var(--muted);font-size:15px;margin-top:20px;display:flex;justify-content:center;gap:8px;align-items:center}
+
+/* ---------- Assistant ---------- */
+.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--subtle);border-radius:16px;padding:6px;margin-bottom:32px}
+.step{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;color:var(--muted)}
+.step .circle{width:34px;height:34px;border-radius:50%;border:2px solid #BDB6A8;display:grid;place-items:center;font-weight:700;font-size:15px;flex:0 0 auto}
+.step small{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.step b{display:block;font-size:16px}
+.step.active{background:#fff;box-shadow:var(--shadow);color:var(--petrol)}
+.step.active .circle{background:var(--green);border-color:var(--green);color:#fff}
+.step.done{color:var(--petrol)}
+.step.done .circle{background:var(--green);border-color:var(--green);color:#fff}
+.title-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}
+.chip{display:inline-flex;gap:8px;align-items:center;background:var(--subtle);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap}
+
+.drop{border:2px dashed var(--field);border-radius:var(--radius);background:#FCFBF8;text-align:center;padding:48px 24px}
+.drop .big-icon{width:64px;height:64px;border-radius:16px;background:var(--green-soft);color:var(--green-ink);display:grid;place-items:center;margin:0 auto 16px}
+.drop h2{font-weight:600}
+.drop p{margin:6px 0 22px;color:var(--muted)}
+.photos-box{padding:24px}
+.photos-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.badge{display:inline-flex;gap:8px;align-items:center;border-radius:999px;padding:8px 16px;font-weight:650}
+.badge.ok{background:var(--green-soft);color:var(--green-ink)}
+.badge.warn{background:var(--orange-soft);color:var(--orange-ink)}
+.thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.thumb{aspect-ratio:3/2;border-radius:10px;overflow:hidden;background:var(--subtle);position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb span{position:absolute;left:0;right:0;bottom:0;color:#fff;font-size:12px;padding:14px 8px 5px;background:linear-gradient(transparent,rgba(0,0,0,.6));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.thumb.more{display:grid;place-items:center;text-align:center;color:var(--petrol)}
+.thumb.more b{font-size:24px;display:block}
+.path{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-top:16px;word-break:break-all}
+
+/* Formulaire */
+.form{padding:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 22px}
+.field label{display:block;font-weight:650;color:var(--petrol);margin-bottom:6px;font-size:15px}
+.field .req{color:var(--orange-ink)}
+.input{width:100%;height:48px;border:1px solid var(--field);border-radius:10px;padding:0 14px;background:#FDFCFA;font-size:16px}
+.input:focus{border-color:var(--green);outline:none;box-shadow:0 0 0 3px rgba(11,125,92,.18)}
+.field.invalid .input{border-color:var(--danger);box-shadow:0 0 0 3px rgba(194,59,59,.12)}
+.hint{font-size:14px;color:var(--muted);margin-top:6px}
+.err{font-size:14px;color:var(--danger);margin-top:6px;display:none}
+.field.invalid .err{display:block}
+.divider{height:1px;background:var(--line);margin:26px 0}
+.row-between{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.seg{display:flex;background:var(--subtle);border-radius:12px;padding:4px;gap:4px}
+.seg button{width:52px;height:44px;border:0;background:none;border-radius:9px;font-weight:700;font-size:17px;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed=true]{background:#fff;color:var(--petrol);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+details.soil summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;font-weight:650;color:var(--petrol);font-size:18px}
+details.soil summary::-webkit-details-marker{display:none}
+details.soil summary .chev{margin-left:auto;transition:transform .2s}
+details.soil[open] summary .chev{transform:rotate(180deg)}
+.tag{background:var(--subtle);color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.06em;border-radius:6px;padding:3px 8px}
+.soil-body{background:var(--bg);border-radius:12px;padding:22px;margin-top:18px}
+.toggle{display:flex;gap:14px;align-items:flex-start;cursor:pointer}
+.toggle input{appearance:none;width:48px;height:28px;border-radius:999px;background:#C9C3B6;position:relative;flex:0 0 auto;cursor:pointer;transition:background .2s;margin:2px 0 0}
+.toggle input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle input:checked{background:var(--green)}
+.toggle input:checked::after{left:23px}
+.toggle b{display:block;color:var(--petrol)}
+.info-line{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);margin-top:16px}
+
+/* Vérification */
+.verify{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
+.recap{padding:24px}
+.recap-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.recap dl{margin:0}
+.recap .r{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.recap .r:last-child{border-bottom:0}
+.recap dt{color:var(--muted)}
+.recap dd{margin:0;font-weight:650;color:var(--petrol);text-align:right}
+.quality{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+.q{position:relative;text-align:left;padding:22px;border:2px solid var(--line);border-radius:var(--radius);background:#fff;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.q:hover{border-color:var(--field)}
+.q[aria-checked=true]{border-color:var(--green);background:#F7FCFA}
+.q .radio{width:22px;height:22px;border-radius:50%;border:2px solid #A9A293;margin-bottom:10px}
+.q[aria-checked=true] .radio{border:7px solid var(--green)}
+.q b{font-size:19px;color:var(--petrol)}
+.q .reco{position:absolute;top:16px;right:16px;background:var(--green-soft);color:var(--green-ink);font-size:12px;font-weight:700;letter-spacing:.05em;padding:4px 9px;border-radius:6px}
+.q .dur{display:flex;gap:6px;align-items:center;color:var(--blue-ink);font-weight:650;font-size:15px;margin-top:6px}
+.notice{display:flex;gap:14px;align-items:flex-start;border-radius:var(--radius);padding:18px 22px;margin-top:24px}
+.notice.warm{background:#FFF8EC;border:1px solid #F3D9AE}
+.notice.cool{background:#EEF5F8;border:1px solid #D2E2EA}
+.notice.err{background:var(--danger-soft);border:1px solid #F0C4C4}
+.notice b{color:var(--ink)}
+
+/* Progression */
+.prog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.timer{display:flex;gap:12px;align-items:center;padding:14px 20px}
+.timer small{display:block;color:var(--muted);font-size:13px}
+.timer b{font-size:22px;color:var(--petrol);font-variant-numeric:tabular-nums}
+.bar-label{display:flex;justify-content:space-between;margin:30px 0 10px;font-weight:650;color:var(--petrol)}
+.bar{height:14px;background:var(--subtle);border-radius:999px;overflow:hidden}
+.bar>div{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--green),#2CB386);transition:width .6s ease;position:relative;overflow:hidden}
+.bar>div::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:shine 1.8s infinite;transform:translateX(-100%)}
+@keyframes shine{to{transform:translateX(100%)}}
+.prog-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;margin-top:28px}
+.stages{padding:16px;list-style:none;margin:0}
+.stages li{display:flex;gap:14px;align-items:center;padding:14px;border-radius:12px;color:var(--muted)}
+.stages .c{width:34px;height:34px;border-radius:50%;border:2px solid #C9C3B6;display:grid;place-items:center;font-weight:700;font-size:14px;flex:0 0 auto}
+.stages li.done{color:var(--petrol)}
+.stages li.done .c{background:var(--green);border-color:var(--green);color:#fff}
+.stages li.current{background:var(--green-soft);color:var(--petrol)}
+.stages li.current .c{background:var(--blue);border-color:var(--blue);color:#fff;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(30,111,217,.45)}100%{box-shadow:0 0 0 10px rgba(30,111,217,0)}}
+.stages b{display:block;font-weight:650}
+.stages .sub{font-size:14px;color:var(--blue-ink)}
+.illus{overflow:hidden;display:grid;place-items:center;background:linear-gradient(#EAF3F1 0 52%,#DCE6CC 52%)}
+.illus svg{width:100%;height:100%}
+.drone{animation:hover 3s ease-in-out infinite}
+@keyframes hover{50%{transform:translateY(-6px)}}
+.scan{animation:scan 3.2s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateX(-120px)}50%{transform:translateX(120px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Résultats */
+.banner{display:flex;align-items:center;gap:16px;background:var(--petrol);color:#fff;border-radius:16px;padding:18px 22px}
+.banner .okc{width:40px;height:40px;border-radius:50%;background:#12936C;display:grid;place-items:center;flex:0 0 auto}
+.banner b{font-size:18px}
+.banner small{display:block;color:#CFE3E0;font-size:14px}
+.verdict-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin:28px 0 22px}
+.verdict-row h1{font-size:30px;font-weight:650}
+.verdict-detail{margin:8px 0 0;font-size:17px}
+.verdict-detail .hl{color:var(--orange-ink);font-weight:650}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.stat>div{min-width:0}
+.stat b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat{display:flex;gap:14px;align-items:center;padding:18px 20px}
+.stat .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:0 0 auto}
+.stat small{display:block;color:var(--muted);font-size:14px}
+.stat b{font-size:28px;color:var(--petrol);font-variant-numeric:tabular-nums}
+.stat em{font-style:normal;font-size:15px;color:var(--muted);margin-left:3px}
+.maps{margin-top:22px;overflow:hidden}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;background:var(--subtle);padding:6px}
+.tabs button{border:0;background:none;padding:10px 16px;border-radius:10px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;font-size:15px}
+.tabs button[aria-selected=true]{background:#fff;color:var(--petrol);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.tabs button:disabled{opacity:.45;cursor:not-allowed}
+.map-view{padding:20px;display:grid;place-items:center;min-height:380px;background:#fff}
+.map-view img{max-width:100%;max-height:460px;border-radius:8px;display:block}
+.map-empty{color:var(--muted);text-align:center;max-width:420px}
+.map-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 22px;border-top:1px solid var(--line);background:#FCFBF8}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
+.legend span{display:inline-flex;gap:7px;align-items:center}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block;border:1px solid rgba(0,0,0,.08)}
+.map-desc{font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;max-width:520px}
+.res-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:18px;flex-wrap:wrap}
+.help{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;font-size:12px;font-weight:700;margin-left:6px;cursor:help;position:relative}
+.help:hover::after,.help:focus::after{content:attr(data-tip);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);width:260px;background:var(--ink);color:#fff;font-weight:400;font-size:13px;line-height:1.4;padding:10px 12px;border-radius:8px;z-index:30;white-space:normal;text-align:left}
+
+/* Pages simples */
+.narrow{max-width:820px;margin:0 auto}
+.center-card{padding:44px;text-align:center}
+.feature-icon{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;margin:0 auto 20px}
+.howto{list-style:none;margin:28px 0;padding:0;text-align:left}
+.howto li{display:flex;gap:16px;padding:18px 4px;border-top:1px solid var(--line)}
+.howto li:last-child{border-bottom:1px solid var(--line)}
+.howto b{color:var(--petrol)}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
+.set-card{padding:26px}
+.set-card h3{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.set-card .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center}
+.inline{display:flex;gap:10px;align-items:flex-end}
+.result-msg{margin-top:14px;font-weight:600;display:none;gap:8px;align-items:center}
+.result-msg.show{display:flex}
+.result-msg.ok{color:var(--green-ink)}
+.result-msg.ko{color:var(--danger)}
+.about-meta{display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left;margin-top:26px}
+.about-meta b{display:block;color:var(--petrol);font-size:14px}
+.box-soft{background:#F4F9F6;border:1px solid #D7EBE1;border-radius:12px;padding:20px;margin-top:24px}
+.tech-detail{margin-top:16px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;max-height:200px;overflow:auto;display:none}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;z-index:50;font-size:15px}
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+/* Fenêtre plus étroite (petits portables) */
+@media (max-width:1100px){
+  .hero h1{font-size:42px}
+  .steps-strip{grid-template-columns:1fr;gap:14px}.steps-strip .arrow{display:none}
+  .verify{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .thumbs{grid-template-columns:repeat(4,1fr)}.thumbs .thumb:nth-child(n+4):not(.more){display:none}
+  .prog-grid{grid-template-columns:1fr}.illus{height:220px}
+}
+@media (max-height:700px){.screen{padding-top:20px}.hero{padding-top:12px}.hero h1{font-size:38px}.steps-strip{margin-top:28px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="va-logo" viewBox="345 720 640 590"><defs>
+            <linearGradient y2="745.675" x2="965.536" y1="1189.22" x1="407" gradientUnits="userSpaceOnUse" id="va-g">
+                <stop stop-color="#2E4449" offset="0" class="stop0"/>
+                <stop stop-color="#2D5248" offset="1" class="stop1"/>
+            </linearGradient>
+        </defs><path d="M620.848 739.446c67.23-.29 120.07 23.209 172.868 62.363a158 158 0 0 1 12.488-13.239c44.973-42.518 102.35-47.289 160.793-45.514 1.375 83.373-9.913 141.992-89.555 182.972 58.151 136.122-1.125 274.362-129.368 340.902-99.86 50.55-226.723 33.17-309.843-41.59a276 276 0 0 1-91.066-190.65 283.54 283.54 0 0 1 74.878-208.73c51.333-56.091 123.984-83.151 198.805-86.514" fill="url(#va-g)"/><path d="M458.425 948.887c-3.976 10.893-8.837 27.008-10.285 38.139a72.73 72.73 0 0 0 15.032 53.774c23.338 30.12 70.858 36.09 103.435 55.32 18.49 8.68 25.073 29.83 42.442 39.62 21.337 12.02 44.926 11.26 68.487 9.15 7.276-.81 22.009 1.3 28.817-1.06 35.841-12.43 59.912-57.11 62.6-93.35.365-4.92 1.605-9.87-1.433-13.59l-2.097.37c-4.463 3.47-5.365 17.57-6.466 23.43a113.8 113.8 0 0 1-14.248 37.62c-8.787 14.71-24.053 33.27-41.455 36.82-7.226 1.47-15.571.78-22.783 1.5-23.645 2.33-58.003 3.32-76.058-15.42-15.011-15.58-15.404-23.41-37.335-34.82-26.117-13.58-56.164-20.51-81.103-35.87-14.649-9.02-26.094-25.3-29.153-42.47-5.398-30.29 12.841-55.141 15.61-85.876 2.106-23.38-1.616-42.196.39-64.658.611-6.834 4.881-18.533 8.979-23.586 22.027-27.157 75.01-45.971 107.565-51.534a203.3 203.3 0 0 1 152.818 34.563c11.541 8.103 21.305 19.483 32.508 27.135l-4.152 30.618c-3.549-3.226-8.568-8.06-11.631-11.531-45.263-51.412-116.859-73.232-182.888-54.266-16.848 4.84-47.634 15.935-60.459 28.275-.62 3.37-.987 1.893.364 4.652 5.199 1.707 16.948-6.623 22.185-9.227a234.4 234.4 0 0 1 34.874-13.586c56.281-17.228 113.404-7.401 159.709 30.262 11.906 9.685 26.081 28.206 38.14 34.57-.061 9.774-.373 19.761-.57 29.552-27.043-11.736-25.969-19.305-44.675-38.293-25.034-25.413-63.682-40.655-99.526-40.141-37.153.533-79.182 15.706-106.108 42.014-5.545 5.418-11.116 13.629-14.068 20.832-5.898 14.395-8.427 30.395-12.114 45.6-3.681 15.181-10.108 32.335-9.698 48.057 1.34 51.438 65.556 54.798 100.058 76.788 14.972 9.55 19.928 17.12 32.265 29.3 13.426 13.24 35.651 16.34 53.917 15.52s34.65-6.11 47.576-20.35c27.08-29.82 22.121-85.65 22.189-123.383.051-28.241-18.528-55.663-38.835-73.817-22.692-20.287-51.865-30.907-82.675-28.406-25.107 2.038-53.783 11.428-70.963 31.348-19.229 22.295-27.638 64.194-26.53 93.031.315 8.194 3.279 16.017 9.91 21.067 13.358 10.18 28.574 7.91 43.802 6 11.789 9.06 23.929 18.13 35.484 27.6 19.116 16.15 43.02 42.8 71.212 31.5 28.51-12.8 23.91-52.43 25.578-76.44 2.894-41.632-10.574-82.516-53.58-98.125a75.57 75.57 0 0 0-59.257 3.262c-31.672 15.255-43.637 48.068-34.141 81.203 2.542 8.868 5.892 15.71 9.966 24-36.064 2.91-45.932-8.25-39.813-43.86 6.509-37.888 13.006-64.75 50.151-82.072 56.673-27.218 119.691.409 145.004 56.51 10.799 23.935 5.408 65.562 5.43 92.232.02 23.81-13.13 56.85-37.733 65.85-20.088 7.34-54.197 6.49-71.697-8.94-15.991-20.03-42.698-39.19-67.007-46.24-59.641-17.29-73.279-39.79-52.421-99.357 4.065-9.983 7.143-37.086 12.233-45.64 38.542-64.776 149.589-75.729 202.172-22.129 23.47 23.924 23.44 30.916 53.329 45.113.511 15.087-1.775 62.043 5.011 70.145 25.673 30.648 24.382 39.598 14.413 80.338-8.524 34.83-32.903 74.17-65.423 93.44-12.089 7.17-26.438 2.33-39.839 2.78-24.102.91-45.092 2.73-68.744-4.1-20.57-3.69-31.5-24.99-46.317-33.75-24.017-14.19-56.218-35.18-81.749-45.2-25.19-9.89-45.347-9.63-58.973-36.29-17.457-34.16-3.268-75.817 7.346-109.428 8.243 3.321 14.262 5.938 23.001 7.905" fill="#759379"/><path d="M359.251 1077.04c14.433 21 18.884 36.17 42.248 51.79 26.843 16.85 54.731 20.53 83.68 34.93 43.467 21.62 73.279 61.67 120.8 73.44 22.359 7.56 44.163 4.64 66.375 6.05 42.263 2.69 61.413 2.47 99.318-20.03 1.161 6.27 2.263 12.54 3.305 18.82-29.701 22.68-78.5 38.14-115.473 42.91-49.955 6.44-107.276-1.18-152.718-23.5a270.04 270.04 0 0 1-127.44-130.16c-7.871-17.09-13.98-36.33-20.095-54.25" fill="#63899A"/><path d="M833.978 1130.55c-3.614 9.25-9.495 18.6-14.684 27.05-20.632 33.59-51.545 66.62-91.286 75.74-18.496 4.25-37.115 1.37-55.875 1.44-109.458.42-104.768-36.55-188.776-81.76-23.011-12.38-50.372-14.35-72.638-28.46-27.958-17.72-45.56-48.63-52.337-80.45-12.222-57.393 10.422-129.151 41.758-177.441.975 13.02 1.803 35.505-.652 48.049-9.055 46.265-28.93 81.549-16.302 130.472 8.808 34.13 25.331 55.88 59.253 69.13 10.775 4.21 23.223 6.62 34.192 11.02 12.861 4.26 24.476 13.6 36.19 19.39 26.938 13.31 48.312 34.42 71.842 51.17 16.807 11.96 53.056 15.29 72.829 15.4 8.316.05 18.555-.92 27.006-.95 13.713.14 25.639 4.35 39.472-.14 42.164-13.71 68.527-51.7 88.534-88.04 9.402 1.91 13.094 3.39 21.474 8.38" fill="#63899A"/><path d="M624.141 907.39c52.731-3.021 76.822 45.549 75.158 91.392-1.204 33.178.412 93.258-52.506 66.178-9.102-5.87-67.084-52.62-70.299-58.86-23.428-45.462-9.573-92.172 47.647-98.71" fill="#759379"/><path d="M623.958 930.051c21.406-3.006 41.229 11.815 44.402 33.197 3.173 21.381-11.492 41.322-32.848 44.662-21.594 3.37-41.803-11.489-45.011-33.108-3.208-21.62 11.814-41.712 33.457-44.751" fill="#2C4945"/><path d="M620.987 938.808a30.11 30.11 0 1 1 15.548 58.17c-15.95 3.992-32.152-5.55-36.397-21.434-4.246-15.884 5.035-32.237 20.849-36.736" fill="#294A4E"/><path d="M408.396 855.997c6.906-12.065 18.726-22.786 29.113-31.74-9.435 34.388-3.37 59.042-5.205 93.263-.527 9.82-6.184 26.226-9.486 35.97-13.043 38.487-21.895 88.64 12 119.39 17.85 15.68 48.64 17.73 69.172 30.62 17.914 11.93 41.11 22.23 58.139 34.81 19.861 14.68 26.695 27.87 51.934 35.49 24.111 7.29 44.06 5.47 68.901 4.07 9.522-.54 21.726 3.34 31.488.88 27.322-7.73 46.683-31.65 62.229-53.98 8.98-.64 16.182-1.09 25.196-.64-15.501 31.26-51.027 74.62-88.916 79.7-6.883.93-19.638-1.8-27.211-1.92-9.054-.13-17.763.21-26.845.83-19.942.93-43.729-2.81-62.22-10.4-17.177-7.06-29.249-21.81-45.015-32.66-18.872-12.99-39.912-25.73-59.962-36.71-25.069-13.74-53.149-12.21-75.45-34.09-30.853-30.29-33.188-73.4-23.833-113.332 4.518-19.283 12.009-39.714 15.131-58.744 2.864-17.45 1.467-42.9.84-60.807" fill="#63899A"/><path d="M440.053 870.717c-.898-22.727 5.7-45.32 18.317-64.921 6.024-7.329 16.704-13.518 24.438-18.19 99.611-60.175 215.904-51.305 306.662 21.737-5.015 9.585-8.382 16.066-12.306 26.28-79.226-79.251-194.746-84.94-286.232-22.275-19.623 13.442-24.227 29.744-27.649 51.928-12.398 1.8-14.112 10.088-23.23 5.441" fill="#759379"/><path d="M848.014 935.641c8.017-1.751 13.055-3.416 20.781-6.444 53.549 119.443 10.575 239.543-93.818 312.843-1.042-6.28-2.144-12.55-3.305-18.82 53.344-42.38 86.876-106.66 96.477-173.64 2.848-19.87 1.222-48.91-10.081-65.955-13.288-20.042-12.171-25.08-10.054-47.984" fill="#759379"/><path d="M778.722 930.856c10.567 3.587 17.792 5.36 28.568 7.857-14.412 31.625 1.943 41.527 14.704 66.597 17.387 34.16-3.967 88.08-20.117 118.82-9.014-.45-16.216 0-25.196.64 11.688-23.54 21.146-43.59 25.476-70.25 4.176-25.71 3.345-39.71-16.014-59.497-11.461-11.716-8.3-48.745-7.421-64.167" fill="#759379"/><path d="m816.743 938.902 23.025-1.047c-4.153 39.471 3.503 28.535 15.905 60.425 13.397 34.45-4.14 100.28-21.695 132.27-8.38-4.99-12.072-6.47-21.474-8.38 14.378-32.76 33.233-79.7 19.805-115.2-9.924-26.229-31.729-31.425-16.702-65.528q.561-1.273 1.136-2.54" fill="#759379"/><path d="M810.662 795.759c.818 4.334.457 25.436.447 31.016q-.14 31.13.357 62.256c-7.868 8.175-23.523 25.009-31.979 31.482-1.357-7.573-1.275-12.489-1.419-20.131-.712-37.765 4.786-76.415 32.594-104.623" fill="#759379"/><path d="M851.186 862.763c27.569.919 57.201-.476 85.435.066-3.574 6.37-17.855 30.169-25.827 28.427-29.169-.809-60.326-.305-89.645-.309a1355 1355 0 0 0 30.037-28.184" fill="#759379"/><path d="M846.564 770.865c2.966 4.024 1.467 71.343 1.665 82.205-7.837 8.665-19.018 19.131-27.514 27.512-2.567-7.543-1.666-78.427-1.727-91.582 8.034-6.594 18.582-12.734 27.576-18.135" fill="#759379"/><path d="M815.038 898.923c29.256.088 60.664 1.024 89.629.582-13.945 9.809-21.621 14.259-36.659 21.53-24.607 10.195-57.42 13.142-82.668 4.058 10.446-8.677 18.411-17.733 29.698-26.17" fill="#759379"/><path d="m882.322 758.169 2.693-.017c2.164 4.276.838 50.986.741 58.938-7.609 8.993-18.92 19.185-27.645 27.2-.942.36-.314.228-1.916-.214-1.177-20.2-1.072-56.556-.697-77.109 8.717-3.93 17.596-6.43 26.824-8.798" fill="#759379"/><path d="M889.205 826.763c3.765-.356 15.538.033 20.033.057l42.62.218c-3.151 11.039-5.351 17.875-10.865 27.892l-16.493-.158c-20.735-.407-43.977 1.059-64.46-.758 7.489-7.096 21.698-21.949 29.165-27.251" fill="#759379"/><path d="M957.692 759.876c3.868 11.114-1.226 46.379-3.359 59.111q-27.217-.043-54.428-.635l-.92-.313-.335-1.118c17.426-17.497 40.391-41.823 59.042-57.045" fill="#759379"/><path d="M440.053 870.717c9.118 4.647 10.832-3.641 23.23-5.441 2.061 36.501 3.668 47.323-4.858 83.611-8.739-1.967-14.758-4.584-23.001-7.905 8.63-24.186 5.554-45.063 4.629-70.265" fill="#63899A"/><path d="M922.516 751.408c6.822-1.086 22.17-.525 29.608-.32-13.674 14.928-27.499 27.983-42.043 42.037-5.463 5.501-10.155 10.615-15.326 16.401.372-17.571-.731-36.85-.597-55.064a2043 2043 0 0 1 28.358-3.054" fill="#759379"/><path d="m1587.53 1042.03 2.28.09c4.68 10.02-1.86 100.99.9 118.21.7 4.41-.68 14.99.38 20.19 1.65 8.03 8 7.28 14.06 11.36l.06 1.75c-6.33 1.07-34.83.49-43.46.56-2.86-.21-1.46.13-4.05-1.85 1.73-6.13 15.5-.63 15.58-15.78.17-31.25-.18-63.24-.13-94.54.03-14.84 4.5-23.6-12.79-29.93-1.51-.56-1.18-.21-1.64-1.27 6.45-3.1 21.53-6.78 28.81-8.79" fill="#294A4E"/><path d="m1328.16 1090.01 1.14.37c2.13 6.16.16 71.01.57 83.5.59 17.97 5.11 9.81 13.91 18.05l-.52 1.64c-4.89.95-37.25.73-45.26.93l-1.47-2.57c3.22-4.26 10.87-2.04 13.93-7.4 2.44-4.27 3.06-70.63.4-76.24-1.38-2.92-4.51-4-7.31-4.93-2.1-.7-3.79-1.24-5.67-2.47l.24-1.58c6.31-2.76 22.11-6.72 30.04-9.3" fill="#294A4E"/><path d="m1276.53 919.109 3.99-.397c6.15 3.309-2.67 84.628 3.81 95.358 3.26 5.42 9.63 3 13.45 7.48l-.4 1.4c-5.28 1.08-30.34.52-37.63.5-4.54.22-5.32.41-9.64-.61l-.69-1.15c3.97-2.39 14.63-6.74 14.86-11.33 1.22-24.916 1.42-51.561-.81-76.302-.39-4.34-10.62-3.158-12.94-6.799 3.67-2.958 20.3-6.69 26-8.15" fill="#294A4E"/></symbol><symbol id="va-logo-full" viewBox="340 720 1390 590"><defs>
+            <linearGradient y2="745.675" x2="965.536" y1="1189.22" x1="407" gradientUnits="userSpaceOnUse" id="va-g2">
+                <stop stop-color="#2E4449" offset="0" class="stop0"/>
+                <stop stop-color="#2D5248" offset="1" class="stop1"/>
+            </linearGradient>
+        </defs><path d="M620.848 739.446c67.23-.29 120.07 23.209 172.868 62.363a158 158 0 0 1 12.488-13.239c44.973-42.518 102.35-47.289 160.793-45.514 1.375 83.373-9.913 141.992-89.555 182.972 58.151 136.122-1.125 274.362-129.368 340.902-99.86 50.55-226.723 33.17-309.843-41.59a276 276 0 0 1-91.066-190.65 283.54 283.54 0 0 1 74.878-208.73c51.333-56.091 123.984-83.151 198.805-86.514" fill="url(#va-g2)"/><path d="M458.425 948.887c-3.976 10.893-8.837 27.008-10.285 38.139a72.73 72.73 0 0 0 15.032 53.774c23.338 30.12 70.858 36.09 103.435 55.32 18.49 8.68 25.073 29.83 42.442 39.62 21.337 12.02 44.926 11.26 68.487 9.15 7.276-.81 22.009 1.3 28.817-1.06 35.841-12.43 59.912-57.11 62.6-93.35.365-4.92 1.605-9.87-1.433-13.59l-2.097.37c-4.463 3.47-5.365 17.57-6.466 23.43a113.8 113.8 0 0 1-14.248 37.62c-8.787 14.71-24.053 33.27-41.455 36.82-7.226 1.47-15.571.78-22.783 1.5-23.645 2.33-58.003 3.32-76.058-15.42-15.011-15.58-15.404-23.41-37.335-34.82-26.117-13.58-56.164-20.51-81.103-35.87-14.649-9.02-26.094-25.3-29.153-42.47-5.398-30.29 12.841-55.141 15.61-85.876 2.106-23.38-1.616-42.196.39-64.658.611-6.834 4.881-18.533 8.979-23.586 22.027-27.157 75.01-45.971 107.565-51.534a203.3 203.3 0 0 1 152.818 34.563c11.541 8.103 21.305 19.483 32.508 27.135l-4.152 30.618c-3.549-3.226-8.568-8.06-11.631-11.531-45.263-51.412-116.859-73.232-182.888-54.266-16.848 4.84-47.634 15.935-60.459 28.275-.62 3.37-.987 1.893.364 4.652 5.199 1.707 16.948-6.623 22.185-9.227a234.4 234.4 0 0 1 34.874-13.586c56.281-17.228 113.404-7.401 159.709 30.262 11.906 9.685 26.081 28.206 38.14 34.57-.061 9.774-.373 19.761-.57 29.552-27.043-11.736-25.969-19.305-44.675-38.293-25.034-25.413-63.682-40.655-99.526-40.141-37.153.533-79.182 15.706-106.108 42.014-5.545 5.418-11.116 13.629-14.068 20.832-5.898 14.395-8.427 30.395-12.114 45.6-3.681 15.181-10.108 32.335-9.698 48.057 1.34 51.438 65.556 54.798 100.058 76.788 14.972 9.55 19.928 17.12 32.265 29.3 13.426 13.24 35.651 16.34 53.917 15.52s34.65-6.11 47.576-20.35c27.08-29.82 22.121-85.65 22.189-123.383.051-28.241-18.528-55.663-38.835-73.817-22.692-20.287-51.865-30.907-82.675-28.406-25.107 2.038-53.783 11.428-70.963 31.348-19.229 22.295-27.638 64.194-26.53 93.031.315 8.194 3.279 16.017 9.91 21.067 13.358 10.18 28.574 7.91 43.802 6 11.789 9.06 23.929 18.13 35.484 27.6 19.116 16.15 43.02 42.8 71.212 31.5 28.51-12.8 23.91-52.43 25.578-76.44 2.894-41.632-10.574-82.516-53.58-98.125a75.57 75.57 0 0 0-59.257 3.262c-31.672 15.255-43.637 48.068-34.141 81.203 2.542 8.868 5.892 15.71 9.966 24-36.064 2.91-45.932-8.25-39.813-43.86 6.509-37.888 13.006-64.75 50.151-82.072 56.673-27.218 119.691.409 145.004 56.51 10.799 23.935 5.408 65.562 5.43 92.232.02 23.81-13.13 56.85-37.733 65.85-20.088 7.34-54.197 6.49-71.697-8.94-15.991-20.03-42.698-39.19-67.007-46.24-59.641-17.29-73.279-39.79-52.421-99.357 4.065-9.983 7.143-37.086 12.233-45.64 38.542-64.776 149.589-75.729 202.172-22.129 23.47 23.924 23.44 30.916 53.329 45.113.511 15.087-1.775 62.043 5.011 70.145 25.673 30.648 24.382 39.598 14.413 80.338-8.524 34.83-32.903 74.17-65.423 93.44-12.089 7.17-26.438 2.33-39.839 2.78-24.102.91-45.092 2.73-68.744-4.1-20.57-3.69-31.5-24.99-46.317-33.75-24.017-14.19-56.218-35.18-81.749-45.2-25.19-9.89-45.347-9.63-58.973-36.29-17.457-34.16-3.268-75.817 7.346-109.428 8.243 3.321 14.262 5.938 23.001 7.905" fill="#759379"/><path d="M359.251 1077.04c14.433 21 18.884 36.17 42.248 51.79 26.843 16.85 54.731 20.53 83.68 34.93 43.467 21.62 73.279 61.67 120.8 73.44 22.359 7.56 44.163 4.64 66.375 6.05 42.263 2.69 61.413 2.47 99.318-20.03 1.161 6.27 2.263 12.54 3.305 18.82-29.701 22.68-78.5 38.14-115.473 42.91-49.955 6.44-107.276-1.18-152.718-23.5a270.04 270.04 0 0 1-127.44-130.16c-7.871-17.09-13.98-36.33-20.095-54.25" fill="#63899A"/><path d="M833.978 1130.55c-3.614 9.25-9.495 18.6-14.684 27.05-20.632 33.59-51.545 66.62-91.286 75.74-18.496 4.25-37.115 1.37-55.875 1.44-109.458.42-104.768-36.55-188.776-81.76-23.011-12.38-50.372-14.35-72.638-28.46-27.958-17.72-45.56-48.63-52.337-80.45-12.222-57.393 10.422-129.151 41.758-177.441.975 13.02 1.803 35.505-.652 48.049-9.055 46.265-28.93 81.549-16.302 130.472 8.808 34.13 25.331 55.88 59.253 69.13 10.775 4.21 23.223 6.62 34.192 11.02 12.861 4.26 24.476 13.6 36.19 19.39 26.938 13.31 48.312 34.42 71.842 51.17 16.807 11.96 53.056 15.29 72.829 15.4 8.316.05 18.555-.92 27.006-.95 13.713.14 25.639 4.35 39.472-.14 42.164-13.71 68.527-51.7 88.534-88.04 9.402 1.91 13.094 3.39 21.474 8.38" fill="#63899A"/><path d="M624.141 907.39c52.731-3.021 76.822 45.549 75.158 91.392-1.204 33.178.412 93.258-52.506 66.178-9.102-5.87-67.084-52.62-70.299-58.86-23.428-45.462-9.573-92.172 47.647-98.71" fill="#759379"/><path d="M623.958 930.051c21.406-3.006 41.229 11.815 44.402 33.197 3.173 21.381-11.492 41.322-32.848 44.662-21.594 3.37-41.803-11.489-45.011-33.108-3.208-21.62 11.814-41.712 33.457-44.751" fill="#2C4945"/><path d="M620.987 938.808a30.11 30.11 0 1 1 15.548 58.17c-15.95 3.992-32.152-5.55-36.397-21.434-4.246-15.884 5.035-32.237 20.849-36.736" fill="#294A4E"/><path d="M408.396 855.997c6.906-12.065 18.726-22.786 29.113-31.74-9.435 34.388-3.37 59.042-5.205 93.263-.527 9.82-6.184 26.226-9.486 35.97-13.043 38.487-21.895 88.64 12 119.39 17.85 15.68 48.64 17.73 69.172 30.62 17.914 11.93 41.11 22.23 58.139 34.81 19.861 14.68 26.695 27.87 51.934 35.49 24.111 7.29 44.06 5.47 68.901 4.07 9.522-.54 21.726 3.34 31.488.88 27.322-7.73 46.683-31.65 62.229-53.98 8.98-.64 16.182-1.09 25.196-.64-15.501 31.26-51.027 74.62-88.916 79.7-6.883.93-19.638-1.8-27.211-1.92-9.054-.13-17.763.21-26.845.83-19.942.93-43.729-2.81-62.22-10.4-17.177-7.06-29.249-21.81-45.015-32.66-18.872-12.99-39.912-25.73-59.962-36.71-25.069-13.74-53.149-12.21-75.45-34.09-30.853-30.29-33.188-73.4-23.833-113.332 4.518-19.283 12.009-39.714 15.131-58.744 2.864-17.45 1.467-42.9.84-60.807" fill="#63899A"/><path d="M440.053 870.717c-.898-22.727 5.7-45.32 18.317-64.921 6.024-7.329 16.704-13.518 24.438-18.19 99.611-60.175 215.904-51.305 306.662 21.737-5.015 9.585-8.382 16.066-12.306 26.28-79.226-79.251-194.746-84.94-286.232-22.275-19.623 13.442-24.227 29.744-27.649 51.928-12.398 1.8-14.112 10.088-23.23 5.441" fill="#759379"/><path d="M848.014 935.641c8.017-1.751 13.055-3.416 20.781-6.444 53.549 119.443 10.575 239.543-93.818 312.843-1.042-6.28-2.144-12.55-3.305-18.82 53.344-42.38 86.876-106.66 96.477-173.64 2.848-19.87 1.222-48.91-10.081-65.955-13.288-20.042-12.171-25.08-10.054-47.984" fill="#759379"/><path d="M778.722 930.856c10.567 3.587 17.792 5.36 28.568 7.857-14.412 31.625 1.943 41.527 14.704 66.597 17.387 34.16-3.967 88.08-20.117 118.82-9.014-.45-16.216 0-25.196.64 11.688-23.54 21.146-43.59 25.476-70.25 4.176-25.71 3.345-39.71-16.014-59.497-11.461-11.716-8.3-48.745-7.421-64.167" fill="#759379"/><path d="m816.743 938.902 23.025-1.047c-4.153 39.471 3.503 28.535 15.905 60.425 13.397 34.45-4.14 100.28-21.695 132.27-8.38-4.99-12.072-6.47-21.474-8.38 14.378-32.76 33.233-79.7 19.805-115.2-9.924-26.229-31.729-31.425-16.702-65.528q.561-1.273 1.136-2.54" fill="#759379"/><path d="M810.662 795.759c.818 4.334.457 25.436.447 31.016q-.14 31.13.357 62.256c-7.868 8.175-23.523 25.009-31.979 31.482-1.357-7.573-1.275-12.489-1.419-20.131-.712-37.765 4.786-76.415 32.594-104.623" fill="#759379"/><path d="M851.186 862.763c27.569.919 57.201-.476 85.435.066-3.574 6.37-17.855 30.169-25.827 28.427-29.169-.809-60.326-.305-89.645-.309a1355 1355 0 0 0 30.037-28.184" fill="#759379"/><path d="M846.564 770.865c2.966 4.024 1.467 71.343 1.665 82.205-7.837 8.665-19.018 19.131-27.514 27.512-2.567-7.543-1.666-78.427-1.727-91.582 8.034-6.594 18.582-12.734 27.576-18.135" fill="#759379"/><path d="M815.038 898.923c29.256.088 60.664 1.024 89.629.582-13.945 9.809-21.621 14.259-36.659 21.53-24.607 10.195-57.42 13.142-82.668 4.058 10.446-8.677 18.411-17.733 29.698-26.17" fill="#759379"/><path d="m882.322 758.169 2.693-.017c2.164 4.276.838 50.986.741 58.938-7.609 8.993-18.92 19.185-27.645 27.2-.942.36-.314.228-1.916-.214-1.177-20.2-1.072-56.556-.697-77.109 8.717-3.93 17.596-6.43 26.824-8.798" fill="#759379"/><path d="M889.205 826.763c3.765-.356 15.538.033 20.033.057l42.62.218c-3.151 11.039-5.351 17.875-10.865 27.892l-16.493-.158c-20.735-.407-43.977 1.059-64.46-.758 7.489-7.096 21.698-21.949 29.165-27.251" fill="#759379"/><path d="M957.692 759.876c3.868 11.114-1.226 46.379-3.359 59.111q-27.217-.043-54.428-.635l-.92-.313-.335-1.118c17.426-17.497 40.391-41.823 59.042-57.045" fill="#759379"/><path d="M440.053 870.717c9.118 4.647 10.832-3.641 23.23-5.441 2.061 36.501 3.668 47.323-4.858 83.611-8.739-1.967-14.758-4.584-23.001-7.905 8.63-24.186 5.554-45.063 4.629-70.265" fill="#63899A"/><path d="M922.516 751.408c6.822-1.086 22.17-.525 29.608-.32-13.674 14.928-27.499 27.983-42.043 42.037-5.463 5.501-10.155 10.615-15.326 16.401.372-17.571-.731-36.85-.597-55.064a2043 2043 0 0 1 28.358-3.054" fill="#759379"/><path d="m1587.53 1042.03 2.28.09c4.68 10.02-1.86 100.99.9 118.21.7 4.41-.68 14.99.38 20.19 1.65 8.03 8 7.28 14.06 11.36l.06 1.75c-6.33 1.07-34.83.49-43.46.56-2.86-.21-1.46.13-4.05-1.85 1.73-6.13 15.5-.63 15.58-15.78.17-31.25-.18-63.24-.13-94.54.03-14.84 4.5-23.6-12.79-29.93-1.51-.56-1.18-.21-1.64-1.27 6.45-3.1 21.53-6.78 28.81-8.79" fill="#294A4E"/><path d="m1328.16 1090.01 1.14.37c2.13 6.16.16 71.01.57 83.5.59 17.97 5.11 9.81 13.91 18.05l-.52 1.64c-4.89.95-37.25.73-45.26.93l-1.47-2.57c3.22-4.26 10.87-2.04 13.93-7.4 2.44-4.27 3.06-70.63.4-76.24-1.38-2.92-4.51-4-7.31-4.93-2.1-.7-3.79-1.24-5.67-2.47l.24-1.58c6.31-2.76 22.11-6.72 30.04-9.3" fill="#294A4E"/><path d="m1276.53 919.109 3.99-.397c6.15 3.309-2.67 84.628 3.81 95.358 3.26 5.42 9.63 3 13.45 7.48l-.4 1.4c-5.28 1.08-30.34.52-37.63.5-4.54.22-5.32.41-9.64-.61l-.69-1.15c3.97-2.39 14.63-6.74 14.86-11.33 1.22-24.916 1.42-51.561-.81-76.302-.39-4.34-10.62-3.158-12.94-6.799 3.67-2.958 20.3-6.69 26-8.15" fill="#294A4E"/><path d="M1145.77 1091.14c16.17-1.37 21.21-.13 34.23 8.51 8.48-3.14 25.57-11.66 29.95.04-1.65 15.24-16.32 4.53-27.89 3.62 19.61 28.7 8.62 55.3-27.6 58.78-4.12.39-12.7-1.86-16.28-.71a12.03 12.03 0 0 0-7.36 6.72c-3.3 7.65 5.98 11.98 12.08 12.71 23.57 2.83 68.42-5.78 63.31 32.23l-.31.82-.51 1.36c-10.42 28.03-45.11 36.25-71.89 32.01-13.83-2.18-30.94-13.53-27-29.64 2.68-10.99 13.18-17.07 22.28-22.18-19.59-13.04-15.56-25.65 2.69-36.6-29.17-20.22-19.33-57.5 14.3-67.67" fill="#294A4E"/><path d="M1137.37 1197.04c10.3-.13 32.96-1.18 41.46 2.29 27.23 11.12 12.18 28.4-5.95 36.09-9.9 2-20.2 3.38-30.07.86-30.17-7.72-34.36-25.94-5.44-39.24" fill="#FFFFFF"/><path d="M1148.96 1096.17c3.16-.24 7.7-.77 10.67.64 14.48 6.9 17.68 32.64 12.22 46.16-2.72 6.72-7.11 9.49-13.52 12.14-30.22 3.93-34.07-47.04-9.37-58.94" fill="#FFFFFF"/><path d="M1346.8 919.187c48.15-5.521 72.29 41.17 52.99 81.463-6.84 14.29-19.72 20.68-34.3 25.06-72.29 8.11-81.19-91.043-18.69-106.523" fill="#294A4E"/><path d="M1350.58 924.238c16.49-.935 27.43 7.875 31.9 23.55 7.02 24.612 7.91 63.732-21.65 72.862-16.56.58-27.91-9.43-32.19-24.902-6.8-24.57-7.49-62.792 21.94-71.51" fill="#FFFFFF"/><path d="M1497.16 1090.39c58.9-3.31 71.28 78.08 24.09 102.05-4.88 2.48-11.46 3.58-16.9 4.6-71.32 1.29-74.12-100.8-7.19-106.65" fill="#294A4E"/><path d="M1494.67 1096.27c16.18-.76 27.07 6.71 32.06 22.25 7.68 23.89 8.45 63.02-20.1 72.55-20.69 1.13-31.86-10.38-36.09-30-4.93-22.83-3.61-58.35 24.13-64.8" fill="#FFFFFF"/><path d="M1054.71 1090.38c48.83 1.8 31.26 37.02 32.91 71.14.38 7.9-3.41 23.04 6.08 26.79 3.49-.2 4.6-1.45 7.47-3.51l1.1-.79 1.4.3c2.17 9.76-20.64 15.69-27.61 9.85-5.11-4.28-4.65-6.83-5.78-12.82l-.89-.23c-16.19 14.13-41.75 25.69-54.73 1.13-8.2-33.46 32.52-43.14 56.29-52.34.07-9.32 1.23-20.29-4.9-28.26-6.47-8.4-27.38-7.32-29.27 4.55-1.43 8.96-1.42 20.62-14.75 18.15-2.19-1.6-3.88-3.13-3.98-6.13-.69-20.02 20.9-26.45 36.66-27.83" fill="#294A4E"/><path d="M1069.66 1137.08c2.36 3.14 1.4 28.53 1.36 34.18-8.41 11.83-20.12 16.97-34.03 11.88-4.79-5.46-6.78-13.99-3.92-20.79 5.98-14.22 23.28-19.99 36.59-25.27" fill="#FFFFFF"/><path d="M1657.37 1090.34c30.88-1.63 41.98 19 44.98 45.99-19.09 1.3-49.3.32-69.73.75.03 5.64-.06 11.84 1.52 17.23 9.42 32.09 38.99 39.42 62.37 16.82 3.11-4.67 5.23-7.18 8.81-11.35-2.34 6.92-3.95 11.24-7.8 17.62-11.94 20.57-43.91 25.86-62.63 11.78-23.5-17.66-27.74-59.13-9.76-82.13 8.56-10.96 19.06-15.11 32.24-16.71" fill="#294A4E"/><path d="M1654.1 1096.2c14.23-1 21.97 3.85 26.66 18.21 5.93 18.17-5.45 15.93-18.95 16.35-7.29.16-14.91.41-22.19.3-4.53-.07-4.32-.02-6.56-2.52-3.74-11.74 9.93-27.89 21.04-32.34" fill="#FFFFFF"/><path d="M1448.56 937.465c7.52-8.383 15.83-16.558 27.48-18.253 53.79-7.824 29.36 63.274 35.73 92.938 1.17 5.42 10.49 6.76 14.72 9.67l-.67 1.28c-5.32 1.47-41.4 1.35-46.37-.29l.25-1.52c14.01-6.53 15.33-7.27 14.48-23.968-.85-16.872 2.5-42.509-3.47-57.854-13.87-20.078-39.31-5.432-41.91 14.648-2.25 17.307-.91 37.722 0 55.264.41 7.94 6.54 8.33 12.81 12.92l-.35 1.12c-6.57.5-41.58 1.64-45.62-.55l-.16-2.34 1.63-1.4c2.61-.39 5.71-.6 8.13-1.69 2.35-1.05 3.39-2.77 4.04-5.24 2.57-9.83 3.65-71.433-.84-78.239-2.65-4.029-13.22-4.794-17.75-5.768q17.91-4.68 35.88-9.056l1.64.417c1.2 3.568.48 13.68.35 17.911" fill="#294A4E"/><path d="M1195.75 919.188c12.78-.943 16.23.163 28.23 3.988 2.63-1.733 4.12-3.504 6.99-2.835 1.93 4.643 2.89 29.536 1.07 34.328-3.26-1.906-8.83-16.074-11.33-19.971-5.02-12.06-26.74-14.474-33.84-3.545-10.01 15.387 9.19 24.124 17.25 28.587 13.54 7.509 32.96 17.425 35.07 32.778 2.79 20.292-13.54 30.272-31.15 32.802-17.6.87-19.48-5.23-37.93-.55-.38-6.3-2.61-32.858-.03-36.322l1.7.592c5.35 10.782 6.88 22.79 19.94 28.88 10.73 5 23.08 4.5 28.73-7.35 10.41-21.791-16.28-27.4-29.55-35.3-30.17-17.96-29.79-45.48 4.85-56.082" fill="#294A4E"/><path d="M1396.19 1091.18c12.15-.73 17.89-.31 29.63 5.62 11.81 4.82 15.58 28.06-.42 28.33-17.34.3 2.87-33.66-26.94-28.71-31.89 5.3-31.89 68.71-7.12 82.21 9.66 5.26 17.47 4.94 27.81 2.35 13.2-5.37 10.93-9.02 19.14-16.63l1.68.69c2.08 11.95-16.9 27.45-27.96 30.17-21.65 5.32-44.67-3.76-52.65-25.33-12.56-33.94-1.51-69.29 36.83-78.7" fill="#294A4E"/><path d="M1061.98 998.16c3.73-8.839 26.27-58.259 24.35-65.018-1-3.548-3.83-5.225-6.75-7.037-1.93-1.194-3.49-2.079-5-3.796 3.26-2.402 28.8-1.44 34.33-1.071-2.38 5.629-10.75 6.577-14.95 13.326-7.88 12.679-29.88 83.096-37.14 89.826l-2.48-.11c-11.01-10.82-27.38-76.918-41.31-95.276-5.76-2.45-8.51-2.667-10.6-7.789 9.41-.361 39.04-.69 47.39.576l.84 1.155c-4.57 4.273-11.74.642-15.07 8.067 2.06 11.341 20.93 54.335 26.39 67.147" fill="#294A4E"/><path d="M1244.48 1091.01c.38.1 1.62.99 2.02 1.25.99 5.17.56 13.96.49 19.52 8.64-9.67 21.12-24.66 35.93-18.65 12.17 4.93 11.19 20.02-1.2 24.06-6.36 2.07-8.58-10.59-13.3-13.56-29.14 3.96-21.52 53.95-21.17 75.8 3.53 11.64 7.05 5.91 15.64 13.04l-1.27.89c-6.45.72-40.32 1.31-46.28.23l-.26-2.02c2.27-2.79 11.43-2.86 12.23-5.6 4.02-13.63 6.32-73.67-2.99-82.62l-1.44-.36c-3.46-.87-6.01-1.04-7.51-3.57 4.79-2.19 22.19-6.28 29.11-8.41" fill="#294A4E"/><path d="M1141.75 918.247c4.09 6.266-1.99 81.793 2.44 95.303 1.16 3.54 12.11 4.78 14.41 8.87-3.76 2.22-38.87 1.34-46.45 1.42l-1.64-1.34.56-1.63c5.27-2.01 8.37-2.7 12.45-6.52 2.63-6.95 2.42-71.746-.04-79.649-4.94-6.059-9.36-5.633-17.25-6.821 9.78-3.339 25.26-7.019 35.52-9.633" fill="#294A4E"/><path d="M1128.46 874.495c6.23-2.189 13.05 1.065 15.27 7.281s-1 13.055-7.21 15.302c-6.25 2.263-13.14-.986-15.37-7.242-2.24-6.257 1.04-13.137 7.31-15.341" fill="#294A4E"/><path d="M1316.82 1048.42c6.16-1.71 12.55 1.83 14.37 7.95 1.81 6.13-1.61 12.58-7.7 14.5-4.04 1.27-8.45.27-11.53-2.62-3.09-2.9-4.38-7.23-3.37-11.34s4.16-7.35 8.23-8.49" fill="#294A4E"/><path d="M1270.38 874.47c6.07-1.78 12.46 1.618 14.37 7.65s-1.34 12.489-7.33 14.536a11.64 11.64 0 0 1-11.55-2.359 11.65 11.65 0 0 1-3.57-11.238 11.65 11.65 0 0 1 8.08-8.589" fill="#294A4E"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2-10 5 10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9V3z"/></symbol></svg>
+<div class="app">
+<header>
+  <button class="brand" data-go="home" aria-label="Retour à l'accueil">
+    <span class="logo"><svg width="38" height="36" aria-hidden="true"><use href="#va-logo"/></svg></span>
+    <span class="brand-name">Vision Agricole</span>
+  </button>
+  <span class="badge-orange">CATÉGORIE ORANGE</span>
+  <span class="spacer"></span>
+  <button class="engine-pill" id="enginePill" title="État du moteur de traitement"><span class="dot"></span><span id="engineText">Vérification…</span></button>
+  <div class="menu-wrap">
+    <button class="icon-btn" id="menuBtn" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><svg class="i" style="width:20px;height:20px" aria-hidden="true"><use href="#i-settings"/></svg>
+    </button>
+    <div class="menu" id="menu" role="menu">
+      <button role="menuitem" data-go="settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Réglages avancés</span></button>
+      <button role="menuitem" data-go="engine"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg><span>Aide : démarrer le moteur</span></button>
+      <button role="menuitem" data-go="about"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span>À propos</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== ACCUEIL ===================== -->
+<section class="screen active" id="s-home">
+  <div class="hero">
+    <h1>De vos photos de drone à un rapport clair pour votre parcelle</h1>
+    <p class="lead">Un parcours simple et guidé, du vol jusqu'aux décisions sur le terrain.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary btn-lg" id="startBtn">Démarrer une mission <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      <button class="link" id="openPrevBtn"><svg class="i" aria-hidden="true"><use href="#i-folder"/></svg> Ouvrir une mission précédente</button>
+    </div>
+  </div>
+  <div class="card steps-strip">
+    <div class="strip-item"><span class="num">01</span><div><b>Choisissez vos photos</b><span>Sélectionnez le dossier du vol.</span></div></div>
+    <span class="arrow"><svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+    <div class="strip-item"><span class="num">02</span><div><b>Décrivez votre parcelle</b><span>Ajoutez quelques informations utiles.</span></div></div>
+    <span class="arrow"><svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+    <div class="strip-item"><span class="num">03</span><div><b>Recevez votre rapport</b><span>Consultez et partagez le PDF.</span></div></div>
+  </div>
+  <p class="privacy"><svg class="i" aria-hidden="true"><use href="#i-monitor"/></svg> Vos photos sont traitées sur cet ordinateur.</p>
+</section>
+
+<!-- ===================== MOTEUR NON DÉMARRÉ ===================== -->
+<section class="screen" id="s-engine">
+  <div class="narrow">
+    <button class="link" data-go="home"><svg class="i" aria-hidden="true"><use href="#i-arrow-left"/></svg> Retour à l'accueil</button>
+    <div class="card center-card" style="margin-top:16px">
+      <div class="feature-icon" style="background:var(--orange-soft);color:var(--orange-ink)"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></div>
+      <h2 style="font-size:28px" id="engineTitle">Le moteur de traitement n'est pas encore démarré</h2>
+      <p class="lead">Pas d'inquiétude : c'est lui qui fait le gros du calcul sur votre ordinateur. Suivez ces trois étapes.</p>
+      <ol class="howto">
+        <li><span class="num">1</span><div><b>Ouvrez Docker Desktop</b><div class="muted">Attendez que l'indication en bas à gauche affiche « Engine running ».</div></div></li>
+        <li><span class="num">2</span><div><b>Démarrez « nodeodm »</b><div class="muted">Dans l'onglet « Containers », cliquez sur le bouton <svg class="i" aria-hidden="true"><use href="#i-play"/></svg> (démarrer) de la ligne nodeodm.</div></div></li>
+        <li><span class="num">3</span><div><b>Revenez ici</b><div class="muted">Cliquez sur « Vérifier à nouveau ».</div></div></li>
+      </ol>
+      <button class="btn btn-primary" id="recheckBtn">Vérifier à nouveau <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      <p class="result-msg ko" id="recheckMsg" style="justify-content:center"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ÉTAPE 1 ===================== -->
+<section class="screen" id="s-step1">
+  <div class="stepper" data-step="1"></div>
+  <div class="title-row">
+    <div><p class="eyebrow">Votre mission</p><h1>Ajoutez les photos du vol</h1><p class="lead">Choisissez le dossier contenant les photos prises par votre drone.</p></div>
+    <span class="chip"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg> Formats acceptés : JPG, PNG</span>
+  </div>
+  <div id="dropEmpty" class="drop">
+    <div class="big-icon"><svg class="i" style="width:28px;height:28px" aria-hidden="true"><use href="#i-upload"/></svg></div>
+    <h2>Choisissez le dossier des photos de votre drone</h2>
+    <p>Vous pourrez vérifier les images avant de continuer.</p>
+    <button class="btn btn-primary" id="pickPhotosBtn">Choisir un dossier</button>
+  </div>
+  <div id="photosFull" class="card photos-box" hidden>
+    <div class="photos-head"><span class="badge" id="photosBadge"></span><button class="link" id="changeDirBtn">Changer de dossier</button></div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="path"><svg class="i" aria-hidden="true"><use href="#i-folder"/></svg> <span id="photosPath"></span></div>
+  </div>
+  <div class="nav-row"><button class="btn btn-secondary" data-go="home">Retour</button><button class="btn btn-primary" id="toStep2" disabled>Continuer <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+</section>
+
+<!-- ===================== ÉTAPE 2 ===================== -->
+<section class="screen" id="s-step2">
+  <div class="stepper" data-step="2"></div>
+  <p class="eyebrow">Votre parcelle</p><h1>Parlez-nous de ce terrain</h1>
+  <p class="lead" style="margin-bottom:24px">Ces informations apparaîtront dans votre rapport. Les champs marqués <span style="color:var(--orange-ink)">*</span> sont obligatoires.</p>
+  <div class="card form">
+    <div class="grid3">
+      <div class="field" data-f="nom_parcelle"><label for="f-parcelle">Nom de la parcelle <span class="req">*</span></label><input class="input" id="f-parcelle" placeholder="Ex : Maïs Sud – Savalou"><div class="err"></div></div>
+      <div class="field" data-f="exploitant"><label for="f-exploitant">Exploitant ou coopérative <span class="req">*</span></label><input class="input" id="f-exploitant" placeholder="Nom ou coopérative"><div class="err"></div></div>
+      <div class="field" data-f="date_vol"><label for="f-date">Date du vol <span class="req">*</span></label><input class="input" type="date" id="f-date"><div class="err"></div></div>
+      <div class="field" data-f="altitude_vol"><label for="f-alt">Altitude de vol (m)</label><input class="input" id="f-alt" inputmode="decimal" placeholder="Ex : 90"><div class="hint">Hauteur du drone au-dessus du terrain.</div><div class="err"></div></div>
+      <div class="field"><label for="f-pilote">Pilote</label><input class="input" id="f-pilote" placeholder="Nom du télépilote"></div>
+      <div class="field"><label for="f-equipe">Équipe</label><input class="input" id="f-equipe" placeholder="Ex : Équipe terrain 2"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="row-between">
+      <div><h3>Niveau de détail du découpage <span class="help" tabindex="0" data-tip="L'application regroupe les parties de la parcelle qui se ressemblent. Chaque zone pourra recevoir un traitement adapté.">?</span></h3><div class="hint">Plus de zones = un découpage plus fin de la parcelle.</div></div>
+      <div class="seg" id="zonesSeg" role="group" aria-label="Nombre de zones"></div>
+    </div>
+    <div class="divider"></div>
+    <details class="soil" id="soilBox">
+      <summary><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg> Sol et cultures possibles <span class="tag">FACULTATIF</span><svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="soil-body">
+        <div class="grid3">
+          <div class="field" data-f="soil_ph"><label for="f-ph">pH du sol</label><input class="input" id="f-ph" inputmode="decimal" placeholder="Ex : 6,5"><div class="err"></div></div>
+          <div class="field"><label for="f-texture">Texture du sol</label>
+            <select class="input" id="f-texture"><option value="">Non renseignée</option><option>Sableux</option><option>Limoneux</option><option>Argileux</option><option>Limono-argilo-sableux (mixte)</option></select></div>
+          <div class="field"><label for="f-note">Observation sur le sol</label><input class="input" id="f-note" placeholder="Ex : apport NPK prévu"></div>
+        </div>
+        <label class="toggle" style="margin-top:20px"><input type="checkbox" id="f-soilgrids"><span><b>Estimer le sol par géolocalisation</b><span class="muted small">Utilisé seulement si rien n'est saisi ci-dessus. La position de la parcelle est envoyée au service en ligne SoilGrids (Internet requis ; estimation régionale d'environ 250 m, non mesurée sur place).</span></span></label>
+        <p class="info-line"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg> Le drone ne mesure pas le sol : ces informations servent à proposer des cultures, à titre indicatif.</p>
+      </div>
+    </details>
+  </div>
+  <div class="nav-row"><button class="btn btn-secondary" data-go="step1">Retour</button><button class="btn btn-primary" id="toStep3">Continuer <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+</section>
+
+<!-- ===================== ÉTAPE 3 ===================== -->
+<section class="screen" id="s-step3">
+  <div class="stepper" data-step="3"></div>
+  <p class="eyebrow">Dernière étape</p><h1>Tout est prêt pour l'analyse</h1>
+  <p class="lead" style="margin-bottom:24px">Vérifiez vos choix, puis lancez le traitement.</p>
+  <div class="verify">
+    <div class="card recap">
+      <div class="recap-head"><h2>Récapitulatif</h2><button class="link" data-go="step2">Modifier</button></div>
+      <dl id="recap"></dl>
+    </div>
+    <div>
+      <h2>Choisissez la qualité</h2>
+      <div class="quality" id="quality" role="radiogroup" aria-label="Qualité du traitement">
+        <button class="q" role="radio" data-q="rapide"><span class="radio"></span><span class="reco">RECOMMANDÉ</span><b>Rapide</b><span class="muted small">Conseillé sur un ordinateur de 8 Go de mémoire.</span><span class="dur"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg> Environ 30 à 40 min pour une soixantaine de photos</span></button>
+        <button class="q" role="radio" data-q="equilibre"><span class="radio"></span><b>Équilibré</b><span class="muted small">Plus de détail. Demande au moins 16 Go de mémoire.</span><span class="dur"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg> Plus long (durée non mesurée)</span></button>
+        <button class="q" role="radio" data-q="precis"><span class="radio"></span><b>Précis</b><span class="muted small">Détail maximal, pour un ordinateur puissant.</span><span class="dur"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg> Nettement plus long (durée non mesurée)</span></button>
+      </div>
+      <p class="hint" id="qualityWarn" hidden style="color:var(--orange-ink)"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg> Sur un ordinateur de 8 Go, ce niveau peut faire échouer le traitement par manque de mémoire.</p>
+    </div>
+  </div>
+  <div class="notice warm"><span style="color:var(--orange-ink)"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span><div><b>Gardez l'ordinateur allumé et branché</b><div class="muted">Le traitement continue tant que cette application reste ouverte. Désactivez la mise en veille.</div></div></div>
+  <div class="nav-row"><button class="btn btn-secondary" data-go="step2">Retour</button><button class="btn btn-primary btn-lg" id="launchBtn">Lancer le traitement <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+</section>
+
+<!-- ===================== PROGRESSION ===================== -->
+<section class="screen" id="s-progress">
+  <div class="prog-head">
+    <div><p class="eyebrow">Mission en cours</p><h1>Nous analysons votre parcelle</h1><p class="lead" id="progSub"></p></div>
+    <div class="card timer"><span style="color:var(--blue-ink)"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><div><small>Temps écoulé</small><b id="elapsed">0 min 00 s</b></div></div>
+  </div>
+  <div class="bar-label"><span id="pctLabel">0 % terminé</span><span class="muted small" id="stepText" style="font-weight:400"></span></div>
+  <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="barWrap"><div id="bar"></div></div>
+  <div class="prog-grid">
+    <ul class="card stages" id="stages"></ul>
+    <div class="card illus" aria-hidden="true">
+      <svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(300 225)">
+          <polygon points="-210,90 -130,-30 230,-30 170,90" fill="#F3EFE4" stroke="#fff" stroke-width="6"/>
+          <polygon points="-200,84 -126,-24 222,-24 164,84" fill="#6E9B52"/>
+          <g stroke="#83AE64" stroke-width="5">
+            <line x1="-160" y1="84" x2="-80" y2="-24"/><line x1="-110" y1="84" x2="-30" y2="-24"/><line x1="-60" y1="84" x2="20" y2="-24"/>
+            <line x1="-10" y1="84" x2="70" y2="-24"/><line x1="40" y1="84" x2="120" y2="-24"/><line x1="90" y1="84" x2="170" y2="-24"/><line x1="140" y1="84" x2="210" y2="-14"/>
+          </g>
+          <rect class="scan" x="-4" y="-24" width="8" height="108" fill="#1E6FD9" opacity=".55"/>
+        </g>
+        <g class="drone" transform="translate(300 70)">
+          <polygon points="0,18 -38,140 38,140" fill="#1E6FD9" opacity=".12"/>
+          <rect x="-16" y="0" width="32" height="18" rx="5" fill="#0B4F5C"/>
+          <line x1="-16" y1="6" x2="-36" y2="-2" stroke="#0B4F5C" stroke-width="4"/><line x1="16" y1="6" x2="36" y2="-2" stroke="#0B4F5C" stroke-width="4"/>
+          <ellipse cx="-40" cy="-4" rx="16" ry="4" fill="#0B4F5C" opacity=".8"/><ellipse cx="40" cy="-4" rx="16" ry="4" fill="#0B4F5C" opacity=".8"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="notice cool"><span style="color:var(--blue-ink)"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg></span><div><b>Cela peut durer de 30 à 60 minutes, parfois plus.</b><div class="muted">Vous pouvez laisser tourner. Ne fermez pas l'application et ne mettez pas l'ordinateur en veille.</div></div></div>
+</section>
+
+<!-- ===================== ERREUR ===================== -->
+<section class="screen" id="s-error">
+  <div class="narrow">
+    <div class="card center-card">
+      <div class="feature-icon" style="background:var(--danger-soft);color:var(--danger)"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg></div>
+      <h2 style="font-size:28px">Le traitement n'a pas pu aboutir</h2>
+      <p class="lead" id="errMsg"></p>
+      <p class="muted small" id="errHint"></p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+        <button class="btn btn-secondary" data-go="home">Accueil</button>
+        <button class="btn btn-primary" data-go="step3">Réessayer</button>
+      </div>
+      <button class="link" id="toggleDetail" style="margin-top:16px">Voir le détail technique</button>
+      <div class="tech-detail" id="errDetail"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RÉSULTATS ===================== -->
+<section class="screen" id="s-results">
+  <div class="banner">
+    <span class="okc"><svg class="i" style="width:22px;height:22px;color:#fff;stroke-width:3" aria-hidden="true"><use href="#i-check"/></svg></span>
+    <div><b>Votre rapport est prêt</b><small id="doneAt"></small></div>
+    <span class="spacer"></span>
+    <button class="btn btn-primary" id="openPdfBtn"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg> Ouvrir le rapport PDF</button>
+  </div>
+  <div class="verdict-row">
+    <div><p class="eyebrow" id="resParcelle"></p><h1 id="verdictTitle"></h1><p class="verdict-detail muted" id="verdictDetail"></p></div>
+    <button class="btn btn-secondary" id="newMissionBtn">+ Nouvelle mission</button>
+  </div>
+  <div class="stats">
+    <div class="card stat"><span class="ic" style="background:var(--blue-soft);color:var(--blue-ink)"><svg class="i" aria-hidden="true"><use href="#i-map"/></svg></span><div><small>Surface couverte</small><b id="stSurface">–</b></div></div>
+    <div class="card stat"><span class="ic" style="background:var(--green-soft);color:var(--green-ink)"><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg></span><div><small>Couverture végétale <span class="help" tabindex="0" data-tip="Part de l'image occupée par de la végétation (le reste : sol nu, bâtiments, eau, chemins).">?</span></small><b id="stCover">–</b></div></div>
+    <div class="card stat"><span class="ic" style="background:var(--green-soft);color:var(--green-ink)"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><div><small>Végétation saine <span class="help" tabindex="0" data-tip="Part de la végétation qui ne montre pas de signe de stress.">?</span></small><b id="stHealthy">–</b></div></div>
+    <div class="card stat"><span class="ic" style="background:var(--orange-soft);color:var(--orange-ink)"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg></span><div><small>Stress marqué <span class="help" tabindex="0" data-tip="Part de la végétation qui montre un stress important (manque d'eau, carence, maladie…). À vérifier sur place.">?</span></small><b id="stSevere">–</b></div></div>
+  </div>
+  <div class="card maps">
+    <div class="tabs" id="mapTabs" role="tablist"></div>
+    <div class="map-view" id="mapView"></div>
+    <div class="map-foot"><div class="legend" id="legend"></div><div class="map-desc"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg> <span id="mapDesc"></span></div></div>
+  </div>
+  <div class="res-actions">
+    <button class="btn btn-secondary" id="openFolderBtn"><svg class="i" aria-hidden="true"><use href="#i-folder"/></svg> Ouvrir le dossier des résultats</button>
+    <button class="btn btn-secondary" id="openQgisBtn"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Fichiers pour QGIS</button>
+  </div>
+</section>
+
+<!-- ===================== RÉGLAGES ===================== -->
+<section class="screen" id="s-settings">
+  <button class="link" data-go="home"><svg class="i" aria-hidden="true"><use href="#i-arrow-left"/></svg> Retour à l'accueil</button>
+  <p class="eyebrow" style="margin-top:20px">Pour le technicien</p>
+  <h1>Réglages avancés</h1>
+  <p class="lead">Modifiez ces paramètres uniquement si votre installation le demande.</p>
+  <div class="settings-grid">
+    <div class="card set-card">
+      <h3><span class="ic" style="background:var(--blue-soft);color:var(--blue-ink)"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span>Moteur de traitement</h3>
+      <div class="inline">
+        <div class="field" style="flex:2" data-f="node_host"><label for="f-host">Adresse</label><input class="input" id="f-host"></div>
+        <div class="field" style="flex:1" data-f="node_port"><label for="f-port">Port</label><input class="input" id="f-port" inputmode="numeric"></div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;margin-top:18px;flex-wrap:wrap">
+        <button class="btn btn-blue" id="testConnBtn">Tester la connexion</button>
+        <button class="link" data-go="engine">Aide : démarrer Docker et le moteur <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      </div>
+      <p class="result-msg" id="connMsg"></p>
+    </div>
+    <div class="card set-card">
+      <h3><span class="ic" style="background:var(--green-soft);color:var(--green-ink)"><svg class="i" aria-hidden="true"><use href="#i-folder"/></svg></span>Rapports et fichiers</h3>
+      <div class="field"><label for="f-out">Dossier de sortie du rapport</label>
+        <div class="inline"><input class="input" id="f-out" readonly><button class="btn btn-secondary" id="pickOutBtn">Parcourir</button></div></div>
+      <div class="field" style="margin-top:18px"><label for="f-qdef">Qualité proposée par défaut</label>
+        <select class="input" id="f-qdef"><option value="rapide">Rapide (recommandé sur 8 Go)</option><option value="equilibre">Équilibré</option><option value="precis">Précis</option></select></div>
+    </div>
+  </div>
+  <div class="card set-card" style="margin-top:22px">
+    <h3><span class="ic" style="background:var(--subtle);color:var(--petrol)"><svg class="i" aria-hidden="true"><use href="#i-layers"/></svg></span>Exports SIG</h3>
+    <p class="muted" style="margin:0">Chaque mission produit automatiquement, dans <b>livrables\qgis</b>, le zonage (GeoTIFF et Shapefile) et les courbes de niveau (Shapefile et DXF), prêts à ouvrir dans QGIS ou un logiciel de DAO. Aucun réglage n'est nécessaire.</p>
+  </div>
+  <div class="nav-row"><span></span><button class="btn btn-primary" id="saveSettingsBtn">Enregistrer les réglages</button></div>
+</section>
+
+<!-- ===================== À PROPOS ===================== -->
+<section class="screen" id="s-about">
+  <div class="narrow">
+    <button class="link" data-go="home"><svg class="i" aria-hidden="true"><use href="#i-arrow-left"/></svg> Retour à l'accueil</button>
+    <div class="card center-card" style="margin-top:16px">
+      <svg role="img" aria-label="Vision Agricole" style="width:340px;height:145px;display:block;margin:0 auto 6px"><use href="#va-logo-full"/></svg>
+      <span class="chip" style="margin-top:10px" id="versionChip">Version</span>
+      <p class="lead">Transformer les images du ciel en décisions simples pour le terrain.</p>
+      <div class="box-soft"><b style="color:var(--petrol)">Un projet béninois porté par</b><div class="muted">Groupe 2 – Impact Connexion<br>Catégorie Orange · ÉlectroChallenge 2026</div></div>
+      <div class="about-meta">
+        <div><b>Technologies</b><span class="muted small">Python, PyWebView, OpenDroneMap (NodeODM, via Docker), rasterio, NumPy, scikit-learn, Matplotlib, ReportLab.</span></div>
+        <div><b>Licence</b><span class="muted small">Licence MIT. Le moteur NodeODM, sous licence AGPL-3.0, fonctionne séparément dans Docker.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const ICON = n => `<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+/* ============ Accès au pont Python (PyWebView) ============ */
+let api = null;
+function whenApiReady(){
+  return new Promise(resolve=>{
+    if (window.pywebview && window.pywebview.api) return resolve(window.pywebview.api);
+    window.addEventListener("pywebviewready", ()=>resolve(window.pywebview.api), {once:true});
+  });
+}
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const pct = v => (v==null||isNaN(v)) ? "–" : `${Math.round(v)}<em>%</em>`;
+
+const state = {
+  images: null,            // {path,count,thumbs:[{name,src}]}
+  zones: 4,
+  quality: "rapide",
+  settings: {node_host:"localhost", node_port:3000, output_dir:"", default_quality:"rapide"},
+  engineOk: null,
+  result: null,
+  currentMap: null,
+  pollTimer: null,
+};
+
+/* ============ Navigation ============ */
+const SCREENS = ["home","engine","step1","step2","step3","progress","error","results","settings","about"];
+function go(name){
+  if (state.running && !["progress","about","settings","engine"].includes(name)) name = "progress";
+  SCREENS.forEach(n => $("#s-"+n).classList.toggle("active", n===name));
+  $("#main").scrollTop = 0;
+  closeMenu();
+  if (name==="step3") renderRecap();
+  if (name==="settings") fillSettings();
+  if (name==="home") checkEngine(false);
+}
+document.addEventListener("click", e=>{
+  const t = e.target.closest("[data-go]");
+  if (t) go(t.dataset.go);
+});
+
+function toast(msg){
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove("show"), 3200);
+}
+
+/* Menu */
+function closeMenu(){ $("#menu").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded","false"); }
+$("#menuBtn").addEventListener("click", e=>{
+  e.stopPropagation();
+  const open = !$("#menu").classList.contains("open");
+  $("#menu").classList.toggle("open", open); $("#menuBtn").setAttribute("aria-expanded", String(open));
+});
+document.addEventListener("click", e=>{ if(!e.target.closest(".menu-wrap")) closeMenu(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeMenu(); });
+
+/* Barre d'étapes de l'assistant */
+$$(".stepper").forEach(el=>{
+  const cur = +el.dataset.step;
+  const names = ["Vos photos","Votre parcelle","Vérification"];
+  el.innerHTML = names.map((n,i)=>{
+    const k = i+1, cls = k<cur ? "done" : k===cur ? "active" : "";
+    const c = k<cur ? ICON("check") : k;
+    return `<div class="step ${cls}"><span class="circle">${c}</span><span><small>Étape ${k} sur 3</small><b>${n}</b></span></div>`;
+  }).join("");
+});
+
+/* ============ Moteur ============ */
+function setEnginePill(ok, text){
+  const p = $("#enginePill");
+  p.classList.toggle("ok", ok===true); p.classList.toggle("down", ok===false);
+  $("#engineText").textContent = text;
+}
+async function checkEngine(verbose){
+  setEnginePill(null, "Vérification…");
+  try{
+    const r = await api.check_engine(state.settings.node_host, state.settings.node_port);
+    state.engineOk = r.ok;
+    setEnginePill(r.ok, r.ok ? "Moteur prêt" : "Moteur non démarré");
+    return r;
+  }catch(e){
+    state.engineOk = false; setEnginePill(false, "Moteur non démarré");
+    return {ok:false, message:String(e)};
+  }
+}
+$("#enginePill").addEventListener("click", async ()=>{
+  const r = await checkEngine(true);
+  if (!r.ok) go("engine"); else toast("Le moteur de traitement répond correctement.");
+});
+$("#recheckBtn").addEventListener("click", async ()=>{
+  const b = $("#recheckBtn"); b.disabled = true; b.textContent = "Vérification…";
+  const r = await checkEngine(true);
+  b.disabled = false; b.innerHTML = "Vérifier à nouveau " + ICON("arrow-right");
+  const m = $("#recheckMsg");
+  if (r.ok){ toast("Le moteur est prêt."); go(state.pendingLaunch ? "step3" : "home"); state.pendingLaunch=false; }
+  else { m.textContent = "Le moteur ne répond toujours pas. Vérifiez qu'il est bien démarré (état « Running »)."; m.classList.add("show"); }
+});
+
+/* ============ Accueil ============ */
+$("#startBtn").addEventListener("click", ()=>go("step1"));
+$("#openPrevBtn").addEventListener("click", async ()=>{
+  const r = await api.load_previous_mission();
+  if (!r) return;
+  if (r.error){ toast(r.error); return; }
+  showResults(r);
+});
+
+/* ============ Étape 1 : photos ============ */
+async function pickPhotos(){
+  const r = await api.choose_images_dir();
+  if (!r) return;
+  state.images = r;
+  $("#dropEmpty").hidden = true; $("#photosFull").hidden = false;
+  const badge = $("#photosBadge");
+  if (r.count>0){ badge.className="badge ok"; badge.innerHTML = ICON("check") + ` ${r.count} photo${r.count>1?"s":""} détectée${r.count>1?"s":""}`; }
+  else { badge.className="badge warn"; badge.innerHTML = ICON("alert") + " Aucune photo (.jpg, .png) trouvée dans ce dossier"; }
+  $("#photosPath").textContent = r.path;
+  const th = r.thumbs.map(t=>`<div class="thumb"><img src="${t.src}" alt=""><span>${escapeHtml(t.name)}</span></div>`);
+  const rest = r.count - r.thumbs.length;
+  if (rest>0) th.push(`<div class="thumb more"><div><b>+${rest}</b>photos</div></div>`);
+  $("#thumbs").innerHTML = th.join("");
+  $("#toStep2").disabled = r.count===0;
+}
+$("#pickPhotosBtn").addEventListener("click", pickPhotos);
+$("#changeDirBtn").addEventListener("click", pickPhotos);
+$("#toStep2").addEventListener("click", ()=>go("step2"));
+
+/* ============ Étape 2 : parcelle ============ */
+$("#zonesSeg").innerHTML = [2,3,4,5,6].map(n=>`<button type="button" data-z="${n}" aria-pressed="${n===4}">${n}</button>`).join("");
+$("#zonesSeg").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  state.zones = +b.dataset.z;
+  $$("#zonesSeg button").forEach(x=>x.setAttribute("aria-pressed", String(x===b)));
+});
+(function setToday(){ const d=new Date(); $("#f-date").value = d.toISOString().slice(0,10); })();
+
+function isoToFr(v){ if(!v) return ""; const [y,m,d] = v.split("-"); return `${d}/${m}/${y}`; }
+function collectParams(){
+  return {
+    images_dir: state.images ? state.images.path : "",
+    output_dir: state.settings.output_dir,
+    nom_parcelle: $("#f-parcelle").value.trim(),
+    exploitant: $("#f-exploitant").value.trim(),
+    date_vol: isoToFr($("#f-date").value),
+    altitude_vol: $("#f-alt").value.trim(),
+    pilote: $("#f-pilote").value.trim(),
+    equipe: $("#f-equipe").value.trim(),
+    n_zones: state.zones,
+    quality: state.quality,
+    soil_ph: $("#f-ph").value.trim(),
+    soil_texture: $("#f-texture").value,
+    soil_note: $("#f-note").value.trim(),
+    allow_soilgrids: $("#f-soilgrids").checked,
+    node_host: state.settings.node_host,
+    node_port: state.settings.node_port,
+  };
+}
+function clearErrors(){ $$(".field.invalid").forEach(f=>f.classList.remove("invalid")); }
+function showErrors(errors){
+  clearErrors();
+  let first = null;
+  for (const [name,msg] of errors){
+    const f = document.querySelector(`.field[data-f="${name}"]`);
+    if (f){ f.classList.add("invalid"); f.querySelector(".err").textContent = msg; first = first || f; }
+    if (name==="soil_ph") $("#soilBox").open = true;
+  }
+  if (first) first.querySelector("input,select").focus();
+  return first;
+}
+function validateStep2(){
+  const p = collectParams(), errs = [];
+  if(!p.nom_parcelle) errs.push(["nom_parcelle","Indiquez le nom de la parcelle."]);
+  if(!p.exploitant) errs.push(["exploitant","Indiquez l'exploitant ou la coopérative."]);
+  if(!p.date_vol) errs.push(["date_vol","Indiquez la date du vol."]);
+  if(p.altitude_vol && isNaN(+p.altitude_vol.replace(",","."))) errs.push(["altitude_vol","L'altitude doit être un nombre (ex : 90)."]);
+  if(p.soil_ph){ const v=+p.soil_ph.replace(",","."); if(isNaN(v)||v<=0||v>=14) errs.push(["soil_ph","Le pH doit être un nombre entre 0 et 14 (ex : 6,5)."]); }
+  showErrors(errs); return errs.length===0;
+}
+$$("#s-step2 .input").forEach(i=>i.addEventListener("input", ()=>i.closest(".field")?.classList.remove("invalid")));
+$("#toStep3").addEventListener("click", ()=>{ if(validateStep2()) go("step3"); });
+
+/* ============ Étape 3 : vérification ============ */
+const Q_LABEL = {rapide:"Rapide", equilibre:"Équilibré", precis:"Précis"};
+function setQuality(q){
+  state.quality = q;
+  $$("#quality .q").forEach(b=>b.setAttribute("aria-checked", String(b.dataset.q===q)));
+  $("#qualityWarn").hidden = q==="rapide";
+}
+$("#quality").addEventListener("click", e=>{ const b=e.target.closest(".q"); if(b) setQuality(b.dataset.q); });
+function renderRecap(){
+  const p = collectParams();
+  const rows = [
+    ["Photos", state.images ? `${state.images.count} photos` : "–"],
+    ["Parcelle", p.nom_parcelle || "–"],
+    ["Exploitant", p.exploitant || "–"],
+    ["Date du vol", p.date_vol || "–"],
+    ["Découpage", `${p.n_zones} zones`],
+    ["Sol", p.soil_ph||p.soil_texture ? [p.soil_ph && ("pH "+p.soil_ph), p.soil_texture].filter(Boolean).join(" · ") : (p.allow_soilgrids ? "Estimation en ligne" : "Non renseigné")],
+  ];
+  $("#recap").innerHTML = rows.map(([k,v])=>`<div class="r"><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("");
+}
+$("#launchBtn").addEventListener("click", async ()=>{
+  const b = $("#launchBtn"); b.disabled = true;
+  try{
+    const eng = await checkEngine(false);
+    if (!eng.ok){ state.pendingLaunch = true; go("engine"); return; }
+    const r = await api.start_mission(collectParams());
+    if (!r.ok){
+      const e = r.errors || [];
+      const fields1 = e.filter(x=>x[0]==="images_dir");
+      if (fields1.length){ go("step1"); toast(fields1[0][1]); return; }
+      go("step2"); showErrors(e); return;
+    }
+    startProgress();
+  } finally { b.disabled = false; }
+});
+
+/* ============ Progression ============ */
+const STAGES = ["Envoi des photos au moteur","Assemblage de la carte de la parcelle","Analyse de la santé des plantes","Calcul du relief et des pentes","Rédaction du rapport"];
+function renderStages(cur, sub){
+  $("#stages").innerHTML = STAGES.map((n,i)=>{
+    const cls = i<cur ? "done" : i===cur ? "current" : "";
+    const c = i<cur ? ICON("check") : i+1;
+    const s = i===cur ? `<span class="sub">${escapeHtml(sub||"En cours…")}</span>` : "";
+    return `<li class="${cls}"><span class="c">${c}</span><span><b>${n}</b>${s}</span></li>`;
+  }).join("");
+}
+function fmtElapsed(s){ s=Math.max(0,Math.floor(s)); const h=Math.floor(s/3600), m=Math.floor(s%3600/60), x=String(s%60).padStart(2,"0"); return h ? `${h} h ${String(m).padStart(2,"0")} min` : `${m} min ${x} s`; }
+function startProgress(){
+  state.running = true;
+  const p = collectParams();
+  $("#progSub").textContent = `${p.nom_parcelle} · ${state.images.count} photos · qualité ${Q_LABEL[p.quality]}`;
+  renderStages(0, "Démarrage…"); setBar(0); go("progress");
+  clearInterval(state.pollTimer);
+  state.pollTimer = setInterval(poll, 1000);
+}
+function setBar(v){
+  v = Math.max(0, Math.min(100, v||0));
+  $("#bar").style.width = v+"%"; $("#barWrap").setAttribute("aria-valuenow", Math.round(v));
+  $("#pctLabel").textContent = `${Math.round(v)} % terminé`;
+}
+async function poll(){
+  let s;
+  try { s = await api.get_progress(); } catch(e){ return; }
+  $("#elapsed").textContent = fmtElapsed(s.elapsed);
+  if (s.running){
+    setBar(s.pct); renderStages(s.stage, s.text); $("#stepText").textContent = "";
+    return;
+  }
+  clearInterval(state.pollTimer); state.running = false;
+  if (s.error){
+    $("#errMsg").textContent = s.error.message;
+    $("#errHint").textContent = s.error.hint || "";
+    $("#errDetail").textContent = (s.error.log_path ? "Journal : "+s.error.log_path+"\n\n" : "") + (s.error.detail||"");
+    $("#errDetail").style.display = "none"; $("#toggleDetail").textContent = "Voir le détail technique";
+    go("error"); return;
+  }
+  if (s.result){ setBar(100); showResults(s.result, true); }
+}
+$("#toggleDetail").addEventListener("click", ()=>{
+  const d = $("#errDetail"), show = d.style.display!=="block";
+  d.style.display = show ? "block" : "none";
+  $("#toggleDetail").textContent = show ? "Masquer le détail technique" : "Voir le détail technique";
+});
+
+/* ============ Résultats ============ */
+const MAPS = [
+  {k:"ortho", t:"Vue réelle", d:n=>`Vue réelle assemblée à partir des ${n} photos du drone.`, l:[]},
+  {k:"vari", t:"Santé des plantes", help:"Indice VARI : estime la vigueur des plantes à partir des couleurs de la photo (le drone n'a pas de capteur infrarouge).", d:()=>"Plus c'est vert, plus la végétation est vigoureuse ; le rouge signale un stress à vérifier.", l:[["#1A9850","Vigoureuse"],["#FEE08B","Moyenne"],["#D73027","Stressée"],["#D9D9D9","Hors végétation (sol, bâti, eau)"]]},
+  {k:"exg", t:"Densité verte", help:"Indice ExG (« excès de vert ») : mesure la quantité de végétation verte visible.", d:()=>"Met en évidence la quantité de végétation verte visible.", l:[["#006837","Beaucoup de vert"],["#ADDD8E","Moyen"],["#FFFFE5","Peu de vert"],["#D9D9D9","Hors végétation"]]},
+  {k:"zoning", t:"Zonage", help:"La parcelle est découpée en zones qui se ressemblent, pour adapter les apports (engrais, eau) à chacune.", d:n=>`La parcelle est divisée en ${n} zones aux besoins similaires. Chaque couleur correspond à une zone (voir la légende de la carte).`, l:[]},
+  {k:"hillshade", t:"Relief", help:"Modèle numérique de terrain, ombré comme s'il était éclairé de côté.", d:()=>"Le relief apparaît ombré, comme éclairé de côté : on y voit buttes et creux.", l:[]},
+  {k:"slope", t:"Pentes", d:()=>"Les zones rouges ont les pentes les plus fortes (ruissellement, érosion).", l:[["#FFFFB2","Faible pente"],["#FD8D3C","Moyenne"],["#BD0026","Forte pente"]]},
+  {k:"low_zones", t:"Zones basses", d:()=>"Les 20 % de la parcelle les plus bas : l'eau peut s'y accumuler après de fortes pluies.", l:[["#1E6FD9","Zone basse"],["#9A9A9A","Reste de la parcelle (relief)"]]},
+];
+function fmtHa(v){ return v==null ? "–" : `${v.toLocaleString("fr-FR",{maximumFractionDigits:2})}<em>ha</em>`; }
+function showResults(r, fresh){
+  state.result = r;
+  const now = new Date();
+  $("#doneAt").textContent = fresh ? `Traitement terminé aujourd'hui à ${now.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}` : `Mission ouverte depuis : ${r.out_dir}`;
+  $("#resParcelle").textContent = r.nom_parcelle || "";
+  $("#verdictTitle").textContent = r.verdict_title || "Résultats de la mission";
+  const det = $("#verdictDetail");
+  det.innerHTML = r.verdict_detail ? (r.verdict_level==="ok" ? escapeHtml(r.verdict_detail) : `<span class="hl">${escapeHtml(r.verdict_detail)}</span>`) : "";
+  $("#stSurface").innerHTML = fmtHa(r.surface_ha);
+  $("#stCover").innerHTML = pct(r.pct_couverture);
+  $("#stHealthy").innerHTML = pct(r.pct_saine);
+  $("#stSevere").innerHTML = pct(r.pct_severe);
+  $("#openPdfBtn").disabled = !r.pdf_path;
+  $("#mapTabs").innerHTML = MAPS.map(m=>{
+    const has = r.maps && r.maps[m.k];
+    return `<button role="tab" data-k="${m.k}" aria-selected="false" ${has?"":"disabled title='Carte non disponible pour cette mission'"}>${m.t}${m.help?` <span class="help" tabindex="0" data-tip="${escapeHtml(m.help)}">?</span>`:""}</button>`;
+  }).join("");
+  const first = MAPS.find(m=>r.maps && r.maps[m.k]);
+  go("results");
+  if (first) selectMap(first.k); else { $("#mapView").innerHTML = `<p class="map-empty">Aucune carte n'a été trouvée pour cette mission.</p>`; $("#legend").innerHTML=""; $("#mapDesc").textContent=""; }
+}
+async function selectMap(k){
+  state.currentMap = k;
+  $$("#mapTabs button").forEach(b=>b.setAttribute("aria-selected", String(b.dataset.k===k)));
+  const m = MAPS.find(x=>x.k===k), r = state.result;
+  $("#legend").innerHTML = m.l.map(([c,t])=>`<span><i style="background:${c}"></i>${t}</span>`).join("");
+  $("#mapDesc").textContent = m.d(k==="ortho" ? (r.n_photos||"") : (r.n_zones||""));
+  $("#mapView").innerHTML = `<p class="map-empty">Chargement de la carte…</p>`;
+  const src = await api.get_map_image(r.maps[k]);
+  if (state.currentMap!==k) return;
+  $("#mapView").innerHTML = src ? `<img src="${src}" alt="${m.t}">` : `<p class="map-empty">Impossible d'afficher cette carte.</p>`;
+}
+$("#mapTabs").addEventListener("click", e=>{ const b=e.target.closest("button[data-k]"); if(b && !b.disabled) selectMap(b.dataset.k); });
+$("#openPdfBtn").addEventListener("click", ()=>api.open_path(state.result.pdf_path));
+$("#openFolderBtn").addEventListener("click", ()=>api.open_path(state.result.out_dir));
+$("#openQgisBtn").addEventListener("click", async ()=>{ const ok = await api.open_qgis_folder(state.result.out_dir); if(!ok) toast("Le dossier QGIS n'existe pas pour cette mission."); });
+$("#newMissionBtn").addEventListener("click", ()=>{
+  state.images = null; $("#dropEmpty").hidden=false; $("#photosFull").hidden=true; $("#toStep2").disabled = true;
+  go("step1");
+});
+
+/* ============ Réglages ============ */
+function fillSettings(){
+  const s = state.settings;
+  $("#f-host").value = s.node_host; $("#f-port").value = s.node_port;
+  $("#f-out").value = s.output_dir; $("#f-qdef").value = s.default_quality;
+  $("#connMsg").className = "result-msg";
+}
+$("#pickOutBtn").addEventListener("click", async ()=>{ const d = await api.choose_folder("Choisir le dossier de sortie des rapports"); if(d) $("#f-out").value = d; });
+$("#testConnBtn").addEventListener("click", async ()=>{
+  const b = $("#testConnBtn"), m = $("#connMsg");
+  b.disabled = true; b.textContent = "Test en cours…";
+  const r = await api.check_engine($("#f-host").value.trim(), $("#f-port").value.trim());
+  b.disabled = false; b.textContent = "Tester la connexion";
+  m.className = "result-msg show " + (r.ok ? "ok" : "ko");
+  m.innerHTML = r.ok ? ICON("check") + " Connexion réussie : le moteur répond." : ICON("x") + " " + escapeHtml(r.message);
+});
+$("#saveSettingsBtn").addEventListener("click", async ()=>{
+  const port = +$("#f-port").value;
+  if (!Number.isInteger(port) || port<1 || port>65535){ showErrors([["node_port","Le port doit être un nombre entier (ex : 3000)."]]); return; }
+  const host = $("#f-host").value.trim() || "localhost";
+  const s = {node_host:host, node_port:port, output_dir:$("#f-out").value, default_quality:$("#f-qdef").value};
+  const saved = await api.save_settings(s);
+  state.settings = saved; setQuality(saved.default_quality);
+  toast("Réglages enregistrés."); checkEngine(false);
+});
+
+function escapeHtml(s){ return String(s??"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+/* ============ Démarrage ============ */
+whenApiReady().then(async a=>{
+  api = a;
+  try{
+    const init = await api.get_settings();
+    state.settings = init.settings;
+    $("#versionChip").textContent = "Version " + init.version;
+    setQuality(init.settings.default_quality || "rapide");
+  }catch(e){ setQuality("rapide"); }
+  checkEngine(false);
+});
+</script>
+</body>
+</html>
