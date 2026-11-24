@@ -1,31 +1,36 @@
 # Vision Agricole – site vitrine
 
 ## Contexte
-Application Windows de cartographie agricole par drone (Groupe 2 – Impact Connexion,
-ÉlectroChallenge 2026, Catégorie Orange, mentor Renaud DANVI). Dépôt : Jojo-DG/vision-agricole. Licence MIT.
-Le Groupe 2 a remporté l'ÉlectroChallenge 2026 ; l'équipe promeut maintenant l'application.
+Application Windows de cartographie agricole par drone, créée par le Groupe 2 – Impact Connexion
+(ÉlectroChallenge 2026, Catégorie Orange, mentor Renaud DANVI). Dépôt : Jojo-DG/vision-agricole. Licence MIT.
+Le groupe a remporté la Catégorie Orange le 19 août 2026 ; Jaime DEGUE a été meilleur participant de la catégorie.
+L'équipe continue de faire évoluer l'application et de la promouvoir.
 
 ## Objectif du site
-Présenter l'application, l'équipe et l'histoire du projet, et proposer le téléchargement.
+UN SITE PRODUIT : présenter et faire télécharger l'application, comme une mise en avant de produit
+(promesse, bénéfices, preuves, appel à l'action). Ce n'est PAS un site sur le groupe Impact Connexion.
+La marque est « Vision Agricole ». Le groupe n'apparaît qu'en signature discrète, dans une courte section
+« Notre histoire » et dans la section « L'équipe ».
 Public : agriculteurs d'abord, puis techniciens, jury et partenaires.
 
-## Contenus fournis
-Tout est dans `site/contenu.md` (équipe, rôles, histoire à compléter) et `site/medias/`
-(captures de la vraie application, photos de l'équipe, capture de la version 0.0.0).
-Les textes marqués « À COMPLÉTER » restent visibles comme tels : ne pas inventer de faits.
+## À lire avant de commencer
+- `site/argumentaire.md` : la structure et les textes du site, orientés produit. C'est la référence.
+- `site/contenu.md` : matière première (équipe, rôles, histoire détaillée). À condenser, jamais à copier en bloc.
+- `site/medias/` : captures de la vraie application, photos de l'équipe.
 
 ## Règles
-- Tout le texte est en français, ton simple et chaleureux, sans jargon.
+- Tout le texte est en français, chaleureux, concret, phrases courtes. Le bénéfice avant la technique.
+- Accueil : accroche, bénéfices, 3 étapes, captures, réassurance, téléchargement. L'histoire y tient en 5 à 8 lignes.
+- Ne rien inventer : pas de chiffres, de précision ou de durée non fournis. Les textes « À COMPLÉTER » restent signalés.
 - Site statique (HTML/CSS/JS sans framework ni build), dans `site/`, publiable via GitHub Pages.
-- Lisible sur téléphone. Léger. Pas de bibliothèque externe sans nécessité.
-- Charte : pétrole #0B4F5C, vert #0B7D5C, orange #DF7E26 ; logo dans `assets/logo_vision_agricole.svg`.
+- Lisible sur téléphone, léger, sans bibliothèque externe sans nécessité.
+- Charte : pétrole #0B4F5C, vert #0B7D5C, orange #DF7E26 ; logo `assets/logo_vision_agricole.svg`.
 - Icônes en SVG (Feather Icons, MIT), jamais d'emojis.
+- Les photos de l'équipe sont publiques avec l'accord des membres.
 - Ne jamais toucher à `app/`, aux scripts de build ni à la Release.
 - Travailler sur une branche, jamais directement sur `main`.
 
-## Sections
-Accueil, Comment ça marche (3 étapes : photos, parcelle, rapport), Captures, Équipe, Notre histoire,
-Télécharger (lien Release v1.1.0, prérequis Docker/NodeODM, alerte SmartScreen,
-SHA-256 ecf9f03b36ac40f7828d46675f0bd0000a16663846c9f8efcf3a6da1eadc9c0e),
-Licence et crédits (MIT ; NodeODM/ODM AGPL-3.0 ; Feather Icons MIT).
-Lien de téléchargement : https://github.com/Jojo-DG/vision-agricole/releases/download/v1.1.0/Vision.Agricole.exe
+## Téléchargement
+Lien : https://github.com/Jojo-DG/vision-agricole/releases/download/v1.1.0/Vision.Agricole.exe
+SHA-256 : ecf9f03b36ac40f7828d46675f0bd0000a16663846c9f8efcf3a6da1eadc9c0e
+Licences : MIT (application) ; NodeODM/ODM AGPL-3.0 ; Feather Icons MIT.
