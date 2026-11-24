@@ -27,6 +27,8 @@ Monsieur Goldfrid OBELAKOU est le promoteur principal de l'ÉlectroChallenge. Il
 - Catégorie Verte (15 à 18 ans) : un système d'arrosage / d'irrigation (à confirmer).
 - Catégorie Orange (18 à 30 ans) : la nôtre, avec la cartographie agricole par drone. Cinq équipes s'y affrontaient.
 
+Les phases préparatoires ont commencé le 2 août ; la finale a débuté le 17 août.
+
 ### Le récit
 L'ÉlectroChallenge 2026 a commencé à la mi-juillet. Nous avions tous postulé individuellement, puis passé un test sélectif, à la hauteur du défi. Les candidats retenus ont ensuite été répartis en équipes. Le Groupe 2 – Impact Connexion, Catégorie Orange, s'est formé autour de notre mentor, Monsieur Renaud DANVI, avec qui nous avons commencé à discuter du projet.
 
@@ -41,13 +43,14 @@ Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'applica
 
 ### Frise chronologique (pour la page)
 - Mi-juillet : candidatures individuelles, puis test de sélection ; constitution des équipes ; premiers échanges avec le mentor.
+- 2 août : début des phases préparatoires.
 - 13 août (à confirmer) : première cartographie sur un terrain ; début du développement de l'application, séance jusqu'à 22 h.
 - Même semaine : recherche d'un ordinateur adapté au traitement photogrammétrique.
 - Samedi : derniers réglages de l'application ; début du PowerPoint.
-- Lundi soir : le diaporama prend forme.
+- Lundi 17 août : début de la finale ; le soir, le diaporama prend forme.
 - Mardi : fin du PowerPoint ; premières répétitions.
 - Mercredi : pitch devant le jury, victoire en Catégorie Orange ; Jaime, meilleur participant de la catégorie.
 - Depuis : v1.1.0 de Vision Agricole, projets en cours avec l'application.
 
 ### À COMPLÉTER
-Dates exactes (ouverture, 13 août, pitch), projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
+Date exacte du pitch (sans doute le mercredi 19 août) et confirmation du 13 août, projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
