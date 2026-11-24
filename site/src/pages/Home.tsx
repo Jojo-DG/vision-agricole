@@ -1,7 +1,8 @@
-import { useState } from 'react'
 import { Accordion, Button, Counter, Icon, Reveal, Topography } from '../components/ui'
 import type { IconName } from '../components/ui'
 import { BeforeAfter, Gallery } from '../components/Interactive'
+import { Checksum } from '../components/Copy'
+import { Contact } from '../components/Contact'
 import { benefits, faqs, LINKS, maps, shots, steps, team, testFlight, why } from '../data'
 
 function Kicker({ children, light = false }: { children: string; light?: boolean }) {
@@ -190,7 +191,7 @@ function Why() {
           {why.map((w, i) => (
             <Reveal key={w.n} delay={i * 0.08}>
               <span>{w.n}</span>
-              <div><h3>{w.title}</h3><p>{w.text}</p></div>
+              <div><h3>{w.title}</h3><p>{w.text}{'link' in w && <> <a className="inline-link" href={w.link.href}>{w.link.label}</a>.</>}</p></div>
               <Icon name="check" />
             </Reveal>
           ))}
@@ -239,10 +240,6 @@ function Team() {
 }
 
 function Download() {
-  const [copied, setCopied] = useState(false)
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(LINKS.sha256); setCopied(true); setTimeout(() => setCopied(false), 1800) } catch { /* copie impossible : le texte reste sélectionnable */ }
-  }
   return (
     <section className="section download-section" id="telecharger" aria-labelledby="titre-telecharger">
       <div className="container">
@@ -258,25 +255,21 @@ function Download() {
               <span><Icon name="check" size={16} />Un seul fichier, sans installer Python</span>
               <span><Icon name="check" size={16} />Gratuit</span>
             </div>
+            <a className="text-link" href="#/installation">Guide d’installation pas à pas <Icon name="arrow" /></a>
             <p className="mac-note">Mac : une version peut être construite depuis le code source (non testé).</p>
           </div>
           <div className="download-details">
             <h3>Avant de commencer</h3>
             <ul>
               <li>Un ordinateur Windows.</li>
-              <li>Docker Desktop et le moteur de traitement (NodeODM), expliqués pas à pas dans le <a href={LINKS.readme}>README</a>.</li>
+              <li>Docker Desktop et le moteur de traitement (NodeODM), expliqués pas à pas dans le <a href="#/installation">guide d’installation</a>.</li>
               <li>Sur un PC de 8 Go, choisissez la qualité « Rapide ».</li>
             </ul>
             <Accordion title="Windows affiche un avertissement ?">
               <p>C’est normal pour un nouveau logiciel qui n’est pas encore signé. Cliquez sur <b>Informations complémentaires</b>, puis sur <b>Exécuter quand même</b>.</p>
               <p>Vous préférez vérifier d’abord ? Utilisez l’empreinte et l’analyse ci-dessous.</p>
             </Accordion>
-            <div className="checksum">
-              <div><span>Empreinte SHA-256</span><code>{LINKS.sha256}</code></div>
-              <button type="button" onClick={copy} aria-live="polite"><Icon name={copied ? 'check' : 'copy'} size={16} />{copied ? 'Copié' : 'Copier'}</button>
-            </div>
-            <p className="verify-tip">Sous Windows, dans l’Invite de commandes : <code>certutil -hashfile Vision.Agricole.exe SHA256</code> (avec le nom du fichier téléchargé). Le résultat doit être identique.</p>
-            <a className="virus-link" href={LINKS.virustotal} rel="noopener">Voir l’analyse VirusTotal <Icon name="arrow" /></a>
+            <Checksum />
           </div>
         </Reveal>
       </div>
@@ -292,11 +285,15 @@ function Faq() {
           <Kicker>Questions fréquentes</Kicker>
           <h2 id="titre-faq">Avant votre premier <em>vol.</em></h2>
           <p>Les réponses essentielles pour démarrer sereinement.</p>
+          <p className="faq-contact">Une autre question ? Écrivez-nous ou appelez-nous.</p>
+          <Contact />
         </Reveal>
         <Reveal delay={0.1}>
           {faqs.map((f, i) => (
             <Accordion key={f.q} title={f.q} defaultOpen={i === 0}>
               {f.a.map((line, j) => <p key={j}>{line}</p>)}
+              {'link' in f && <p><a className="inline-link" href={f.link.href}>{f.link.label}</a></p>}
+              {'contact' in f && <Contact />}
             </Accordion>
           ))}
         </Reveal>

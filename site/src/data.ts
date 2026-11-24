@@ -10,8 +10,13 @@ export const LINKS = {
     'https://www.virustotal.com/gui/file/ecf9f03b36ac40f7828d46675f0bd0000a16663846c9f8efcf3a6da1eadc9c0e',
   github: GITHUB,
   readme: `${GITHUB}#readme`,
-  issues: `${GITHUB}/issues`,
-  license: `${GITHUB}/blob/main/LICENSE`,
+} as const
+
+/** Coordonnées publiques pour poser une question. */
+export const CONTACT = {
+  email: 'jaimedeg001@gmail.com',
+  phone: '+229 01 91 28 99 99',
+  tel: '+2290191289999',
 } as const
 
 export const media = (name: string) => `medias/${name}`
@@ -75,7 +80,7 @@ export const why = [
   { n: '01', title: 'Simple et guidé, en 3 étapes', text: 'Un parcours pensé pour l’agriculteur et son technicien.' },
   { n: '02', title: '100 % en français', text: 'Les écrans, les explications et le rapport PDF.' },
   { n: '03', title: 'Vos photos restent sur votre ordinateur', text: 'Le traitement se fait chez vous. Vos photos ne sont pas envoyées sur Internet.' },
-  { n: '04', title: 'Gratuit et libre, licence MIT', text: 'Le code est public sur GitHub.' },
+  { n: '04', title: 'Gratuit et libre, licence MIT', text: 'Le code est public. Vous pouvez utiliser, copier et modifier l’application.', link: { label: 'Comprendre la licence', href: '#/licence' } },
   { n: '05', title: 'Pour les drones courants', text: 'Testé avec un DJI Mavic 3 Enterprise (photos RGB).' },
 ] as const
 
@@ -91,8 +96,8 @@ export const faqs = [
   { q: 'Faut-il Internet ?', a: ['Pas pour le traitement. Il faut Internet la première fois, pour télécharger Docker et le moteur de traitement.', 'L’estimation du sol en ligne (SoilGrids), qui est facultative, utilise aussi Internet.'] },
   { q: 'Mes photos sont-elles envoyées quelque part ?', a: ['Non. Tout reste sur votre ordinateur.'] },
   { q: 'Combien de temps dure un traitement ?', a: ['Cela dépend du nombre de photos et de la puissance de votre PC. L’application affiche la progression et le temps écoulé. Ne la fermez pas et ne mettez pas le PC en veille pendant le traitement.'] },
-  { q: 'C’est payant ?', a: ['Non. Vision Agricole est gratuit et libre, sous licence MIT.'] },
-  { q: 'Où trouver de l’aide ?', a: ['Le README explique l’installation pas à pas. Pour poser une question, ouvrez une demande dans les Issues du dépôt GitHub.'] },
+  { q: 'C’est payant ?', a: ['Non. Vision Agricole est gratuit et libre, sous licence MIT.'], link: { label: 'Comprendre la licence MIT', href: '#/licence' } },
+  { q: 'Où trouver de l’aide ?', a: ['Le guide d’installation explique chaque étape et propose un dépannage. Pour poser une question, écrivez-nous ou appelez-nous.'], link: { label: 'Ouvrir le guide d’installation', href: '#/installation' }, contact: true },
 ] as const
 
 /** Frise de « Notre histoire » (site/contenu.md). */

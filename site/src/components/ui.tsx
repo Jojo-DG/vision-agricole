@@ -4,10 +4,11 @@ import type { ReactNode } from 'react'
 /* ---------- Icônes (style Feather, trait de 1,7 px) ---------- */
 
 export type IconName =
-  | 'arrow' | 'award' | 'check' | 'chevron' | 'copy' | 'download' | 'drop' | 'file'
-  | 'github' | 'grid' | 'lock' | 'map' | 'menu' | 'photo' | 'settings' | 'x' | 'zoom'
+  | 'alert' | 'arrow' | 'award' | 'check' | 'chevron' | 'copy' | 'download' | 'drop' | 'file'
+  | 'github' | 'grid' | 'lock' | 'mail' | 'map' | 'menu' | 'phone' | 'photo' | 'scale' | 'settings' | 'x' | 'zoom'
 
 const paths: Record<IconName, ReactNode> = {
+  alert: <><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" /><path d="M12 9v4M12 17h.01" /></>,
   arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
   award: <><circle cx="12" cy="8" r="6" /><path d="m8.2 13.4-1.2 8.6 5-3 5 3-1.2-8.6" /></>,
   check: <path d="m5 12 4 4L19 6" />,
@@ -19,6 +20,9 @@ const paths: Record<IconName, ReactNode> = {
   github: <><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.6S18.2.2 15 2a13.4 13.4 0 0 0-7 0C4.8.2 3.7.6 3.7.6A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4" /><path d="M8 19c-3 .9-3-1.5-4-2" /></>,
   grid: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
   lock: <><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></>,
+  mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>,
+  phone: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />,
+  scale: <><path d="M12 3v18M7 21h10M5 7h14" /><path d="m5 7-3 7a3 3 0 0 0 6 0Zm14 0-3 7a3 3 0 0 0 6 0Z" /></>,
   map: <><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" /><path d="M9 3v15M15 6v15" /></>,
   menu: <path d="M4 7h16M4 17h16" />,
   photo: <><rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="8.5" cy="9" r="1.5" /><path d="m21 15-5-5L5 20" /></>,
