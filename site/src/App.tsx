@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { Footer, Header, pageFromHash, takePendingSection } from './components/Chrome'
 import type { Page } from './components/Chrome'
 import Home from './pages/Home'
@@ -49,6 +50,7 @@ export default function App() {
       <Header page={page} />
       {page === 'home' ? <main id="contenu-accueil"><Home /></main> : page === 'histoire' ? <History /> : page === 'installation' ? <Installation /> : page === 'licence' ? <License /> : <Technical />}
       <Footer page={page} />
+      <Analytics />
     </>
   )
 }
