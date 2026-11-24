@@ -20,6 +20,7 @@ Node 22 ou plus récent est recommandé.
 | Je veux changer… | Fichier |
 |---|---|
 | Un texte, la FAQ, l'équipe, la frise, les liens de téléchargement, l'e-mail et le téléphone de contact | `src/data.ts` (et `src/pages/*.tsx` pour les textes longs) |
+| Les liens, empreintes et commandes Windows / Mac | `src/data.ts` (`LINKS`, `MAC`) |
 | Le guide d'installation, la page licence MIT | `src/pages/Installation.tsx`, `src/pages/License.tsx` |
 | Les couleurs, les polices, les animations | `src/index.css` (variables en haut du fichier) |
 | Une image | `public/medias/` (captures, équipe, cartes du vol test) |
@@ -31,6 +32,7 @@ Node 22 ou plus récent est recommandé.
 ## Choix de conception
 
 - **Navigation par hash** : `#/histoire`, `#/techniciens`, `#/installation` et `#/licence` sont des pages, `#resultats`… sont des sections de l'accueil. Aucune configuration serveur n'est nécessaire sur GitHub Pages.
+- **Onglets Windows / Mac** : `src/components/platform.tsx` garde le choix du système (détecté d'après le navigateur, modifiable) et le partage entre l'accueil et le guide d'installation.
 - **Aucune ressource externe** : les polices (Fraunces, Plus Jakarta Sans, DM Mono) sont dans `src/fonts/`, sans Google Fonts, sans suivi.
 - **Animations** : `Reveal` (apparition au défilement) et `Counter` (chiffres qui défilent) dans `src/components/ui.tsx`, en CSS et `IntersectionObserver`, sans bibliothèque. Elles sont coupées si le visiteur a demandé « réduire les animations » (`prefers-reduced-motion`).
 - **Images du comparateur** : `public/medias/resultats/comparaison-*.webp` sont deux vues du même vol test, découpées sur la même emprise.

@@ -38,9 +38,12 @@ Un drone voit tout, mais ses photos brutes ne disent rien à un agriculteur.
 - Bouton principal : Vision Agricole 1.1.0 pour Windows (lien Release v1.1.0).
 - Prérequis, en 3 lignes : Windows ; Docker Desktop + le moteur de traitement (NodeODM), expliqués pas à pas dans le README ; PC de 8 Go : choisir la qualité « Rapide ».
 - Encadré « Windows affiche un avertissement ? » : c'est normal pour un nouveau logiciel non signé. Cliquer sur « Informations complémentaires » puis « Exécuter quand même ». Empreinte SHA-256 et analyse VirusTotal fournies pour vérifier.
-- Onglet « Mac » à côté de « Windows » (même section, sans bouton de téléchargement direct) : pas encore d'application Mac prête à télécharger ; on la construit une fois depuis le code source. Annoncer honnêtement « Version Mac : en préparation, non testée sur un vrai Mac ».
-  Étapes à afficher, courtes : 1) installer Python 3.12 (python.org) et Docker Desktop ; 2) télécharger le code (bouton « Download ZIP » sur GitHub) ; 3) dans le Terminal : `chmod +x build_mac.sh` puis `./build_mac.sh` ; 4) glisser `dist/Vision Agricole.app` dans Applications ; 5) premier lancement : clic droit > Ouvrir ; 6) démarrer le moteur : `docker run -d -p 3000:3000 --name nodeodm opendronemap/nodeodm`.
-  Mention : sur Mac Apple Silicon (M1, M2, M3), le moteur tourne en émulation (`--platform linux/amd64`), donc plus lentement. Détails dans le README, section 6 bis.
+- Onglet « Mac » à côté de « Windows » (même section, et page Installation) : bouton « Télécharger pour Mac » (Release v1.1.0, `Vision-Agricole-1.1.0-Mac.zip`).
+  Compatibilité : Mac à puce Apple Silicon (M1, M2, M3…) ; pas de version Intel pour l'instant.
+  Empreinte SHA-256 avec bouton « Copier », commande de vérification `shasum -a 256 "Vision-Agricole-1.1.0-Mac.zip"` et lien VirusTotal.
+  Premier lancement : décompresser, glisser dans Applications, clic droit > Ouvrir > Ouvrir ; si macOS bloque : `xattr -dr com.apple.quarantine "/Applications/Vision Agricole.app"`.
+  Rappel : Docker Desktop et le moteur NodeODM restent nécessaires ; commande `docker run -d -p 3000:3000 --platform linux/amd64 --name nodeodm opendronemap/nodeodm`. Sur Apple Silicon le moteur tourne en émulation, donc plus lentement.
+  Repli, dans un bloc repliable « Je préfère construire moi-même » : 1) installer Python 3.12 (python.org) et Docker Desktop ; 2) télécharger le code (bouton « Download ZIP » sur GitHub) ; 3) dans le Terminal : `chmod +x build_mac.sh` puis `./build_mac.sh` ; 4) glisser `dist/Vision Agricole.app` dans Applications ; 5) premier lancement : clic droit > Ouvrir ; 6) démarrer le moteur (commande ci-dessus).
 
 ## FAQ (4 à 6 questions)
 - Quel drone faut-il ? Des photos aériennes JPG/PNG de bonne qualité, avec recouvrement.
