@@ -38,7 +38,9 @@ Un drone voit tout, mais ses photos brutes ne disent rien à un agriculteur.
 - Bouton principal : Vision Agricole 1.1.0 pour Windows (lien Release v1.1.0).
 - Prérequis, en 3 lignes : Windows ; Docker Desktop + le moteur de traitement (NodeODM), expliqués pas à pas dans le README ; PC de 8 Go : choisir la qualité « Rapide ».
 - Encadré « Windows affiche un avertissement ? » : c'est normal pour un nouveau logiciel non signé. Cliquer sur « Informations complémentaires » puis « Exécuter quand même ». Empreinte SHA-256 et analyse VirusTotal fournies pour vérifier.
-- Petite ligne : Mac : build possible depuis le code source (non testé).
+- Onglet « Mac » à côté de « Windows » (même section, sans bouton de téléchargement direct) : pas encore d'application Mac prête à télécharger ; on la construit une fois depuis le code source. Annoncer honnêtement « Version Mac : en préparation, non testée sur un vrai Mac ».
+  Étapes à afficher, courtes : 1) installer Python 3.12 (python.org) et Docker Desktop ; 2) télécharger le code (bouton « Download ZIP » sur GitHub) ; 3) dans le Terminal : `chmod +x build_mac.sh` puis `./build_mac.sh` ; 4) glisser `dist/Vision Agricole.app` dans Applications ; 5) premier lancement : clic droit > Ouvrir ; 6) démarrer le moteur : `docker run -d -p 3000:3000 --name nodeodm opendronemap/nodeodm`.
+  Mention : sur Mac Apple Silicon (M1, M2, M3), le moteur tourne en émulation (`--platform linux/amd64`), donc plus lentement. Détails dans le README, section 6 bis.
 
 ## FAQ (4 à 6 questions)
 - Quel drone faut-il ? Des photos aériennes JPG/PNG de bonne qualité, avec recouvrement.
