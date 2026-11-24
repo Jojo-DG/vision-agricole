@@ -15,6 +15,7 @@ rapports_drone/
 *.tiff
 *.jpg
 *.JPG
+!site/**/*.jpg
 *.las
 *.laz
 *.log
