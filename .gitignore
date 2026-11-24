@@ -15,9 +15,13 @@ rapports_drone/
 *.tiff
 *.jpg
 *.JPG
+!site/**/*.jpg
 *.las
 *.laz
 *.log
+
+# Site (Vite)
+node_modules/
 
 # Système / éditeur
 .DS_Store
