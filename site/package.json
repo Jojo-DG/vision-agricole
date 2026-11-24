@@ -9,13 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.0.0",
-    "@fontsource/fraunces": "^5.0.0",
     "@fontsource/dm-mono": "^5.0.0",
+    "@fontsource/fraunces": "^5.0.0",
     "@tailwindcss/vite": "^4.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
