@@ -1,5 +1,7 @@
 # Contenu du site vitrine – Vision Agricole
 
+> Matière première, PAS la structure du site. Le site est un site produit (voir `argumentaire.md`) : l'histoire et l'équipe n'y occupent que de courtes sections.
+
 
 ## Équipe (Groupe 2 – Impact Connexion, Catégorie Orange, ÉlectroChallenge 2026)
 Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
@@ -22,10 +24,7 @@ Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
 ## Histoire (texte pour la page « Notre histoire » – à relire par l'équipe)
 
 ### Le concours
-Monsieur Goldfrid OBELAKOU est le promoteur principal de l'ÉlectroChallenge. Il comptait trois catégories, selon l'âge des participants :
-- Catégorie Bleue (12 à 15 ans) : un four solaire (à confirmer).
-- Catégorie Verte (15 à 18 ans) : un système d'arrosage / d'irrigation (à confirmer).
-- Catégorie Orange (18 à 30 ans) : la nôtre, avec la cartographie agricole par drone. Cinq équipes s'y affrontaient.
+Monsieur Goldfrid OBELAKOU est le promoteur principal de l'ÉlectroChallenge. Le concours était ouvert à plusieurs catégories selon l'âge. La nôtre, la Catégorie Orange (18 à 30 ans), portait sur la cartographie agricole par drone. Cinq équipes s'y affrontaient.
 
 Les phases préparatoires ont commencé le 2 août ; la finale a débuté le 17 août.
 
@@ -49,8 +48,8 @@ Nous avons gardé le contact entre nous. Nous poursuivons l'aventure : l'applica
 - Samedi : derniers réglages de l'application ; début du PowerPoint.
 - Lundi 17 août : début de la finale ; le soir, le diaporama prend forme.
 - Mardi : fin du PowerPoint ; premières répétitions.
-- Mercredi : pitch devant le jury, victoire en Catégorie Orange ; Jaime, meilleur participant de la catégorie.
+- Mercredi 19 août : pitch devant le jury, victoire en Catégorie Orange ; Jaime, meilleur participant de la catégorie.
 - Depuis : v1.1.0 de Vision Agricole, projets en cours avec l'application.
 
 ### À COMPLÉTER
-Date exacte du pitch (sans doute le mercredi 19 août), projets exacts des catégories Bleue et Verte, autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
+autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l'on peut citer publiquement.
