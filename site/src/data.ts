@@ -99,11 +99,13 @@ export const why = [
   { n: '05', title: 'Pour les drones courants', text: 'Testé avec un DJI Mavic 3 Enterprise (photos RGB).' },
 ] as const
 
-/** Rôles de l'équipe : détail donné par le chef d'équipe (à relire avec l'équipe). */
+/** Profils de l'équipe : parcours, passions et rôle dans le projet (informations données par le chef d'équipe). */
 export const team = [
   {
     photo: media('equipe/degue-jaime-jordi.jpg'), w: 487, h: 680, name: 'Jaime Jordi DEGUE', role: 'Chef d’équipe',
     badge: 'Meilleur participant de l’ÉlectroChallenge 2026',
+    studies: 'En cycle d’ingénieur (4e année) à l’École nationale supérieure de génie énergétique et procédés d’Abomey.',
+    passions: 'L’énergie renouvelable et l’électricité de bâtiment.',
     points: [
       'Design, interface (UI) et expérience utilisateur (UX).',
       'Réalisation du PowerPoint de présentation.',
@@ -112,6 +114,8 @@ export const team = [
   },
   {
     photo: media('equipe/gbaguidi-constantino.jpg'), w: 512, h: 680, name: 'Constantino GBAGUIDI', role: 'Adjoint au chef d’équipe',
+    studies: 'Titulaire d’une licence professionnelle en génie électrique et énergie renouvelable.',
+    profile: 'Un touche-à-tout, très polyvalent.',
     points: [
       'Auteur de la toute première version de l’application (version 0.0.0).',
       'Épaule le chef d’équipe, avec des compétences très proches des siennes.',
@@ -119,6 +123,7 @@ export const team = [
   },
   {
     photo: media('equipe/adigbli-serge-olivier.jpg'), w: 499, h: 680, name: 'Serge-Olivier ADIGBLI', role: 'Technique',
+    studies: 'En cycle d’ingénieur à l’École nationale supérieure de génie énergétique et procédés d’Abomey.',
     points: [
       'A apporté les fonctionnalités de l’application.',
       'Gestion des dépendances.',
@@ -126,6 +131,8 @@ export const team = [
   },
   {
     photo: media('equipe/oyeniran-aweni.jpg'), w: 509, h: 680, name: 'Awèni OYENIRAN', role: 'Valorisation',
+    studies: 'Étudie à l’Université nationale d’agriculture.',
+    passions: 'La transformation des produits agricoles et la prise de parole en public.',
     points: ['Marketing et communication.'],
   },
 ] as const
