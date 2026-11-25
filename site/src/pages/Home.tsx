@@ -232,7 +232,12 @@ function Team() {
           {team.map((m, i) => (
             <Reveal as="article" key={m.name} delay={i * 0.1} className="team-card">
               <div className="team-portrait"><img src={m.photo} width={m.w} height={m.h} loading="lazy" alt={`Portrait de ${m.name}`} /></div>
-              <div><small>{m.role}</small><h3>{m.name}</h3><p>{m.detail}</p></div>
+              <div>
+                <small>{m.role}</small>
+                <h3>{m.name}</h3>
+                {'badge' in m && <span className="team-badge"><Icon name="award" size={14} />{m.badge}</span>}
+                <ul className="team-points">{m.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+              </div>
             </Reveal>
           ))}
         </div>
