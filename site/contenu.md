@@ -9,10 +9,10 @@ Photos dans `medias/equipe/`. Mentor : Renaud DANVI.
 
 | Nom | Photo | Rôle |
 |---|---|---|
-| DEGUE Jaime Jordi | degue-jaime-jordi.jpg | Chef d'équipe ; titre de « Meilleur participant » de l'ÉlectroChallenge 2026. A réalisé le design, l'UI et l'UX, le PowerPoint de présentation et la rédaction du rapport qui détaille le fonctionnement de l'application |
-| GBAGUIDI Constantino | gbaguidi-constantino.jpg | Adjoint au chef d'équipe ; auteur de la toute première version (0.0.0). A épaulé le chef d'équipe, avec des compétences très proches des siennes |
-| ADIGBLI Serge-Olivier | adigbli-serge-olivier.jpg | Côté technique : a apporté les fonctionnalités de l'application ; gestion des dépendances |
-| OYENIRAN Awèni | oyeniran-aweni.jpg | Valorisation, marketing et communication |
+| DEGUE Jaime Jordi | degue-jaime-jordi.jpg | Chef d'équipe ; titre de « Meilleur participant » de l'ÉlectroChallenge 2026. A réalisé le design, l'UI et l'UX, le PowerPoint de présentation et la rédaction du rapport qui détaille le fonctionnement de l'application. En cycle d'ingénieur (4e année) à l'École nationale supérieure de génie énergétique et procédés d'Abomey ; passionné par l'énergie renouvelable et l'électricité de bâtiment |
+| GBAGUIDI Constantino | gbaguidi-constantino.jpg | Adjoint au chef d'équipe ; auteur de la toute première version (0.0.0). A épaulé le chef d'équipe, avec des compétences très proches des siennes. Titulaire d'une licence professionnelle en génie électrique et énergie renouvelable ; touche-à-tout, très polyvalent |
+| ADIGBLI Serge-Olivier | adigbli-serge-olivier.jpg | Côté technique : a apporté les fonctionnalités de l'application ; gestion des dépendances. En cycle d'ingénieur à l'École nationale supérieure de génie énergétique et procédés d'Abomey |
+| OYENIRAN Awèni | oyeniran-aweni.jpg | Valorisation, marketing et communication. Étudie à l'Université nationale d'agriculture ; passionnée par la transformation des produits agricoles et la prise de parole en public |
 
 
 ## Captures (`medias/captures/`)

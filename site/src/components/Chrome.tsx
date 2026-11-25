@@ -37,44 +37,93 @@ const links = [
   ['Équipe', 'equipe'],
 ] as const
 
+/* Blocage du défilement de la page quand le menu est ouvert, sans perdre la position :
+   le corps de page est figé (position: fixed) et la position est rétablie à la fermeture. */
+let lockedY: number | null = null
+const isScrollLocked = () => lockedY !== null
+function lockScroll() {
+  if (lockedY !== null) return
+  lockedY = window.scrollY
+  const st = document.body.style
+  st.position = 'fixed'; st.top = `-${lockedY}px`; st.left = '0'; st.right = '0'; st.width = '100%'
+}
+function unlockScroll() {
+  if (lockedY === null) return
+  const y = lockedY
+  lockedY = null
+  const st = document.body.style
+  st.position = ''; st.top = ''; st.left = ''; st.right = ''; st.width = ''
+  window.scrollTo({ top: y, behavior: 'instant' as ScrollBehavior })
+}
+
 export function Header({ page }: { page: Page }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    // Pendant que le menu est ouvert, la page est figée : on ignore ces faux événements de défilement.
+    const onScroll = () => { if (!isScrollLocked()) setScrolled(window.scrollY > 24) }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+    lockScroll()
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
     window.addEventListener('keydown', onKey)
-    return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = '' }
+    return () => { window.removeEventListener('keydown', onKey); unlockScroll() }
   }, [open])
-  const close = () => setOpen(false)
+  // Si l'écran s'élargit (rotation, bureau) alors que le menu est ouvert, on le ferme.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 981px)')
+    const onChange = () => { if (mq.matches) setOpen(false) }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  /* Clic sur un lien du menu : on rend d'abord la page (position rétablie), puis on va à la section. */
+  const go = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    unlockScroll()
+    setOpen(false)
+    if (page === 'home') {
+      requestAnimationFrame(() => {
+        const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        document.getElementById(id)?.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' })
+        history.replaceState(null, '', `#${id}`)
+      })
+    } else {
+      pendingSection = id
+      window.location.hash = '#/'
+    }
+  }
+
   return (
-    <header className={`site-header ${scrolled || page !== 'home' ? 'is-scrolled' : ''} ${page !== 'home' ? 'is-solid' : ''}`}>
-      <div className="header-inner">
-        <a className="logo" href={page === 'home' ? '#accueil' : '#/'} aria-label="Vision Agricole, accueil">
-          <img src="logo.svg" width="127" height="52" alt="Vision Agricole" />
-        </a>
-        <nav aria-label="Navigation principale">
-          {links.map(([name, id]) => <SectionLink key={id} id={id} page={page}>{name}</SectionLink>)}
-        </nav>
-        <SectionLink id="telecharger" page={page} className="button button-primary">Télécharger</SectionLink>
-        <button type="button" className="menu-toggle" aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-          aria-expanded={open} aria-controls="menu-mobile" onClick={() => setOpen(!open)}>
-          <Icon name={open ? 'x' : 'menu'} size={26} />
-        </button>
-      </div>
-      <div id="menu-mobile" className={`mobile-menu ${open ? 'is-open' : ''}`}>
+    <>
+      <header className={`site-header ${scrolled || page !== 'home' ? 'is-scrolled' : ''} ${page !== 'home' ? 'is-solid' : ''} ${open ? 'menu-open' : ''}`}>
+        <div className="header-inner">
+          <a className="logo" href={page === 'home' ? '#accueil' : '#/'} aria-label="Vision Agricole, accueil" onClick={() => setOpen(false)}>
+            <img src="logo.svg" width="127" height="52" alt="Vision Agricole" />
+          </a>
+          <nav aria-label="Navigation principale">
+            {links.map(([name, id]) => <SectionLink key={id} id={id} page={page}>{name}</SectionLink>)}
+          </nav>
+          <SectionLink id="telecharger" page={page} className="button button-primary">Télécharger</SectionLink>
+          <button type="button" className="menu-toggle" aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={open} aria-controls="menu-mobile" onClick={() => setOpen(!open)}>
+            <Icon name={open ? 'x' : 'menu'} size={26} />
+          </button>
+        </div>
+      </header>
+      {/* Menu mobile : frère du <header> (et non enfant), car un parent avec backdrop-filter
+          ferait de lui le repère de position: fixed et le tronquerait à la hauteur de l'en-tête. */}
+      <div id="menu-mobile" className={`mobile-menu ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {links.map(([name, id], i) => (
-          <SectionLink key={id} id={id} page={page} onClick={close}><span>0{i + 1}</span>{name}</SectionLink>
+          <a key={id} href={page === 'home' ? `#${id}` : '#/'} onClick={go(id)} tabIndex={open ? 0 : -1}><span>0{i + 1}</span>{name}</a>
         ))}
-        <SectionLink id="telecharger" page={page} className="button button-primary" onClick={close}>Télécharger pour Windows</SectionLink>
+        <a href={page === 'home' ? '#telecharger' : '#/'} className="button button-primary" onClick={go('telecharger')} tabIndex={open ? 0 : -1}>Télécharger pour Windows</a>
       </div>
-    </header>
+    </>
   )
 }
 

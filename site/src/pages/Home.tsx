@@ -226,7 +226,7 @@ function Team() {
       <div className="container">
         <Reveal className="section-heading split">
           <div><Kicker>Le Groupe 2</Kicker><h2 id="titre-equipe">Une équipe, <em>un même terrain.</em></h2></div>
-          <p>Quatre compétences réunies pour transformer une idée ambitieuse en outil concret.</p>
+          <p>Quatre parcours, des études à la passion, réunis pour transformer une idée ambitieuse en outil concret.</p>
         </Reveal>
         <div className="team-grid">
           {team.map((m, i) => (
@@ -236,6 +236,12 @@ function Team() {
                 <small>{m.role}</small>
                 <h3>{m.name}</h3>
                 {'badge' in m && <span className="team-badge"><Icon name="award" size={14} />{m.badge}</span>}
+                <dl className="team-facts">
+                  <div><dt>Formation</dt><dd>{m.studies}</dd></div>
+                  {'passions' in m && <div><dt>Passions</dt><dd>{m.passions}</dd></div>}
+                  {'profile' in m && <div><dt>Profil</dt><dd>{m.profile}</dd></div>}
+                </dl>
+                <h4 className="team-sub">Dans le projet</h4>
                 <ul className="team-points">{m.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
               </div>
             </Reveal>
