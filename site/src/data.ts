@@ -99,11 +99,35 @@ export const why = [
   { n: '05', title: 'Pour les drones courants', text: 'Testé avec un DJI Mavic 3 Enterprise (photos RGB).' },
 ] as const
 
+/** Rôles de l'équipe : détail donné par le chef d'équipe (à relire avec l'équipe). */
 export const team = [
-  { photo: media('equipe/degue-jaime-jordi.jpg'), w: 487, h: 680, name: 'Jaime Jordi DEGUE', role: 'Chef d’équipe', detail: 'Meilleur participant de l’ÉlectroChallenge 2026.' },
-  { photo: media('equipe/gbaguidi-constantino.jpg'), w: 512, h: 680, name: 'Constantino GBAGUIDI', role: 'Adjoint au chef d’équipe', detail: 'Auteur de la version 0.0.0.' },
-  { photo: media('equipe/adigbli-serge-olivier.jpg'), w: 499, h: 680, name: 'Serge-Olivier ADIGBLI', role: 'Technique', detail: 'Gestion des dépendances.' },
-  { photo: media('equipe/oyeniran-aweni.jpg'), w: 509, h: 680, name: 'Awèni OYENIRAN', role: 'Valorisation', detail: 'Marketing et communication.' },
+  {
+    photo: media('equipe/degue-jaime-jordi.jpg'), w: 487, h: 680, name: 'Jaime Jordi DEGUE', role: 'Chef d’équipe',
+    badge: 'Meilleur participant de l’ÉlectroChallenge 2026',
+    points: [
+      'Design, interface (UI) et expérience utilisateur (UX).',
+      'Réalisation du PowerPoint de présentation.',
+      'Rédaction du rapport qui détaille le fonctionnement de l’application.',
+    ],
+  },
+  {
+    photo: media('equipe/gbaguidi-constantino.jpg'), w: 512, h: 680, name: 'Constantino GBAGUIDI', role: 'Adjoint au chef d’équipe',
+    points: [
+      'Auteur de la toute première version de l’application (version 0.0.0).',
+      'Épaule le chef d’équipe, avec des compétences très proches des siennes.',
+    ],
+  },
+  {
+    photo: media('equipe/adigbli-serge-olivier.jpg'), w: 499, h: 680, name: 'Serge-Olivier ADIGBLI', role: 'Technique',
+    points: [
+      'A apporté les fonctionnalités de l’application.',
+      'Gestion des dépendances.',
+    ],
+  },
+  {
+    photo: media('equipe/oyeniran-aweni.jpg'), w: 509, h: 680, name: 'Awèni OYENIRAN', role: 'Valorisation',
+    points: ['Marketing et communication.'],
+  },
 ] as const
 
 export const faqs = [
