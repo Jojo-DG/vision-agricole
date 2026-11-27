@@ -21,7 +21,7 @@ Public : agriculteurs d'abord, puis techniciens, jury et partenaires.
 ## Règles
 - Tout le texte est en français, chaleureux, concret, phrases courtes. Le bénéfice avant la technique.
 - Accueil : accroche, bénéfices, 3 étapes, captures, réassurance, téléchargement. L'histoire y tient en 5 à 8 lignes.
-- Ne rien inventer : pas de chiffres, de précision ou de durée non fournis. Sources autorisées : `site/argumentaire.md`, `site/contenu.md`, le README et le rapport du projet (`main (1).pdf`, chiffres du vol test à présenter comme tels). Les textes « À COMPLÉTER » restent signalés.
+- Ne rien inventer : pas de chiffres, de précision ou de durée non fournis. Sources autorisées : `site/argumentaire.md`, `site/contenu.md`, le README et le rapport du projet (`main (1).pdf`, chiffres du vol test à présenter comme tels). Aucun texte provisoire (« À COMPLÉTER », texte d'attente) ne doit être visible sur le site publié ; les manques éventuels se notent dans `site/contenu.md`. Une capture sur données de test reste légendée « Exemple sur données de test ».
 - Site en React + TypeScript + Vite + Tailwind CSS, dans `site/` (voir `site/DEVELOPPEMENT.md`), compilé et publié sur Vercel (dossier racine du projet Vercel : `site`, réglages dans `site/vercel.json`). Il suit la maquette Figma Make.
 - Lisible sur téléphone, léger, sans bibliothèque ni ressource externe sans nécessité (polices auto-hébergées, aucun CDN, aucun suivi).
 - Animations sobres (CSS et `IntersectionObserver`), coupées avec `prefers-reduced-motion`.

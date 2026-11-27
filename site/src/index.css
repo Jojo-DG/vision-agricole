@@ -348,10 +348,6 @@ footer > .topography { color: #fff; width: 60%; left: auto; right: -10%; }
 .timeline h3 { font-size: 30px; }
 .timeline p { max-width: 610px; color: var(--muted); margin-top: 12px; }
 .timeline-award { width: fit-content; margin-top: 20px; padding: 10px 14px; border-radius: 30px; color: var(--night); background: var(--orange); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-.todo-box { max-width: 760px; margin-top: 40px; padding: 22px 24px; border: 2px dashed var(--orange); border-radius: 18px; background: #fcefe0; }
-.todo-box h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: var(--sans); font-size: 17px; letter-spacing: -.01em; color: var(--night); margin-bottom: 6px; }
-.todo-tag { padding: 3px 10px; border-radius: 99px; background: var(--orange); color: var(--night); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
-.todo-box p { margin: 0; color: var(--ink); font-size: 15px; }
 .tech-section { background: #fff; }
 .flow { display: flex; justify-content: space-between; align-items: center; padding: 45px; border-radius: 25px; background: #edf2ef; }
 .flow > div { min-width: 150px; display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; }

@@ -86,10 +86,6 @@ export default function History() {
               <SectionLink id="equipe" page="histoire" className="button button-secondary">Rencontrer l’équipe <Icon name="arrow" /></SectionLink>
             </div>
           </Reveal>
-          <div className="todo-box" role="note">
-            <h3><span className="todo-tag">À COMPLÉTER</span> Ce qui manque encore</h3>
-            <p>Autres encadrants et organisateurs à remercier, anecdotes, projets actuels que l’on peut citer publiquement.</p>
-          </div>
         </div>
       </section>
     </main>
